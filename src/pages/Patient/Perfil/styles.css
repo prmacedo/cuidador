@@ -1,0 +1,35 @@
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.edit {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+}
+
+p {
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+ListItem {
+    height: 40px;
+}
+
+.description {
+    margin-right: 5px;
+}
+
+.send-buttom {
+    margin-top: 100px;
+    text-decoration: none;
+}
+
+.logout {
+    cursor: pointer;
+}

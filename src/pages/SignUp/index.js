@@ -1,89 +1,83 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schema } from './validate';
 
+import logoImg from "../../assets/images/logoAppWhite.svg";
+import backIcon from "../../assets/images/icons/back.svg";
 
-import logoImg from '../../assets/images/logoAppWhite.svg';
-import backIcon from '../../assets/images/icons/back.svg';
-
-import API_URL from '../../services/api';
-import AuthService from '../../services/auth.service'
-import './styles.css';
-
+import API_URL from "../../services/api";
+import AuthService from "../../services/auth.service";
+import "./styles.css";
 
 function SignUp() {
-
   const history = useHistory();
 
+  const { register, handleSubmit, watch, errors } = useForm({
+    resolver: yupResolver(schema)
+  });
 
-  const [firstName, setfirstName] = useState('');
-  const [lastName, setlastName] = useState('');
-  const [nascimento, setNascimento] = useState('');
-  const [cpf, setCPF] = useState('');
-  const [codigo, setCodigo] = useState('');
-  const [papel, setPapel] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const password = useRef({});
+  password.current = watch("password", "");
+  const selectedPaper = watch("paper");
 
-  function handleCreateForm(e) {
-    e.preventDefault()
 
-    if (papel == 1) {
+  function handleRegisterUser({
+    paper,
+    cpf,
+    firstName,
+    lastName,
+    bornDate,
+    email,
+    code,
+    password,
+    confirmPassword,
+  }) {
+
+
+    if (selectedPaper == 'professional') {
       AuthService.patientRegister(
         firstName,
         lastName,
-        /*nascimento,
-        cpf: Number(cpf),
-        codigo,
-        papel,*/
+        bornDate,
+        Number(cpf),
+        code,
+        paper,
         email,
         password
-      ).then(() => {
+      )
+        .then(() => {
+          alert("Cadastro realizado com sucesso!");
+          history.push("/");
+        })
+        .catch(() => {
+          alert("Erro no cadastro!");
 
-        alert('Cadastro realizado com sucesso!');
-        history.push('/');
-      }).catch(() => {
-        alert('Erro no cadastro!');
-
-        history.push('/');
-
-      })
-    }
-    else if (papel == 2) {
+          history.push("/");
+        });
+    } else if (selectedPaper == 'pacient') {
       AuthService.professionalRegister(
         firstName,
         lastName,
-        /*nascimento,
-        cpf: Number(cpf),
-        papel,*/
+        bornDate,
+        Number(cpf),
+        paper,
         email,
-        codigo,
         password
-      ).then(() => {
-        alert('Cadastro realizado com sucesso!');
+      )
+        .then(() => {
+          alert("Cadastro realizado com sucesso!");
 
-        history.push('/LoginCuidador');
-      }).catch(() => {
-        alert('Erro no cadastro!');
+          history.push("/LoginCuidador");
+        })
+        .catch(() => {
+          alert("Erro no cadastro!");
 
-        history.push('/LoginCuidador');
-
-      })
+          history.push("/LoginCuidador");
+        });
     }
-
-
-
-    console.log({
-      firstName,
-      lastName,
-      nascimento,
-      cpf,
-      papel,
-      email,
-      password
-    });
   }
-
-
 
   return (
     <div id="page-cadastro" className="container">
@@ -100,54 +94,64 @@ function SignUp() {
       </header>
 
       <main>
-        <form onSubmit={handleCreateForm}>
+        <form onSubmit={handleSubmit(handleRegisterUser)}>
           <fieldset>
             <div className="input-block">
               <label htmlFor="id">Papel</label>
-              <br></br>
               <select
-                value={papel}
-                onChange={(e) => { setPapel(e.target.value) }}>
-                <optgroup>
-                  <option value="" disabled hidden>Selecione uma opção</option>
-                  <option value="1">Paciente</option>
-                  <option value="2">Profissional</option>
-
-                </optgroup>
+                name="paper"
+                ref={register({
+                  required: true,
+                })}
+              >
+                <option value="">
+                  Selecione uma opção
+                </option>
+                <option value="pacient">Paciente</option>
+                <option value="professional">Profissional</option>
               </select>
               {/* <button onClick={() => setShow(!show)}>{show ? "hide": "show"}</button> */}
             </div>
-
+            {errors.paper?.message}
             <div className="input-block">
               <label htmlFor="id">CPF*</label>
               <input
                 type="text"
                 id="cpf"
-                maxLength='11'
-                value={cpf}
-                onChange={(e) => { setCPF(e.target.value) }}
+                name="cpf"
+                ref={register({
+                  required: true,
+                })}
               />
+            {errors.cpf?.message}
             </div>
 
-            {papel == 2 && (<div className="input-block">
-              <label htmlFor="id">Código do Conselho</label>
-              <input
-                type="text"
-                id="codigo"
-                value={codigo}
-                onChange={(e) => { setCodigo(e.target.value) }}
-              />
-            </div>)}
+            {selectedPaper == "professional" && (
+              <div className="input-block">
+                <label htmlFor="id">Código do Conselho</label>
+                <input
+                  type="text"
+                  id="codigo"
+                  name="code"
+                  ref={register({
+                    required: true,
+                  })}
+                />
+              {errors.code?.message}
+              </div>
+            )}
 
-            <div
-              className="input-block">
+            <div className="input-block">
               <label htmlFor="name">Nome*</label>
               <input
                 type="text"
                 id="name"
-                value={firstName}
-                onChange={(e) => { setfirstName(e.target.value) }}
+                name="firstName"
+                ref={register({
+                  required: true,
+                })}
               />
+               {errors.firstName?.message}
             </div>
 
             <div className="input-block">
@@ -155,8 +159,12 @@ function SignUp() {
               <input
                 type="text"
                 id="surname"
-                value={lastName}
-                onChange={(e) => { setlastName(e.target.value) }} />
+                name="lastName"
+                ref={register({
+                  required: true,
+                })}
+              />
+               {errors.lastName?.message}
             </div>
 
             <div className="input-block">
@@ -164,9 +172,13 @@ function SignUp() {
               <input
                 type="date"
                 id="date"
-                value={nascimento}
-                onChange={(e) => { setNascimento(e.target.value) }}
+                name="bornDate"
+                placeholder="DD/MM/AAAA"
+                ref={register({
+                  required: true,
+                })}
               />
+               {errors.bornDate?.message}
             </div>
 
             <div className="input-block">
@@ -174,8 +186,12 @@ function SignUp() {
               <input
                 type="email"
                 id="email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value) }} />
+                name="email"
+                ref={register({
+                  required: true,
+                })}
+              />
+               {errors.email?.message}
             </div>
 
             <div className="input-block">
@@ -183,36 +199,41 @@ function SignUp() {
               <input
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value) }} />
+                name="password"
+                ref={register({
+                  required: true,
+                })}
+              />
+               {errors.password?.message}
             </div>
 
             <div className="input-block">
               <label htmlFor="password">Confirmar senha*</label>
-              <input type="password" id="confirm-password" />
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirmPassword"
+                ref={register({
+                  required: true,
+                  validate: value => { console.log(value, password.current); return value === password.current || "The passwords do not match"}
+                })}
+              />
+               {errors.confirmPassword?.message}
+
             </div>
           </fieldset>
 
           <footer>
-
-            <button type="submit">
-              Cadastrar
-        </button>
-
+            <button type="submit">Cadastrar</button>
           </footer>
-
 
           <span className="total-connections">
             Produzido por: E-brains Team
-                </span>
-
+          </span>
         </form>
-
       </main>
-
-
     </div>
-  )
+  );
 }
 
 export default SignUp;

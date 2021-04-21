@@ -114,13 +114,6 @@ export default function Perfil() {
 
   }, []);
 
-
-
-
-
-
-
-
   return (
 
 
@@ -136,63 +129,51 @@ export default function Perfil() {
 
             <List component="nav" className={classes.divisor} aria-label="mailbox folders">
               <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h5">Nome:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{firstName}</Typography>
-
+                <Typography gutterBottom variant="h4">Nome:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{firstName}</Typography>
               </ListItem>
 
               <Divider light />
 
               <ListItem button className={classes.listItem} >
-
-                <Typography gutterBottom variant="h5">Sobrenome:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{lastName}</Typography>
-
+                <Typography gutterBottom variant="h4">Sobrenome:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{lastName}</Typography>
               </ListItem>
 
               <Divider light />
 
               <ListItem button className={classes.listItem} >
-
-                <Typography gutterBottom variant="h5">Gênero:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{gender}</Typography>
-
+                <Typography gutterBottom variant="h4">Gênero:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{gender}</Typography>
               </ListItem>
 
               <Divider light />
 
               <ListItem button className={classes.listItem} >
+                <Typography gutterBottom variant="h4">Idade</Typography>
+                <Typography className="description" gutterBottom variant="h5">{birth}</Typography>
+              </ListItem>
 
-                <Typography gutterBottom variant="h5">Idade</Typography>
-                <Typography className="description" gutterBottom variant="body2">{birth}</Typography>
+              <Divider light />
 
+              <ListItem button className={classes.listItem}>
+                <Typography gutterBottom variant="h4">Ocupação:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{occupation}</Typography>
+              </ListItem>
+
+              <Divider light />
+
+              <ListItem button className={classes.listItem}>
+                <Typography gutterBottom variant="h4">Estado:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{state}</Typography>
               </ListItem>
 
               <Divider light />
 
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Ocupação:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{occupation}</Typography>
-
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h5">Estado:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{state}</Typography>
-
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h5">Cidade:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{city}</Typography>
+                <Typography gutterBottom variant="h4">Cidade:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{city}</Typography>
 
               </ListItem>
 
@@ -202,38 +183,15 @@ export default function Perfil() {
 
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Peso:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{weight}</Typography>
+                <Typography gutterBottom variant="h4">Peso:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{weight}</Typography>
 
               </ListItem>
               <Divider light />
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Altura:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{height}</Typography>
-
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h5">IMC:</Typography>
-
-
-                <Typography className="description" gutterBottom variant="body2">{imc}</Typography>
-
-
-              </ListItem>
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h5">Tipo Sanguíneo:</Typography>
-
-
-                <Typography className="description" gutterBottom variant="body2">{bloodtype}</Typography>
-
+                <Typography gutterBottom variant="h4">Altura:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{height}</Typography>
 
               </ListItem>
 
@@ -241,8 +199,22 @@ export default function Perfil() {
 
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Condição de saúde <br></br>que causa dor Crônica:</Typography>
-                <Typography className="description" gutterBottom variant="body2">{condition}</Typography>
+                <Typography gutterBottom variant="h4">IMC:</Typography>
+
+
+                <Typography className="description" gutterBottom variant="h5">{imc}</Typography>
+
+
+              </ListItem>
+              <Divider light />
+
+              <ListItem button className={classes.listItem}>
+
+                <Typography gutterBottom variant="h4">Tipo Sanguíneo:</Typography>
+
+
+                <Typography className="description" gutterBottom variant="h5">{bloodtype}</Typography>
+
 
               </ListItem>
 
@@ -250,8 +222,8 @@ export default function Perfil() {
 
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Ano que foi Diagnosticado:</Typography>
-                <Typography className="description" gutterBottom variant="body2"> Ainda não implementado</Typography>
+                <Typography gutterBottom variant="h4">Condição de saúde <br></br>que causa dor Crônica:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{condition}</Typography>
 
               </ListItem>
 
@@ -259,8 +231,17 @@ export default function Perfil() {
 
               <ListItem button className={classes.listItem}>
 
-                <Typography gutterBottom variant="h5">Medicações em Uso:</Typography>
-                <Typography className="description" gutterBottom variant="body2">Ainda não implementado</Typography>
+                <Typography gutterBottom variant="h4">Ano que foi Diagnosticado:</Typography>
+                <Typography className="description" gutterBottom variant="h5"> Ainda não implementado</Typography>
+
+              </ListItem>
+
+              <Divider light />
+
+              <ListItem button className={classes.listItem}>
+
+                <Typography gutterBottom variant="h4">Medicações em Uso:</Typography>
+                <Typography className="description" gutterBottom variant="h5">Ainda não implementado</Typography>
 
               </ListItem>
             </List>

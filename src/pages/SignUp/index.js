@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from './validate';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./validate";
 
 import logoImg from "../../assets/images/logoAppWhite.svg";
 import backIcon from "../../assets/images/icons/back.svg";
@@ -15,15 +15,14 @@ function SignUp() {
   const history = useHistory();
 
   const { register, handleSubmit, watch, errors } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   const password = useRef({});
   password.current = watch("password", "");
   const selectedPaper = watch("paper");
 
-
-  function handleRegisterUser({
+  const handleRegisterUser = ({
     paper,
     cpf,
     firstName,
@@ -33,17 +32,12 @@ function SignUp() {
     code,
     password,
     confirmPassword,
-  }) {
+  }) => {
 
-
-    if (selectedPaper == 'professional') {
+    if (selectedPaper == "pacient") {
       AuthService.patientRegister(
         firstName,
         lastName,
-        bornDate,
-        Number(cpf),
-        code,
-        paper,
         email,
         password
       )
@@ -56,7 +50,7 @@ function SignUp() {
 
           history.push("/");
         });
-    } else if (selectedPaper == 'pacient') {
+    } else if (selectedPaper == "professional") {
       AuthService.professionalRegister(
         firstName,
         lastName,
@@ -77,7 +71,7 @@ function SignUp() {
           history.push("/LoginCuidador");
         });
     }
-  }
+  };
 
   return (
     <div id="page-cadastro" className="container">
@@ -104,9 +98,7 @@ function SignUp() {
                   required: true,
                 })}
               >
-                <option value="">
-                  Selecione uma opção
-                </option>
+                <option value="">Selecione uma opção</option>
                 <option value="pacient">Paciente</option>
                 <option value="professional">Profissional</option>
               </select>
@@ -123,7 +115,7 @@ function SignUp() {
                   required: true,
                 })}
               />
-            {errors.cpf?.message}
+              {errors.cpf?.message}
             </div>
 
             {selectedPaper == "professional" && (
@@ -137,7 +129,7 @@ function SignUp() {
                     required: true,
                   })}
                 />
-              {errors.code?.message}
+                {errors.code?.message}
               </div>
             )}
 
@@ -151,7 +143,7 @@ function SignUp() {
                   required: true,
                 })}
               />
-               {errors.firstName?.message}
+              {errors.firstName?.message}
             </div>
 
             <div className="input-block">
@@ -164,13 +156,13 @@ function SignUp() {
                   required: true,
                 })}
               />
-               {errors.lastName?.message}
+              {errors.lastName?.message}
             </div>
 
             <div className="input-block">
               <label htmlFor="date">Data de Nascimento*</label>
               <input
-                type="date"
+                type="text"
                 id="date"
                 name="bornDate"
                 placeholder="DD/MM/AAAA"
@@ -178,7 +170,7 @@ function SignUp() {
                   required: true,
                 })}
               />
-               {errors.bornDate?.message}
+              {errors.bornDate?.message}
             </div>
 
             <div className="input-block">
@@ -191,7 +183,7 @@ function SignUp() {
                   required: true,
                 })}
               />
-               {errors.email?.message}
+              {errors.email?.message}
             </div>
 
             <div className="input-block">
@@ -204,7 +196,7 @@ function SignUp() {
                   required: true,
                 })}
               />
-               {errors.password?.message}
+              {errors.password?.message}
             </div>
 
             <div className="input-block">
@@ -215,11 +207,11 @@ function SignUp() {
                 name="confirmPassword"
                 ref={register({
                   required: true,
-                  validate: value => { console.log(value, password.current); return value === password.current || "The passwords do not match"}
+                  validate: (value) =>
+                    value === password.current || "The passwords do not match",
                 })}
               />
-               {errors.confirmPassword?.message}
-
+              {errors.confirmPassword?.message}
             </div>
           </fieldset>
 

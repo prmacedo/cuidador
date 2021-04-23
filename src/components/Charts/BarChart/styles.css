@@ -1,0 +1,91 @@
+#barChartContainer * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#barChartContainer > h3 {
+  text-align: center;
+  font-family: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+#barChartContainer > p {
+  margin-bottom: 0.8rem;
+}
+
+#barChartContainer > .input-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-bottom: 0.8rem;
+}
+
+#barChartContainer > .input-group > select {
+  padding: 1.2rem 1.6rem;
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+#barChartContainer > .input-group > #month {
+  width: 58%;
+}
+
+#barChartContainer > .input-group > #year {
+  width: 38%;
+}
+
+#barChartContainer > .chart {
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #E6E6F0;
+
+  margin-bottom: 0.8rem;
+  padding: 2.4rem 1.2rem;
+}
+
+#barChartContainer > .info > img{
+  width: 1.6rem;
+  margin-right: 0.8rem;
+}
+
+#barChartContainer > .info {
+  color: #4F4F4F;
+  
+  display: flex;
+  align-content: center;
+
+  cursor: pointer;
+}
+
+#numberedBody {
+  position: relative;
+  
+  padding: 2.4rem 1.2rem;
+  
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  background: white;
+  border: 1px solid #E6E6F0;
+  border-radius: 4px;
+}
+
+#numberedBody > h3 {
+  text-align: center;
+}
+
+#numberedBody > img {
+  object-fit: contain;
+  margin: 0.8rem auto 0;
+}
+
+#numberedBody > span {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  cursor: pointer;
+}

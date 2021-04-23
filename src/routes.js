@@ -16,7 +16,6 @@ import LoginCuidador from './pages/Profissional/LoginCuidador';
 
 
 import ProfilePatient from './pages/Profissional/ProfilePatient/index.js';
-import GraficoDor from "./components/Charts/graficoDor"
 
 import ProtectedRoute from './services/ProtectedRoute';
 import Perfil from './pages/Patient/Perfil';
@@ -47,7 +46,6 @@ export default function Routes() {
         <Route path="/MainPage" component = {Paperbase}/>
         <Route path="/MeuPaciente" component = {PaperbasePatient}/>
         <Route path="/MeuPerfil" component = {PaperbaseProfile}/>
-        <Route path="/graficoDor" component = {GraficoDor}/>
         <Route path="/table" component = {patientTable}/>
 
         </Switch>

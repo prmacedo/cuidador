@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 import './styles.css';
@@ -23,14 +23,12 @@ export default function LineChart() {
       legend: {
         position: 'none',
       },
-      title: {
-        display: false,
-      },
     },
     scales: {
       y: {
         beginAtZero: true,
         reverse: true,
+        max: 10
       }
     }
   };

@@ -16,9 +16,9 @@ import './styles.css';
 
 const useStyles = makeStyles((theme) => ({
     button: {
-      margin: theme.spacing(1),
+        margin: theme.spacing(1),
     },
-  }));
+}));
 
 function App() {
 
@@ -105,20 +105,19 @@ function App() {
                                 <button type="submit">
                                     Entrar
                         </button>
+
                             </div>
-                        </form>
-                        <div className="buttons-change">
+                        <div className="buttons-container">
                             <Button
                                 variant="contained"
                                 color="primary"
                                 className={classes.button}
-                               
-                                onClick={toggleChecked}
-                            >
+                                onClick={toggleChecked}>
                                 Cuidador
                              </Button>
-                  
+
                         </div>
+                        </form>
                     </main>
 
 

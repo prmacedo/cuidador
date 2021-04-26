@@ -124,7 +124,7 @@ function App() {
                 </Link>
                         </div>
 
-                        <span className="total-connections">
+                        <span className="footer">
                             Produzido por: E-brains Team
                 </span>
 

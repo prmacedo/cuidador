@@ -2,45 +2,29 @@
     width: 100%;
     height: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     color: var(--color-text-in-primary);
-    
-    
     background-image: url("../../background.jpg");
-     
-
 }
 
 .container {
     width: 100%;
-    height: 80%;
+    height: 90%;
     display: flex;
     align-items: center;
- 
 }
 
-.page-wrapper{
-    /* position: absolute;
-    top: 10px; */
-   /* display: flex;
-   flex-direction: column;
-   align-items: center; */
-
+.page-wrapper {
     overflow: auto;
     background: var(--color-box-base);
     border-radius: 15px;
     padding-top: 30px;
-    /* margin-top: 10px; */
     margin-left: 10px;
     margin-right: 10px;
-    /* margin-bottom: 10px; */
     width: 100vw;
-    /* height: 80%; */
-    -webkit-box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
-    -moz-box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
-    box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
-   
+    -webkit-box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.28);
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.28);
 }
 
 .logo-container {
@@ -56,13 +40,12 @@
     width: 100%;
     padding: 0 50px;
     margin-bottom: 1rem;
+      
 }
 
 .logo-container h2 {
     font-weight: 500;
     font-size: 2.4rem;
-    /* line-height: 4.6rem; */
-    /* margin-top: 0rem; */
     align-content: center;
 }
 
@@ -83,7 +66,6 @@
 .input-block {
     position: relative;
     padding-top: 8px;
-
 }
 
 .input-block label {
@@ -100,8 +82,7 @@
     border: 1px solid var(--color-line-in-white);
     outline: 0;
     padding: 0 1.6rem;
-    font:1.6rem Archivo;
-
+    font: 1.6rem Archivo;
 }
 
 .input-block:focus-within::after {
@@ -115,15 +96,13 @@
     bottom: 0;
 }
 
-
 .buttons-container {
     display: flex;
     justify-content: center;
     margin: .2rem 0;
 }
 
-
-.buttons-container  button {
+.buttons-container button {
     width: 50%;
     height: 3.6rem;
     background: var(--color-secundary);
@@ -140,13 +119,10 @@
     margin-top: 1.2rem;
 }
 
-.buttons-container  button a {
+.buttons-container button a {
     text-decoration: none;
     color: #fff;
-   
 }
-
-
 
 .cadastro {
     font-size: 1rem;
@@ -154,24 +130,71 @@
     color: var(--color-secundary);
     background: none;
     text-decoration: none;
-
 }
 
-
-
-
-
-
-.page-app .total-connections {
+.page-app .footer {
     font-size: 1rem;
-
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-primary-light);
     padding: 10px;
-
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+@media (min-width: 1100px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 60px;
+        /* background-color: mediumseagreen; */
+    }
+    .page-wrapper {
+        
+        min-width: 1000px;
+        max-width: 1100px;
+        padding-top: 0;
+        height: 78%;
+        display: grid;
+        grid-template:
+		"hero logo logo" 2fr
+		"hero main main" 3fr
+		"hero main main" 5fr
+		"hero cadastro cadastro" 0.5fr
+		"hero footer footer" 0.5fr
+		/ 3fr 1fr 1fr;
+    }
+    .hero-image {
+        grid-area: hero;
+        background: var(--color-primary-light);
+        height: 100%;
+        margin-bottom: 0;
+    }
+    .logo-container {
+        grid-area: logo;
+        margin-top: 20px;
+        z-index: 100;
+        width: 100%;
+        background-color: white;
+    }
+    .page-wrapper main {
+        /* background-color: midnightblue; */
+        grid-area: main;
+        margin-top: 1px;
+    }
+    .cadastro {
+        grid-area: cadastro;
+    }
+    .footer {
+        grid-area: footer;
+    }
+
+    .input-block input {
+        width: 100%;
+        height: 4.0rem;
+    }
 }

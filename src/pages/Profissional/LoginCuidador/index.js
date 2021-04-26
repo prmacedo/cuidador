@@ -52,48 +52,48 @@ function LoginCuidadores() {
     return (
         <div className="page-app">
 
-            
-            <div className="container">
-            <div className="page-wrapper">
-                <div className="logo-container">
-                    <img src={logoImg} alt="Teste" />
-                    <h2>Para Profissionais</h2>
 
-                </div>
-                <img src={Doctor}
-                    alt="Plataforma Teste"
-                    className="hero-image"
+            <div className="container">
+                <div className="page-wrapper">
+                    <div className="logo-container">
+                        <img src={logoImg} alt="Teste" />
+                        <h2>Para Profissionais</h2>
+
+                    </div>
+                    <img src={Doctor}
+                        alt="Plataforma Teste"
+                        className="hero-image"
                     />
 
-                <main>
-                    <form onSubmit={handleCreateForm}>
-                        <fieldset>
-                            <div className="input-block">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    value={email}
-                                    onChange={(e) => { setEmail(e.target.value) }} />
-                            </div>
+                    <main>
+                        <form onSubmit={handleCreateForm}>
+                            <fieldset>
+                                <div className="input-block email">
+                                    <label htmlFor="email">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        value={email}
+                                        onChange={(e) => { setEmail(e.target.value) }} />
+                                </div>
 
-                            <div className="input-block">
-                                <label htmlFor="senha">Senha</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    value={password}
-                                    onChange={(e) => { setPassword(e.target.value) }} 
-                                />
-                            </div>
-                        </fieldset>
+                                <div className="input-block input">
+                                    <label htmlFor="senha">Senha</label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        value={password}
+                                        onChange={(e) => { setPassword(e.target.value) }}
+                                    />
+                                </div>
+                            </fieldset>
 
-                        <div className="buttons-container">
-                            <button  >
-                                Entrar
+                            <div className="buttons-container">
+                                <button  >
+                                    Entrar
                             </button>
-                        </div>
-                    
+                            </div>
+
                         </form>
                         <div className="buttons-container">
                             <button >
@@ -102,24 +102,24 @@ function LoginCuidadores() {
                                 </Link>
                             </button>
                         </div>
-                   
-                </main>
+
+                    </main>
 
 
 
-                <div className="cadastro">
-                    <Link to="/cadastro">
-                        Ainda não tem conta? Cadastre-se
+                    <div className="cadastro">
+                        <Link to="/cadastro">
+                            Ainda não tem conta? Cadastre-se
                     </Link>
-                </div>
+                    </div>
 
 
 
-                <span className="total-connections">
-                    Produzido por: E-brains Team
+                    <span className="footer">
+                        Produzido por: E-brains Team
                 </span>
 
-            </div>
+                </div>
             </div>
         </div>
 

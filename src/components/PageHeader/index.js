@@ -1,41 +1,44 @@
-import React, { useState, useEffect, useContext } from 'react';
-
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import AuthService from '../../services/auth.service'
 
-import logoImg from '../../assets/images/logoAppWhite.svg';
-import backIcon from '../../assets/images/icons/back.svg';
+import back from '../../assets/images/icons/back.svg';
+import logoWhite from '../../assets/images/logoAppWhite.svg';
+import logout from '../../assets/images/icons/logout.svg';
 
-//import api from '../../services/api';
+import './styles.css';
 
-
-function PageHeader(props) {
+export default function PageHeader({hideComeBack, hideLogout}) {
   const history = useHistory();
 
-  const logout = () =>{
+  function handleComeBack() {
+    history.goBack();
+  }
+
+  function handleLogout() {
     AuthService.logout();
     history.push("/");
   }
 
-    return (
-      <header className="page-header">
-        <div className="top-bar-container">
-          <Link to="/">
-            <img src={backIcon} alt="Voltar" />
-          </Link>
-          <img src={logoImg} alt="Cuidador" />
-          <a className="logout" onClick={logout}>Logout</a>
-        </div>
+  window.addEventListener('scroll', () => {
+    if (document.querySelector('#fixed-header')) {      
+      if (window.scrollY >= 80) {
+        document.querySelector('#fixed-header').classList.add('scrolled');
+      } else {
+        document.querySelector('#fixed-header').classList.remove('scrolled');
+      }
+    }
+  });
 
-        <div className="header-content">
-
-          <strong>Bem vindo {props && props.name } !</strong>
-        </div>
+  return (
+    <>
+      <header id="fixed-header">
+        <div onClick={() => handleComeBack()}>{!hideComeBack && <span><img src={back} alt="Voltar" />Voltar</span>}</div>
+        <img src={logoWhite} alt="CuidaDor" className="logo" />
+        <div onClick={() => handleLogout()}>{!hideLogout && <span><img src={logout} alt="Sair" />Sair</span>}</div>
       </header>
-    );
-  }
-
-// }
-
-export default PageHeader;
+      <div className="spacing"></div>
+    </>
+  );
+}

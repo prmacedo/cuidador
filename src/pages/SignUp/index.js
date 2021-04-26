@@ -76,18 +76,23 @@ function SignUp() {
   return (
     <div id="page-cadastro" className="container">
       <header className="page-header">
-        <div className="top-bar-container">
-          <Link to="/">
+        <Link to="/">
+          <div className="top-bar-container">
             <img src={backIcon} alt="Voltar" />
-          </Link>
-          <img src={logoImg} alt="Cuidador" />
-        </div>
-        <div className="header-content">
-          <strong>Cadastro</strong>
-        </div>
+            <span> Voltar</span>
+
+          </div>
+        </Link>
+
+        <img src={logoImg} alt="Cuidador" />
+
       </header>
 
       <main>
+        <div className="page-title">
+
+        <strong >Cadastro</strong>
+        </div>
         <form onSubmit={handleSubmit(handleRegisterUser)}>
           <fieldset>
             <div className="input-block">

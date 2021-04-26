@@ -8,8 +8,8 @@ import Doctor from '../../../assets/images/doctor.svg';
 import API_URL from '../../../services/api';
 import AuthService from '../../../services/auth.service'
 
-import './styles.css';
-
+// import './styles.css';
+import '../../../assets/styles/login.css'
 
 
 
@@ -24,25 +24,25 @@ function LoginCuidadores() {
 
     function handleCreateForm(e) {
         e.preventDefault()
-       
-        AuthService.professionalLogin(email,password).then(() => {
+
+        AuthService.professionalLogin(email, password).then(() => {
             history.push('/MainPage');
         }).catch(() => {
             alert('Erro! Usuário não cadastrado');
         })
     }
-    
+
 
     useEffect(() => {
         (async () => {
-           const logged = await AuthService.isAuthenticated()
-           setUserData(logged)
+            const logged = await AuthService.isAuthenticated()
+            setUserData(logged)
             if (logged.role == "Pacient") {
                 history.push('/appmenu');
-            } else if (logged.role == "Professional"){
+            } else if (logged.role == "Professional") {
                 history.push('/MainPage');
             }
-            
+
         })();
     }, []);
 
@@ -50,17 +50,20 @@ function LoginCuidadores() {
 
 
     return (
-        <div id="page-app">
-            <div id="page-app-content" className="container">
+        <div className="page-app">
+
+            
+            <div className="container">
+            <div className="page-wrapper">
                 <div className="logo-container">
                     <img src={logoImg} alt="Teste" />
                     <h2>Para Profissionais</h2>
-                </div>
 
+                </div>
                 <img src={Doctor}
                     alt="Plataforma Teste"
                     className="hero-image"
-                />
+                    />
 
                 <main>
                     <form onSubmit={handleCreateForm}>
@@ -80,24 +83,26 @@ function LoginCuidadores() {
                                     type="password"
                                     id="password"
                                     value={password}
-                                    onChange={(e) => { setPassword(e.target.value) }} />
+                                    onChange={(e) => { setPassword(e.target.value) }} 
+                                />
                             </div>
                         </fieldset>
 
                         <div className="buttons-container">
-                            <button type="submit">
+                            <button  >
                                 Entrar
-                        </button>
+                            </button>
                         </div>
-                    </form>
-
-                    <div className="buttons-container-change">
-                        <button >
-                            <Link to="/">
-                                Pacientes
-                        </Link>
-                        </button>
-                    </div>
+                    
+                        </form>
+                        <div className="buttons-container">
+                            <button >
+                                <Link to="/">
+                                    Pacientes
+                                </Link>
+                            </button>
+                        </div>
+                   
                 </main>
 
 
@@ -105,17 +110,17 @@ function LoginCuidadores() {
                 <div className="cadastro">
                     <Link to="/cadastro">
                         Ainda não tem conta? Cadastre-se
-                </Link>
+                    </Link>
                 </div>
 
 
-               
+
                 <span className="total-connections">
                     Produzido por: E-brains Team
                 </span>
 
             </div>
-
+            </div>
         </div>
 
     );

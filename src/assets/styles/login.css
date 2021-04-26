@@ -2,33 +2,50 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     color: var(--color-text-in-primary);
-    overflow: auto;
+    
+    
     background-image: url("../../background.jpg");
-    position: relative;
+     
 
 }
 
 .container {
-    position: absolute;
-    top: 50px;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+ 
+}
+
+.page-wrapper{
+    /* position: absolute;
+    top: 10px; */
+   /* display: flex;
+   flex-direction: column;
+   align-items: center; */
+
     overflow: auto;
     background: var(--color-box-base);
     border-radius: 15px;
-    margin: 200px 5px;
+    padding-top: 30px;
+    /* margin-top: 10px; */
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-bottom: 10px; */
     width: 100vw;
     /* height: 80%; */
     -webkit-box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
     -moz-box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
     box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.28);
-    position: relative;
+   
 }
 
 .logo-container {
     text-align: center;
-    margin-bottom: 1.2rem;
+    /* margin-bottom: 1.2rem; */
 }
 
 .logo-container img {
@@ -37,8 +54,8 @@
 
 .hero-image {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 4rem;
+    padding: 0 50px;
+    margin-bottom: 1rem;
 }
 
 .logo-container h2 {
@@ -49,7 +66,7 @@
     align-content: center;
 }
 
-.container main {
+.page-wrapper main {
     width: 100%;
     max-width: 74rem;
     border-radius: 0.8rem;
@@ -58,7 +75,7 @@
     overflow: hidden;
 }
 
-.container main fieldset {
+.page-wrapper main fieldset {
     border: 0;
     padding: 0 2.4rem;
 }
@@ -126,14 +143,17 @@
 .buttons-container  button a {
     text-decoration: none;
     color: #fff;
+   
 }
 
 
 
-.cadastro{
-    font-size: 1.6rem;
+.cadastro {
+    font-size: 1rem;
     text-align: center;
     color: var(--color-secundary);
+    background: none;
+    text-decoration: none;
 
 }
 
@@ -143,7 +163,7 @@
 
 
 .page-app .total-connections {
-    font-size: 1.4rem;
+    font-size: 1rem;
 
     display: flex;
     align-items: center;

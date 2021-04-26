@@ -12,18 +12,13 @@ import LandingImg from '../../../assets/images/landingApp.svg';
 
 import AuthService from '../../../services/auth.service'
 
-import './styles.css';
+import '../../../assets/styles/login.css'
 
-const useStyles = makeStyles((theme) => ({
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
 
 function App() {
 
     const history = useHistory();
-    const classes = useStyles();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState(false);
@@ -67,73 +62,74 @@ function App() {
 
     return (
         <>
-            {!userData && <div id="page-app">
-                <div id="page-app-content" className="container">
-                    <div className="logo-container">
-                        <img src={logoImg} alt="Teste" />
-                        <h2>Para Pacientes</h2>
-                    </div>
+            {!userData && <div className="page-app">
+                <div className="container">
+                    <div className="page-wrapper">
+                        <div className="logo-container">
+                            <img src={logoImg} alt="Teste" />
+                            <h2>Para Pacientes</h2>
+                        </div>
 
-                    <img src={LandingImg}
-                        alt="Plataforma Teste"
-                        className="hero-image"
-                    />
+                        <img src={LandingImg}
+                            alt="Plataforma Teste"
+                            className="hero-image"
+                        />
 
-                    <main>
-                        <form onSubmit={handleCreateForm}>
-                            <fieldset>
-                                <div className="input-block">
-                                    <label htmlFor="email">Email</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        value={email}
-                                        onChange={(e) => { setEmail(e.target.value) }} />
+                        <main>
+                            <form onSubmit={handleCreateForm}>
+                                <fieldset>
+                                    <div className="input-block">
+                                        <label htmlFor="email">Email</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            value={email}
+                                            onChange={(e) => { setEmail(e.target.value) }} />
+                                    </div>
+
+                                    <div className="input-block">
+                                        <label htmlFor="senha">Senha</label>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            value={password}
+                                            onChange={(e) => { setPassword(e.target.value) }} />
+                                    </div>
+                                </fieldset>
+
+                                <div className="buttons-container">
+                                    <button type="submit">
+                                        Entrar
+                                </button>
+
                                 </div>
-
-                                <div className="input-block">
-                                    <label htmlFor="senha">Senha</label>
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        value={password}
-                                        onChange={(e) => { setPassword(e.target.value) }} />
-                                </div>
-                            </fieldset>
-
+                            </form>
                             <div className="buttons-container">
-                                <button type="submit">
-                                    Entrar
-                        </button>
+                                <button >
+                                    <Link to="/LoginCuidador">
+                                        Cuidador
+                                    </Link>
+                                </button>
 
                             </div>
-                        <div className="buttons-container">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                onClick={toggleChecked}>
-                                Cuidador
-                             </Button>
 
-                        </div>
-                        </form>
-                    </main>
+
+                        </main>
 
 
 
-                    <div className="cadastro">
-                        <Link to="/cadastro">
-                            Ainda não tem conta? Cadastre-se
+                        <div className="cadastro">
+                            <Link to="/cadastro">
+                                Ainda não tem conta? Cadastre-se
                 </Link>
-                    </div>
+                        </div>
 
-                    <span className="total-connections">
-                        Produzido por: E-brains Team
+                        <span className="total-connections">
+                            Produzido por: E-brains Team
                 </span>
 
+                    </div>
                 </div>
-
             </div>}
         </>
     );

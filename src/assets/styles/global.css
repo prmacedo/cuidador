@@ -33,8 +33,14 @@
     box-sizing: border-box;
 }
 
-html, body, #root {
-    height: 100vh;
+html {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+body{
+    min-height:100%;
+    overflow: auto;
 }
 
 body {
@@ -56,10 +62,10 @@ textarea {
     color: var(--color-text-base);
 }
 
-.container {
+/* .container {
     width: 90vw;
     max-width: 700px;
-}
+} */
 
 @media (min-width: 700px) {
     :root {

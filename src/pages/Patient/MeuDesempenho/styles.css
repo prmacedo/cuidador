@@ -27,7 +27,7 @@ main#meu-desempenho > h2 {
   margin-bottom: 2.4rem;
 }
 
-hr {
+main#meu-desempenho > hr {
   width: calc(100% + 3.2rem);
   transform: translateX(-1.6rem);
   background: #E6E6F0;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NavbarProfesional from '../../components/NavbarProfesional';
-import Sidebar from '../../components/Sidebar';
+import NavbarProfessional from '../NavbarProfessional';
+import Sidebar from '../Sidebar';
 
 import CurrentPageContextProvider from '../../context/CurrentPage';
 import HiddenSidebarContextProvider from '../../context/HiddenSidebar';
@@ -9,7 +9,7 @@ import ProfileContextProvider from '../../context/Profile';
 
 import './styles.css';
 
-export default function ProfesionalContainer({ children }) {
+export default function ProfessionalContainer({ children }) {
   return (
     <ProfileContextProvider>
       <CurrentPageContextProvider>
@@ -17,7 +17,7 @@ export default function ProfesionalContainer({ children }) {
           <div className="wrapper">
             <Sidebar />
             <main>
-              <NavbarProfesional />
+              <NavbarProfessional />
               <div className="content">
                 { children }
               </div>

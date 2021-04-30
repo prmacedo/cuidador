@@ -13,7 +13,7 @@ import { useHiddenSidebar } from '../../context/HiddenSidebar';
 
 import './styles.css';
 
-export default function NavbarProfesional() {
+export default function NavbarProfessional() {
   const [recentChatsData, setRecentChatsData] = useState([]);
 
   const { profile } = useProfile();
@@ -93,7 +93,7 @@ export default function NavbarProfesional() {
 
   return (
     <>
-      <nav id="navbarProfesional">
+      <nav id="navbarProfessional">
         <div>
           <img src={menu} className="menu" alt="Menu" onClick={() => { handleHideSidebar() }} />
           <h2>{currentPage}</h2>

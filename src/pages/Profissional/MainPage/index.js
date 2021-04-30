@@ -1,12 +1,12 @@
 import React from 'react';
-import ProfesionalContainer from '../../../components/ProfesionalContainer';
+import ProfessionalContainer from '../../../components/ProfessionalContainer';
 
 import './styles.css';
 
 export default function MainPage() {
   return (
-    <ProfesionalContainer>
+    <ProfessionalContainer>
       <h1>Main Page</h1>
-    </ProfesionalContainer>
+    </ProfessionalContainer>
   );
 }

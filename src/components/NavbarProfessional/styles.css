@@ -1,10 +1,10 @@
-#navbarProfesional * {
+#navbarProfessional * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-#navbarProfesional {
+#navbarProfessional {
   padding: 3.2rem 2.4rem 1.6rem;
 
   display: flex;
@@ -12,20 +12,20 @@
   justify-content: space-between;
 }
 
-#navbarProfesional > div {
+#navbarProfessional > div {
   display: flex;
 }
 
-#navbarProfesional > div > .menu {
+#navbarProfessional > div > .menu {
   cursor: pointer;
   margin-right: 2.4rem;
 }
 
-#navbarProfesional > div > .recent {
+#navbarProfessional > div > .recent {
   position: relative;
 }
 
-#navbarProfesional > div > .recent > .content{
+#navbarProfessional > div > .recent > .content{
   background: #FFFFFF;
 
   border: 1px solid #E6E6F0;
@@ -42,7 +42,7 @@
   cursor: pointer;
 }
 
-#navbarProfesional > div > .recent > #recent-chats {
+#navbarProfessional > div > .recent > #recent-chats {
   background: #FFFFFF;
 
   border: 1px solid #E6E6F0;
@@ -63,25 +63,25 @@
   transform: translateX(calc(-50%));
 }
 
-#navbarProfesional > div > .recent > #recent-chats > h3 {
+#navbarProfessional > div > .recent > #recent-chats > h3 {
   text-align: center;
   font-weight: 400;
   font-size: 1.6rem;
 }
 
-#navbarProfesional > div > .recent > #recent-chats > hr {
+#navbarProfessional > div > .recent > #recent-chats > hr {
   background: #E6E6F0;
   border: 1px solid #E6E6F0;
 }
 
-#navbarProfesional > div > .recent > #recent-chats > .scroll {
+#navbarProfessional > div > .recent > #recent-chats > .scroll {
   overflow-y: auto;
 
   min-height: 100%;
   max-height: 28rem;
 }
 
-#navbarProfesional > div > .recent > #recent-chats .chat {
+#navbarProfessional > div > .recent > #recent-chats .chat {
   display: grid;
   grid-template-columns: 5.6rem 1fr;
 
@@ -93,14 +93,14 @@
   cursor: pointer;
 }
 
-#navbarProfesional > div > .recent > #recent-chats .chat > img {
+#navbarProfessional > div > .recent > #recent-chats .chat > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: 0 0.8rem;
 }
 
-#navbarProfesional > div > .recent > #recent-chats .chat > div {
+#navbarProfessional > div > .recent > #recent-chats .chat > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -108,22 +108,22 @@
   padding: 0.8rem 0;
 }
 
-#navbarProfesional > div > .recent > #recent-chats .chat > div > span {
+#navbarProfessional > div > .recent > #recent-chats .chat > div > span {
   font-size: 1.2rem;
 }
 
-#navbarProfesional > div > .recent > #recent-chats .chat > div > span:last-of-type {
+#navbarProfessional > div > .recent > #recent-chats .chat > div > span:last-of-type {
   color: #BDBDBD ;
 }
 
-#navbarProfesional > div > .profile {
+#navbarProfessional > div > .profile {
   margin-left: 1.2rem;
   cursor: pointer;
 
   position: relative;
 }
 
-#navbarProfesional > div > .profile > .content {
+#navbarProfessional > div > .profile > .content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,18 +135,18 @@
   border-radius: 4px;
 }
 
-#navbarProfesional > div > .profile > .content > span {
+#navbarProfessional > div > .profile > .content > span {
   font-size: 1.6rem;
 }
 
-#navbarProfesional > div > .profile > .content > img:first-of-type {
+#navbarProfessional > div > .profile > .content > img:first-of-type {
   height: 3.2rem;
   border-right: 1px solid #E6E6F0;
 
   margin-right: 1.2rem;
 }
 
-#navbarProfesional > div > .profile > .content > img:last-of-type {
+#navbarProfessional > div > .profile > .content > img:last-of-type {
   padding: 0 1.2rem 0 1.6rem;
 }
 
@@ -184,7 +184,7 @@
   margin-right: 1.2rem;
 }
 
-#navbarProfesional.hide {
+#navbarProfessional.hide {
   display: none;
 }
 

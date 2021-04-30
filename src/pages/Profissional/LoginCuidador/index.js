@@ -96,7 +96,7 @@ function LoginCuidadores() {
 
                         </form>
                         <div className="buttons-container">
-                            <button >
+                            <button className="change-role" >
                                 <Link to="/">
                                     Pacientes
                                 </Link>

@@ -125,6 +125,20 @@
     color: #fff;
 }
 
+.buttons-container button.change-role{
+    background: #fff;
+    border:solid 1px var(--color-secundary);
+    
+}
+.buttons-container button.change-role a{
+    color: var(--color-secundary);  
+}
+
+
+
+
+
+
 .cadastro {
     font-size: 1rem;
     text-align: center;

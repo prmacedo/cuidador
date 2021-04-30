@@ -105,7 +105,7 @@ function App() {
                                 </div>
                             </form>
                             <div className="buttons-container">
-                                <button >
+                                <button className="change-role">
                                     <Link to="/LoginCuidador">
                                         Cuidador
                                     </Link>
@@ -121,7 +121,7 @@ function App() {
                         <div className="cadastro">
                             <Link to="/cadastro">
                                 Ainda não tem conta? Cadastre-se
-                </Link>
+                            </Link>
                         </div>
 
                         <span className="footer">

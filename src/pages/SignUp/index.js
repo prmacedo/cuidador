@@ -15,7 +15,7 @@ function SignUp() {
   const history = useHistory();
 
   const { register, handleSubmit, watch, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema), 
   });
 
   const password = useRef({});

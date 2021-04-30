@@ -7568,7 +7568,7 @@ function round(value) {
 var caseAllCaps = {
   textTransform: 'uppercase'
 };
-var defaultFontFamily = '"Roboto", "Helvetica", "Arial", sans-serif';
+var defaultFontFamily = '"Poppins", "Helvetica", "Arial", sans-serif';
 /**
  * @see @link{https://material.io/design/typography/the-type-system.html}
  * @see @link{https://material.io/design/typography/understanding-typography.html}

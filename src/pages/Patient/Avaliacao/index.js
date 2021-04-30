@@ -15,6 +15,7 @@ import { Link, useHistory } from "react-router-dom";
 import logoImg from "../../../assets/images/logoAppWhite.svg";
 import backIcon from "../../../assets/images/icons/back.svg";
 import imagem from "../../../assets/images/Corpo_numerado.png";
+import PageHeader from '../../../components/PageHeader';
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "./styles.css";
@@ -172,29 +173,12 @@ export default function Avaliação() {
   );
 
   return (
-    <div align="center">
+    <div id="page-avaliacao" >
       {okToRender && (
-        <div id="page-cuidadores" className="container">
-          <header className="page-header">
-            <div className="top-bar-container">
-              <Link to="/AppMenu">
-                <img src={backIcon} alt="Voltar" />
-              </Link>
-              <img src={logoImg} alt="Cuidador" />
-            </div>
+        <>
+          <PageHeader name={userData} />
 
-            <div className="header-content">
-              <strong>
-                Avaliação Diária
-                <div align="center">
-                  {new Date().getUTCDate()}/{new Date().getMonth() + 1}/
-                  {new Date().getFullYear()}
-                </div>
-              </strong>
-            </div>
-          </header>
-
-          <Paper className={classes.paper}>
+          <main>
             <Typography component="h4" variant="h3" align="center">
               Avaliação diária
             </Typography>
@@ -203,7 +187,7 @@ export default function Avaliação() {
                 Você está sentindo dor hoje?
               </Typography>
             </Box>
-            <div className={classes.root}>
+            <div className="button-group">
               <ToggleButtonGroup
                 value={pain}
                 exclusive
@@ -239,7 +223,9 @@ export default function Avaliação() {
               <Typography component="span" variant="subtitle1" align="center">
                 Utilize a imagem abaixo para responder a pergunta
               </Typography>
-              <img src={imagem} />
+              <div className="pain-image">
+                <img src={imagem} />
+              </div>
               <Typography omponent="span" variant="h4">
                 Onde estão localizadas suas dores?
               </Typography>
@@ -253,7 +239,7 @@ export default function Avaliação() {
                 onChange={(e) => setText(e.target.value)}
               /> */}
 
-                <Input value={text} onChange={(e) => setText(e.target.value)}/>
+                <Input value={text} onChange={(e) => setText(e.target.value)} />
                 <ButtonGroup
                   variant="contained"
                   color="primary"
@@ -521,10 +507,12 @@ export default function Avaliação() {
                 />
               </div>
             </Box>
+            <div className="send-assessment-button">
 
-            {avaliacaoDone ? avaliationDidntDone : avaliationAlreadyDone}
-          </Paper>
-        </div>
+              {avaliacaoDone ? avaliationDidntDone : avaliationAlreadyDone}
+            </div>
+          </main>
+        </>
       )}
     </div>
   );

@@ -60,7 +60,6 @@ input,
 button,
 textarea {
     font: 500 1.6rem Poppins;
-    padding-left: 8px;
     color: var(--color-text-base);
 }
 

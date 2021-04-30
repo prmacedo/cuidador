@@ -17,6 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 
+import PageHeader from '../../../components/PageHeader';
 import PatientService from '../../../services/patient.service'
 import AuthService from '../../../services/auth.service'
 
@@ -26,12 +27,15 @@ export default function Cuidadores() {
   const [patient_id, setPatient_id] = useState();
   const [email, setEmail] = useState();
   const [profissionalUpdate, setProfissionalUpdate] = useState(false);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     (async () => {
       const { user: { patient_id:{ _id} } } = await AuthService.getCurrentUser()
       const { data: { profissionals } } = await PatientService.returnMyProfissionals({ patient_id: _id })
-
+      const { user: { firstName } } = AuthService.getCurrentUser()
+      
+      setUserData(firstName);
       setProfissionals(profissionals)
       setPatient_id(_id)
       setProfissionalUpdate(false)
@@ -81,18 +85,7 @@ export default function Cuidadores() {
   return (
     <div id="page-cuidadores" className="container">
 
-      <header className="page-header">
-        <div className="top-bar-container">
-          <Link to="/">
-            <img src={backIcon} alt="Voltar" />
-          </Link>
-          <img src={logoImg} alt="Cuidador" />
-        </div>
-
-        <div className="header-content">
-          <strong>Cuidadores </strong>
-        </div>
-      </header>
+      <PageHeader name={userData} />
       <main>
 
         <Button className={classes.botao} align="center" variant="outlined" color="primary" onClick={handleClickOpen}>

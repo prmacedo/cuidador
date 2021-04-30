@@ -1,5 +1,6 @@
-import React from 'react';
-
+import PageHeader from '../../../components/PageHeader';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthService from '../../../services/auth.service'
 // react plugin for creating charts
 // @material-ui/core
 // import { makeStyles } from "@material-ui/core/styles";
@@ -29,28 +30,26 @@ import PatientTask from "./general.js";
 // const useStyles = makeStyles(styles);
 
 export default function Metas() {
-   
-    
-    return (
-        <div id="page-cuidadores" className="container"> 
-            <header className="page-header">
-        <div className="top-bar-container">
-          <Link to="/">
-            <img src={backIcon} alt="Voltar" />
-          </Link>
-          <img src={logoImg} alt="Metas" />
-        </div>
+    const [userData, setUserData] = useState();
 
-        <div className="header-content">
-          <strong>Metas</strong>
-        </div>
-      </header>
-       
+
+    useEffect(() => {
+        (async () => {
+            const { user: { firstName } } = AuthService.getCurrentUser()
+            setUserData(firstName);
+
+        })();
+    }, []);
+
+    return (
+        <div id="page-cuidadores" className="container">
+            <PageHeader name={userData} />
+
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                     <CustomTabs
                         title="Tasks:"
-                        headerColor= "info"
+                        headerColor="info"
                         tabs={[
                             {
                                 tabName: "Atividades",
@@ -63,7 +62,7 @@ export default function Metas() {
 
                                     />
                                 )
-                            }                            
+                            }
                         ]}
                     />
                 </GridItem>
@@ -71,5 +70,5 @@ export default function Metas() {
 
         </div>
 
-);
+    );
 }

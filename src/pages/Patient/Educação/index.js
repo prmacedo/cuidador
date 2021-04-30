@@ -1,36 +1,37 @@
-import React from "react";
-//import ReactDOM from "react-dom";
-
+import React, { useState, useEffect, useContext } from 'react';
 import App from "./App";
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logoImg from '../../../assets/images/logoAppWhite.svg';
 import backIcon from '../../../assets/images/icons/back.svg';
+import AuthService from '../../../services/auth.service'
+import PageHeader from '../../../components/PageHeader';
 
 
 export default function Educação() {
 
 
-return (
-  <div id="page-cuidadores" className="container">
-  {/* <PageHeader/> */}
-  <header className="page-header">
-    <div className="top-bar-container">
-      <Link to= "/AppMenu"> 
-      <img src={backIcon} alt="Voltar" />
-      </Link>
-      <img src={logoImg} alt="Cuidador" />      
-    </div>
-  
-    <div className ="header-content">
-      <strong>Educação em Dor</strong>
-    </div>
-  </header> 
+  const [userData, setUserData] = useState();
 
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  </div>
 
-);
+  useEffect(() => {
+    (async () => {
+      const { user: { firstName } } = AuthService.getCurrentUser()
+      setUserData(firstName);
+
+    })();
+  }, []);
+
+  return (
+    <div id="page-cuidadores" className="container">
+      {/* <PageHeader/> */}
+      <PageHeader name={userData} />
+
+
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+    </div>
+
+  );
 }

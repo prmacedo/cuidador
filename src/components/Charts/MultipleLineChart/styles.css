@@ -1,0 +1,70 @@
+#multiLineChartContainer > h3 {
+  text-align: center;
+  font-family: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+#multiLineChartContainer > p {
+  margin-bottom: 0.8rem;
+}
+
+#multiLineChartContainer > .input-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-bottom: 0.8rem;
+}
+
+#multiLineChartContainer > .input-group > select {
+  padding: 1.2rem 1.6rem;
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+#multiLineChartContainer > .input-group > #month {
+  width: 58%;
+}
+
+#multiLineChartContainer > .input-group > #year {
+  width: 38%;
+}
+
+#multiLineChartContainer > .scroll {
+  overflow-x: scroll;
+}
+
+#multiLineChartContainer .chart {
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #E6E6F0;
+
+  margin-bottom: 0.8rem;
+  padding: 2.4rem 1.2rem;
+
+  height: 85vh;
+  width: 250%;
+}
+
+#multiLineChartContainer > .emptyMessage{
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #E6E6F0;
+
+  padding: 2.4rem 1.2rem;
+  margin: 0;
+
+  text-align: center;
+
+  width: 100%;
+}
+
+@media (min-width: 767px) {
+  #multiLineChartContainer > .scroll {
+    overflow-x: hidden;
+  }
+  
+  #multiLineChartContainer .chart {
+    width: 100%;
+  }
+}

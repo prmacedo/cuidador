@@ -1,49 +1,33 @@
 import React from 'react';
 
-// react plugin for creating charts
-// @material-ui/core
-// import { makeStyles } from "@material-ui/core/styles";
+import PageHeader from '../../../components/PageHeader';
+import BarChart from '../../../components/Charts/BarChart';
+import LineChart from '../../../components/Charts/LineChart';
+import MultipleLineChart from '../../../components/Charts/MultipleLineChart';
 
-// import BugReport from "@material-ui/icons/BugReport";
-// import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
-// core components
-import GraficoDor from "../../../components/Charts/graficoDor"
-
-import { Link } from 'react-router-dom';
-
-import logoImg from '../../../assets/images/logoAppWhite.svg';
-import backIcon from '../../../assets/images/icons/back.svg';
-import './styles.css';
-
-
-
-
-// import styles from "assets/jss/dashboardStyle.js";
-
-// const useStyles = makeStyles(styles);
+import './styles.css'
 
 export default function MeuDesempenho() {
-     
-    return (
-        <div id="page-cuidadores" className="container"> 
-            <header className="page-header">
-        <div className="top-bar-container">
-          <Link to="/">
-            <img src={backIcon} alt="Voltar" />
-          </Link>
-          <img src={logoImg} alt="Metas" />
-        </div>
+  window.addEventListener('scroll', () => {
+    if(window.scrollY >= 80) {
+      document.querySelector('#fixed-header').classList.add('scrolled');
+    } else {
+      document.querySelector('#fixed-header').classList.remove('scrolled');
+    }
+  });
 
-        <div className="header-content">
-          <strong>Meu Desempenho</strong>
-        </div>
-      </header>
-            <GraficoDor />
+  return (  
+    <>      
+      <PageHeader />
 
-
-            
-        </div>
-
-);
+      <main id="meu-desempenho">
+        <h2>Meu Desempenho</h2>
+        <BarChart />
+        <hr/>
+        <LineChart />
+        <hr/>
+        <MultipleLineChart />
+      </main>
+    </>
+  );
 }

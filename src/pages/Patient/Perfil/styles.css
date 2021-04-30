@@ -1,9 +1,25 @@
-.forms {
+#page-perfil  {
+  
+    height: 100%;
+
+}
+
+#page-perfil main {
+    position: absolute;
+    top: 85px;
+    height: 100%;
+}
+
+#page-perfil .forms {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding-top: 40px;
+}
+
+#page-perfil nav {
+    width: 90%;
 }
 
 .edit {

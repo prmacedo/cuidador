@@ -23,7 +23,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
+      // '  margin: theme.spacing(1),'
     },
   },
   extendedIcon: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   listItem: {
-    height: 80,
+    height: 70,
     display: 'flex',
     justifyContent: 'space-between',
 
@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Perfil() {
-  
-  
-  
+
+
+
 
   const [userData, setUserData] = useState();
 
@@ -79,7 +79,7 @@ export default function Perfil() {
       const { user: { firstName, patient_id: { _id } } } = await AuthService.getCurrentUser()
       setUserData(firstName);
       const myData = await PatientService.getMyData({ patient_id: _id })
-     
+
       if (myData.data) {
         const { data: {
           lastName,
@@ -115,146 +115,145 @@ export default function Perfil() {
   }, []);
 
   return (
+    <div id="page-perfil" className="container">
+      { firstName &&
+        <>
+          <PageHeader name={userData} />
+
+          <main >
+
+            <div className="forms" >
+              <h1>Informações Pessoais</h1>
+              <p>Informações básicas, como seu nome e foto</p>
+
+              <List component="nav" className={classes.divisor} aria-label="mailbox folders">
+                <ListItem button className={classes.listItem}>
+                  <Typography gutterBottom variant="h4">Nome:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{firstName}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem} >
+                  <Typography gutterBottom variant="h4">Sobrenome:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{lastName}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem} >
+                  <Typography gutterBottom variant="h4">Gênero:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{gender}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem} >
+                  <Typography gutterBottom variant="h4">Idade</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{birth}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem}>
+                  <Typography gutterBottom variant="h4">Ocupação:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{occupation}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem}>
+                  <Typography gutterBottom variant="h4">Estado:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{state}</Typography>
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem}>
+
+                  <Typography gutterBottom variant="h4">Cidade:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{city}</Typography>
+
+                </ListItem>
+
+              </List>
+
+              <List component="nav" className={classes.divisor} aria-label="mailbox folders">
+
+                <ListItem button className={classes.listItem}>
+
+                  <Typography gutterBottom variant="h4">Peso:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{weight}</Typography>
+
+                </ListItem>
+                <Divider light />
+                <ListItem button className={classes.listItem}>
+
+                  <Typography gutterBottom variant="h4">Altura:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{height}</Typography>
+
+                </ListItem>
+
+                <Divider light />
+
+                <ListItem button className={classes.listItem}>
+
+                  <Typography gutterBottom variant="h4">IMC:</Typography>
 
 
-    <div align="center">
-      { firstName && <div id="page-cuidadores" className="container">
-        <PageHeader name={userData} />
-
-        <div >
-
-          <div className="forms" >
-            <h1>Informações Pessoais</h1>
-            <p>Informações básicas, como seu nome e foto</p>
-
-            <List component="nav" className={classes.divisor} aria-label="mailbox folders">
-              <ListItem button className={classes.listItem}>
-                <Typography gutterBottom variant="h4">Nome:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{firstName}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem} >
-                <Typography gutterBottom variant="h4">Sobrenome:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{lastName}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem} >
-                <Typography gutterBottom variant="h4">Gênero:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{gender}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem} >
-                <Typography gutterBottom variant="h4">Idade</Typography>
-                <Typography className="description" gutterBottom variant="h5">{birth}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-                <Typography gutterBottom variant="h4">Ocupação:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{occupation}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-                <Typography gutterBottom variant="h4">Estado:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{state}</Typography>
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h4">Cidade:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{city}</Typography>
-
-              </ListItem>
-
-            </List>
-
-            <List component="nav" className={classes.divisor} aria-label="mailbox folders">
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h4">Peso:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{weight}</Typography>
-
-              </ListItem>
-              <Divider light />
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h4">Altura:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{height}</Typography>
-
-              </ListItem>
-
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h4">IMC:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{imc}</Typography>
 
 
-                <Typography className="description" gutterBottom variant="h5">{imc}</Typography>
+                </ListItem>
+                <Divider light />
+
+                <ListItem button className={classes.listItem}>
+
+                  <Typography gutterBottom variant="h4">Tipo Sanguíneo:</Typography>
 
 
-              </ListItem>
-              <Divider light />
-
-              <ListItem button className={classes.listItem}>
-
-                <Typography gutterBottom variant="h4">Tipo Sanguíneo:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{bloodtype}</Typography>
 
 
-                <Typography className="description" gutterBottom variant="h5">{bloodtype}</Typography>
+                </ListItem>
 
+                <Divider light />
 
-              </ListItem>
+                <ListItem button className={classes.listItem}>
 
-              <Divider light />
+                  <Typography gutterBottom variant="h4">Condição de saúde <br></br>que causa dor Crônica:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">{condition}</Typography>
 
-              <ListItem button className={classes.listItem}>
+                </ListItem>
 
-                <Typography gutterBottom variant="h4">Condição de saúde <br></br>que causa dor Crônica:</Typography>
-                <Typography className="description" gutterBottom variant="h5">{condition}</Typography>
+                <Divider light />
 
-              </ListItem>
+                <ListItem button className={classes.listItem}>
 
-              <Divider light />
+                  <Typography gutterBottom variant="h4">Ano que foi Diagnosticado:</Typography>
+                  <Typography className="description" gutterBottom variant="h5"> Ainda não implementado</Typography>
 
-              <ListItem button className={classes.listItem}>
+                </ListItem>
 
-                <Typography gutterBottom variant="h4">Ano que foi Diagnosticado:</Typography>
-                <Typography className="description" gutterBottom variant="h5"> Ainda não implementado</Typography>
+                <Divider light />
 
-              </ListItem>
+                <ListItem button className={classes.listItem}>
 
-              <Divider light />
+                  <Typography gutterBottom variant="h4">Medicações em Uso:</Typography>
+                  <Typography className="description" gutterBottom variant="h5">Ainda não implementado</Typography>
 
-              <ListItem button className={classes.listItem}>
+                </ListItem>
+              </List>
 
-                <Typography gutterBottom variant="h4">Medicações em Uso:</Typography>
-                <Typography className="description" gutterBottom variant="h5">Ainda não implementado</Typography>
+            </div>
 
-              </ListItem>
-            </List>
+            <NavLink className="edit" to="/Perfiledit"> <Fab color="primary" aria-label="edit">
+              <EditIcon />
+            </Fab></NavLink>
 
-          </div>
+          </main>
 
-          <NavLink className="edit" to="/Perfiledit"> <Fab color="primary" aria-label="edit">
-            <EditIcon />
-          </Fab></NavLink>
-
-        </div>
-
-      </div>}
+        </>}
     </div>
 
   );

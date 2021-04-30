@@ -105,6 +105,6 @@
   cursor: pointer;
 }
 
-.hide {
+#numberedBody.hide {
   display: none!important;
 }

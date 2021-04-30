@@ -17,6 +17,7 @@ function AppMenu() {
         (async () => {
             const { user: { firstName } } = AuthService.getCurrentUser()
             setUserData(firstName);
+            
         })();
     }, []);
 
@@ -28,6 +29,9 @@ function AppMenu() {
                 <>
                     <PageHeader name={userData} />
                     <main>
+                    <div className="user-greeting" >
+                        <strong>Bem vindo, {userData}!</strong>
+                    </div>
                         <div className="all-buttons">
                             <div className="buttons-container">
                                 <NavLink to="/Perfil" className="study">
@@ -64,9 +68,7 @@ function AppMenu() {
                         </div>
 
                     </main>
-                    <span className="total-connections">
-                        Produzido por: E-brains Team
-            </span>
+             
                 </>}
         </div>
     )

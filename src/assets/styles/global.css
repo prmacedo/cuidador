@@ -39,10 +39,6 @@ html {
     width: 100%;
     overflow: auto;
 }
-body{
-    min-height:100%;
-    overflow: auto;
-}
 
 body {
     background: rgb(238, 241, 250);

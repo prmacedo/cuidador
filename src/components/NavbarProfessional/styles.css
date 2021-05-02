@@ -1,0 +1,193 @@
+#navbarProfessional * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#navbarProfessional {
+  padding: 3.2rem 4.8rem 1.6rem 2.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#navbarProfessional > div {
+  display: flex;
+}
+
+#navbarProfessional > div > .menu {
+  cursor: pointer;
+  margin-right: 2.4rem;
+}
+
+#navbarProfessional > div > .recent {
+  position: relative;
+}
+
+#navbarProfessional > div > .recent > .content{
+  background: #FFFFFF;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  width: 3.2rem;
+  height: 3.2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+#navbarProfessional > div > .recent > #recent-chats {
+  background: #FFFFFF;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  
+  width: 32rem;
+  padding: 1.6rem;
+
+  position: absolute;
+  top: 40px;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  transform: translateX(calc(-50%));
+}
+
+#navbarProfessional > div > .recent > #recent-chats > h3 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+#navbarProfessional > div > .recent > #recent-chats > hr {
+  background: #E6E6F0;
+  border: 1px solid #E6E6F0;
+}
+
+#navbarProfessional > div > .recent > #recent-chats > .scroll {
+  overflow-y: auto;
+
+  min-height: 100%;
+  max-height: 28rem;
+}
+
+#navbarProfessional > div > .recent > #recent-chats .chat {
+  display: grid;
+  grid-template-columns: 5.6rem 1fr;
+
+  margin-top: 0.8rem;
+  
+  border: 1px solid #E6E6F0;
+  border-radius: 0.4rem;
+
+  cursor: pointer;
+}
+
+#navbarProfessional > div > .recent > #recent-chats .chat > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0 0.8rem;
+}
+
+#navbarProfessional > div > .recent > #recent-chats .chat > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 0.8rem 0;
+}
+
+#navbarProfessional > div > .recent > #recent-chats .chat > div > span {
+  font-size: 1.2rem;
+}
+
+#navbarProfessional > div > .recent > #recent-chats .chat > div > span:last-of-type {
+  color: #BDBDBD ;
+}
+
+#navbarProfessional > div > .profile {
+  margin-left: 1.2rem;
+  cursor: pointer;
+
+  position: relative;
+}
+
+#navbarProfessional > div > .profile > .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #FFFFFF;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+#navbarProfessional > div > .profile > .content > span {
+  font-size: 1.6rem;
+}
+
+#navbarProfessional > div > .profile > .content > img:first-of-type {
+  height: 3.2rem;
+  border-right: 1px solid #E6E6F0;
+
+  margin-right: 1.2rem;
+}
+
+#navbarProfessional > div > .profile > .content > img:last-of-type {
+  padding: 0 1.2rem 0 1.6rem;
+}
+
+#options-profile {
+  display: flex;
+  flex-direction: column;
+
+  background: #FFFFFF;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  padding: 1.6rem;
+  width: 100%;
+
+  position: absolute;
+  top: 40px;
+}
+
+#options-profile > span {
+  cursor: pointer;
+  padding: 0.4rem 0;
+
+  width: calc(100% + 3.2rem);
+  margin-left: -1.6rem;
+}
+
+#options-profile > span:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#options-profile > span > img {
+  margin-left: 1.6rem;
+  margin-right: 1.2rem;
+}
+
+#navbarProfessional .hide {
+  display: none!important;
+}
+
+/* .scroll::-webkit-scrollbar {
+  width: 0px;
+} */

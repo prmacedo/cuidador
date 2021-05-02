@@ -27,7 +27,7 @@ function AppMenu() {
         <div id="page-menu-list" className="container">
             {userData &&
                 <>
-                    <PageHeader name={userData} />
+                    <PageHeader hideComeBack={true} hideLogout={false}/>
                     <main>
                     <div className="user-greeting" >
                         <strong>Bem vindo, {userData}!</strong>

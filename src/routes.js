@@ -21,7 +21,7 @@ import ProtectedRoute from './services/ProtectedRoute';
 import Perfil from './pages/Patient/Perfil';
 import Perfiledit from './pages/Patient/Perfil/perfilEdit';
 
-import Paperbase from './pages/Profissional/MainPage/Main';
+import Paperbase from './pages/Profissional/MainPage';
 import PaperbasePatient from './pages/Profissional/MainPage/MyPatient';
 import PaperbaseProfile from './pages/Profissional/MainPage/Profile';
 import patientTable from './pages/Profissional/MainPage/CuidadorPage-Components/patientTable.js';

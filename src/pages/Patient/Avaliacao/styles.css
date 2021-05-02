@@ -8,6 +8,7 @@
     display: block;
 }
 
+
 .MuiToolbar-regular {
     min-height: 48px;
 }
@@ -18,14 +19,23 @@
     padding: 0 10px;
 }
 
+#page-avaliacao {
+    padding-bottom: 85px;
+    overflow-y: scroll;
+}
+
 #page-avaliacao main {
+    position: absolute;
+    top: 85px;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    position: absolute;
-    top: 85px;
+    /* justify-content: space-around; */
+   
+    padding-bottom: 85px;
+    overflow-y:scroll;
 }
 
 #page-avaliacao .send-assessment-button {
@@ -40,19 +50,26 @@
 }
 
 #page-avaliacao .pain-image {
-width: 100%;
-display: flex;
-justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
-#page-avaliacao .pain-image img{
+
+#page-avaliacao .pain-image img {
     width: 90%;
-
 }
 
-#page-avaliacao .send-assessment-button{
+#page-avaliacao .send-assessment-button {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin-bottom: 2rem;
+}
+
+@media (min-width: 700px) {
+    #page-avaliacao .button-group {
+        width:30%;
+    
+    }
 }

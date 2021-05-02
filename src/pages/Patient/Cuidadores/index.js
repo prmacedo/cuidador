@@ -56,7 +56,7 @@ export default function Cuidadores() {
   const useStyles = makeStyles((theme) => ({
     botao: {
       // margin: theme.spacing(4),
-      display: 'flex',
+      display: 'inline',
       fontSize: '15px',
       color: 'var(--color-primary-light)',
       alignContent: 'center',
@@ -83,14 +83,15 @@ export default function Cuidadores() {
 
 
   return (
-    <div id="page-cuidadores" className="container">
+    <div id="page-cuidador" className="container">
 
-      <PageHeader name={userData} />
       <main>
-
+      <PageHeader name={userData} />
         <Button className={classes.botao} align="center" variant="outlined" color="primary" onClick={handleClickOpen}>
           Inserir Código
           </Button>
+
+
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle className={classes.titulo} id="form-dialog-title"><b>Inserir Código</b></DialogTitle>
           <DialogContent >
@@ -123,9 +124,7 @@ export default function Cuidadores() {
         ))}
    
 
-        <span className="total-connections">
-          Produzido por: E-brains Team
-                </span>
+   
       </main>
 
     </div>

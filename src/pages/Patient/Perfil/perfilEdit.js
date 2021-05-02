@@ -78,14 +78,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "40ch",
+    // marginLeft: theme.spacing(1),
+    // marginRight: theme.spacing(1),
+    width: "100%",
   },
   selected: {
-    width: "40ch",
+    width: "100%",
     "& .MuiTextField-root": {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
       width: "100%",
     },
   },
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "40px",
   },
   extendedIcon2: {
-    marginRight: theme.spacing(1),
+    // marginRight: theme.spacing(1),
   },
   button: {
     margin: theme.spacing(1),
@@ -187,52 +187,54 @@ export default function PerfilEdit() {
   const classes = useStyles();
 
   return (
-    <div align="center">
+    <>
       {userData && (
-        <div id="page-cuidadores" className="container">
+        <div id="page-edit" className="container">
           <PageHeader name={userData} />
+          <main>
 
-          <div>
-            <div className="forms">
-              <h1>Informações Pessoais</h1>
-              <TextField
-                label="Nome"
-                id="margin-none"
-                placeholder="Digite seu primeiro nome"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                label="Sobrenome"
-                id="margin-dense"
-                placeholder="Digite seu sobrenome"
-                className={classes.textField}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                margin="normal"
-              />
-              <form className={classes.selected} noValidate autoComplete="off">
-                <div>
-                  <TextField
-                    id="standard-select-currency"
-                    select
-                    label="Gênero"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                  >
-                    {genderObject.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-              </form>
 
-              {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
+            <div>
+              <div className="forms">
+                <h1>Informações Pessoais</h1>
+                <TextField
+                  label="Nome"
+                  id="margin-none"
+                  placeholder="Digite seu primeiro nome"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className={classes.textField}
+                  margin="normal"
+                />
+                <TextField
+                  label="Sobrenome"
+                  id="margin-dense"
+                  placeholder="Digite seu sobrenome"
+                  className={classes.textField}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  margin="normal"
+                />
+                <form className={classes.selected} noValidate autoComplete="off">
+                  <div>
+                    <TextField
+                      id="standard-select-currency"
+                      select
+                      label="Gênero"
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                    >
+                      {genderObject.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </div>
+                </form>
+
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid container justify="start">
 
                 <KeyboardDatePicker
                   margin="normal"
@@ -247,67 +249,67 @@ export default function PerfilEdit() {
                 />
 
               </Grid>
-            </MuiPickersUtilsProvider> */}
+            </MuiPickersUtilsProvider>
 
-              <MuiThemeProvider>
-                <InputMask
-                  mask="00/00/0000"
-                  value={birth}
-                  disabled={false}
-                  maskChar=" "
-                className={classes.textField}
+                {/* <MuiThemeProvider>
+                  <InputMask
+                    mask="00/00/0000"
+                    value={birth}
+                    disabled={false}
+                    maskChar=" "
+                    className={classes.textField}
 
-                >
-                  {() => <TextField />}
-                </InputMask>
-              </MuiThemeProvider>
+                  >
+                    {() => <TextField />}
+                  </InputMask>
+                </MuiThemeProvider> */}
 
-              <TextField
-                label="Ocupação"
-                id="margin-normal"
-                placeholder="Digite sua ocupação"
-                className={classes.textField}
-                value={occupation}
-                onChange={(e) => setOccupation(e.target.value)}
-                margin="normal"
-              />
-              <TextField
-                label="Estado"
-                id="margin-normal"
-                placeholder="Digite o estado que você mora: "
-                className={classes.textField}
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                margin="normal"
-              />
-              <TextField
-                label="Cidade"
-                id="margin-none"
-                placeholder="Digite a cidade onde você mora: "
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                label="Peso"
-                id="margin-dense"
-                placeholder="Digite seu peso"
-                className={classes.textField}
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                margin="normal"
-              />
-              <TextField
-                label="Altura"
-                id="margin-dense"
-                placeholder="Digite sua altura "
-                className={classes.textField}
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-                margin="normal"
-              />
-              {/* <TextField
+                <TextField
+                  label="Ocupação"
+                  id="margin-normal"
+                  placeholder="Digite sua ocupação"
+                  className={classes.textField}
+                  value={occupation}
+                  onChange={(e) => setOccupation(e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Estado"
+                  id="margin-normal"
+                  placeholder="Digite o estado que você mora: "
+                  className={classes.textField}
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Cidade"
+                  id="margin-none"
+                  placeholder="Digite a cidade onde você mora: "
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className={classes.textField}
+                  margin="normal"
+                />
+                <TextField
+                  label="Peso"
+                  id="margin-dense"
+                  placeholder="Digite seu peso"
+                  className={classes.textField}
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Altura"
+                  id="margin-dense"
+                  placeholder="Digite sua altura "
+                  className={classes.textField}
+                  value={height}
+                  onChange={(e) => setHeight(e.target.value)}
+                  margin="normal"
+                />
+                {/* <TextField
               label="IMC"
               id="margin-dense"
               placeholder="Digite seu "
@@ -315,71 +317,74 @@ export default function PerfilEdit() {
 
               margin="normal"
             /> */}
-              <form className={classes.selected} noValidate autoComplete="off">
-                <div>
-                  <TextField
-                    id="standard-select-currency"
-                    select
-                    label="Tipo Sanguíneo"
-                    value={bloodtype}
-                    onChange={(e) => setBloodtype(e.target.value)}
-                  >
-                    {bloodTypeObject.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-              </form>
-              <TextField
-                label="Condição de saúde"
-                id="margin-dense"
-                placeholder="Digite sua condição de saúde relacionada com a dor crônica "
-                className={classes.textField}
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
-                margin="normal"
-              />
-              <TextField
-                label="Ano que foi Diagnosticado"
-                id="margin-dense"
-                placeholder="Não implementado "
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                label="Medicações em Uso"
-                id="margin-dense"
-                placeholder="Não implementado "
-                className={classes.textField}
-                margin="normal"
-              />
+                <form className={classes.selected} noValidate autoComplete="off">
+                  <div>
+                    <TextField
+                      id="standard-select-currency"
+                      select
+                      label="Tipo Sanguíneo"
+                      value={bloodtype}
+                      onChange={(e) => setBloodtype(e.target.value)}
+                    >
+                      {bloodTypeObject.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </div>
+                </form>
+                <TextField
+                  label="Condição de saúde"
+                  id="margin-dense"
+                  placeholder="Digite sua condição de saúde relacionada com a dor crônica "
+                  className={classes.textField}
+                  value={condition}
+                  onChange={(e) => setCondition(e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Ano que foi Diagnosticado"
+                  id="margin-dense"
+                  placeholder="Não implementado "
+                  className={classes.textField}
+                  margin="normal"
+                />
+                <TextField
+                  label="Medicações em Uso"
+                  id="margin-dense"
+                  placeholder="Não implementado "
+                  className={classes.textField}
+                  margin="normal"
+                />
+              </div>
             </div>
-          </div>
-          <NavLink className="send-buttom" to="/Perfil">
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.button}
-              onClick={updateData}
-            >
-              Atualizar Dados
+            <div className="nav-button">
+              <NavLink className="send-buttom" to="/Perfil">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+
+                  onClick={updateData}
+                >
+                  Atualizar Dados
             </Button>
-          </NavLink>
-          <NavLink className="send-buttom" to="/Perfil">
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              startIcon={<DeleteIcon />}
-            >
-              Cancelar
+              </NavLink>
+              <NavLink className="send-buttom" to="/Perfil">
+                <Button
+                  variant="contained"
+                  color="secondary"
+
+                  startIcon={<DeleteIcon />}
+                >
+                  Cancelar
             </Button>
-          </NavLink>
+              </NavLink>
+            </div>
+          </main>
         </div>
       )}
-    </div>
+    </>
   );
 }

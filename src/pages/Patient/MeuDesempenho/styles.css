@@ -1,14 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {  
-  max-width: 100vw;
-  height: 100%!important;
-  overflow-x: hidden;
-}
 
 main#meu-desempenho {
   display: flex;
@@ -20,6 +9,9 @@ main#meu-desempenho {
 
   margin: 0 auto;
   padding: 4.8rem 0 4.8rem;
+
+
+  
 }
 
 main#meu-desempenho > h2 {

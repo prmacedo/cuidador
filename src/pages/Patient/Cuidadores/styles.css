@@ -1,24 +1,32 @@
-#page-cuidadores{
+#page-cuidador{
     width: 100vw;
     height: 100vh;
     /* background: rgb(238, 241, 250); */
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 
 }
 
-#page-cuidadores main {
+#page-cuidador main {
     margin: 1.2rem auto;
     width: 90%;
-    /* height:100vh; */
+    height:100vh;
+    /* background-color: chartreuse; */
+    position: absolute;
+    top: 85px;
+    overflow: scroll;
+
 }
 
-#page-cuidadores .page-header {
+#page-cuidador .page-header {
     display: flex;
     flex-direction: column;
     background-color: var(--color-primary-light);
     /* background-color: white; */
 }
 
-#page-cuidadores .top-bar-container {
+#page-cuidador .top-bar-container {
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -29,7 +37,7 @@
     
 }
 
-#page-cuidadores .total-connections {
+#page-cuidador .total-connections {
     font-size: 1.4rem;
 
     display: flex;
@@ -43,7 +51,7 @@
     right: 0;
 }
 
-#page-cuidadores .container {
+#page-cuidador .container {
     background: white;
     border-radius: 0px;
     padding: 0px;
@@ -54,20 +62,20 @@
     position: relative;
 }
 
-#page-cuidadores .page-header .top-bar-container a {
+#page-cuidador .page-header .top-bar-container a {
     height: 3.2rem;
     transition: opacity 0.2s;
 }
 
-#page-cuidadores .page-header .top-bar-container a:hover {
+#page-cuidador .page-header .top-bar-container a:hover {
    opacity: 0.6;
 }
 
-#page-cuidadores .page-header .top-bar-container > img {
+#page-cuidador .page-header .top-bar-container > img {
     height: 3rem;
 }
 
-#page-cuidadores .page-header .header-content {
+#page-cuidador .page-header .header-content {
     /* width: 90%; */
     margin:0 auto;
     position: relative;
@@ -76,7 +84,7 @@
 
 }
 
-#page-cuidadores .header-content strong {
+#page-cuidador .header-content strong {
     font: 700 2.6rem Archivo;
     line-height: 4.2rem;
     align-items: center;
@@ -85,7 +93,7 @@
 
 
 @media(min-width:700px) {
-    #page-cuidadores {
+    #page-cuidador {
         max-width: 100vw;
     }
 }

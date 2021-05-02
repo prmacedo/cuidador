@@ -1,13 +1,17 @@
 #page-perfil  {
   
-    height: 100%;
+    height: 100vh;
 
+   
 }
 
 #page-perfil main {
     position: absolute;
     top: 85px;
     height: 100%;
+    padding-bottom: 85px;
+    overflow-y:scroll;
+  
 }
 
 #page-perfil .forms {
@@ -48,4 +52,42 @@ p {
 
 .logout {
     cursor: pointer;
+}
+
+
+
+
+/* edit */
+
+#page-edit {
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+
+}
+
+
+#page-edit main {
+    position: absolute;
+    top: 85px;
+    height: 100%;
+    padding-bottom: 150px;
+    overflow-y:scroll;
+}
+#page-edit .forms {
+    width: 80%;
+    margin: 0 0 0 30px;
+
+}
+#page-edit .nav-button {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+a.send-buttom {
+    margin-top: 40px;
 }

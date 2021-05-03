@@ -92,60 +92,58 @@ export default function NavbarProfessional() {
   }
 
   return (
-    <>
-      <nav id="navbarProfessional">
-        <div>
-          <img src={menu} className="menu" alt="Menu" onClick={() => { handleHideSidebar() }} />
-          <h2>{currentPage}</h2>
-        </div>
+    <nav id="navbarProfessional">
+      <div>
+        <img src={menu} className="menu" alt="Menu" onClick={() => { handleHideSidebar() }} />
+        <h2>{currentPage}</h2>
+      </div>
 
-        <div>
-          <div className="recent">
-            <div className="content" onClick={() => toggleRecentChats()}>
-              <img src={recentMail} alt="Conversas recentes" />
-            </div>
+      <div>
+        <div className="recent">
+          <div className="content" onClick={() => toggleRecentChats()}>
+            <img src={recentMail} alt="Conversas recentes" />
+          </div>
 
-            <div id="recent-chats" className="hide">
-              <h3>Chats Recentes</h3>
-              <hr/>
-              {recentChatsData.length ?
-              <div className="scroll">
-                {recentChatsData.map((item) => (
-                  <div className="chat">                    
-                    <img src={item.avatar} alt={item.name} />
-                    <div>
-                      <span>{item.name}</span>
-                      <span>{item.city}, {item.state}</span>
-                    </div>
+          <div id="recent-chats" className="hide">
+            <h3>Chats Recentes</h3>
+            <hr/>
+            {recentChatsData.length ?
+            <div className="scroll">
+              {recentChatsData.map((item, index) => (
+                <div className="chat" key={index}>                    
+                  <img src={item.avatar} alt={item.name} />
+                  <div>
+                    <span>{item.name}</span>
+                    <span>{item.city}, {item.state}</span>
                   </div>
-                ))}
-              </div>
-                :
-              <span>Não há mensagem nos últimos 2 dias.</span>
-              }
+                </div>
+              ))}
             </div>
-          </div>
-
-          <div className="profile">
-            <div className="content" onClick={() => toggleOptionsDropdown()}>
-              <img src={profilePic} alt={profile.avatar} />
-              <span>{profile.name}</span>
-              <img src={arrowDown} alt="Opções" />
-            </div>
-
-            <div id="options-profile" className="hide">
-              <span onClick={ () => { redirectToProfile(); }}>
-                <img src={profileIcon} alt="Meu Perfil" />
-                Meu Perfil
-              </span>
-              <span>
-                <img src={logout} alt="Sair" />
-                Sair
-              </span>
-            </div>
+              :
+            <span>Não há mensagem nos últimos 2 dias.</span>
+            }
           </div>
         </div>
-      </nav>
-    </>
+
+        <div className="profile">
+          <div className="content" onClick={() => toggleOptionsDropdown()}>
+            <img src={profilePic} alt={profile.avatar} />
+            <span>{profile.name}</span>
+            <img src={arrowDown} alt="Opções" />
+          </div>
+
+          <div id="options-profile" className="hide">
+            <span onClick={ () => { redirectToProfile(); }}>
+              <img src={profileIcon} alt="Meu Perfil" />
+              Meu Perfil
+            </span>
+            <span>
+              <img src={logout} alt="Sair" />
+              Sair
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }

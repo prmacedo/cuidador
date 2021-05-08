@@ -41,7 +41,7 @@ export default function MainPage() {
           </span>
 
           <form action="">
-            <input type="text" name="name" placeholder="Digite o nome do paciente" />
+            <input type="text" name="name" placeholder="Buscar paciente" />
             <button type="submit">
               <img src={searchIcon} alt="Buscar"/>
               Buscar

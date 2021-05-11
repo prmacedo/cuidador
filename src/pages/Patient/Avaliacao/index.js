@@ -196,11 +196,11 @@ export default function Avaliação() {
 
           <Paper className={classes.paper}>
             <Typography component="h4" variant="h3" align="center">
-              Avaliação diária
+              Avaliação Diária
             </Typography>
             <Box style={{ marginTop: "16px" }}>
               <Typography component="span" variant="h4" align="center">
-                Você está sentindo dor hoje?
+                Você sentiu dor nas últimas 24 horas?
               </Typography>
             </Box>
             <div className={classes.root}>
@@ -234,14 +234,16 @@ export default function Avaliação() {
 
             <Box className={classes.painBox}>
               <Typography component="span" variant="h4" align="center">
-                Onde está localizada sua dor?
+                
               </Typography>
-              <Typography component="span" variant="subtitle1" align="center">
-                Utilize a imagem abaixo para responder a pergunta
+              <Typography component="span" variant="h4" align="center">
+                Utilize a imagem abaixo para responder às perguntas
               </Typography>
+              <div>
               <img src={imagem} />
-              <Typography omponent="span" variant="h4">
-                Onde estão localizadas suas dores?
+               </div>
+              <Typography omponent="h2" variant="h">
+                Onde está localizada a(s) sua(s) dor(es)?
               </Typography>
 
               <form className={classes.root} noValidate autoComplete="off">
@@ -295,7 +297,7 @@ export default function Avaliação() {
                 variant="h6"
                 align="center"
               >
-                Onde está a dor que mais te incomoda? digite apenas um número.
+                Onde está localizada a dor que mais te incomoda? Digite apenas um número.
               </Typography>
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField
@@ -328,7 +330,7 @@ export default function Avaliação() {
                 variant="h6"
                 align="center"
               >
-                Qual é a media de intensidade desta dor nas últimas 24hs?
+                Qual é a média de intensidade desta dor nas últimas 24hs?
               </Typography>
               <div className={classes.slider}>
                 <Slider
@@ -351,7 +353,7 @@ export default function Avaliação() {
                 Nas últimas 24 horas
               </h3>
               <Typography component="h2" variant="h6" align="center">
-                Quanto a dor está influenciando no seu humor?
+                Quanto a dor está influenciando o seu humor?
               </Typography>
               <div className={classes.slider}>
                 <Slider
@@ -371,7 +373,7 @@ export default function Avaliação() {
               </div>
 
               <Typography component="h2" variant="h6" align="center">
-                Quanto a dor está atrapalhando seu desempenho nas atividades
+                Quanto a dor está atrapalhando o seu desempenho nas atividades
                 habituais?
               </Typography>
               <div className={classes.slider}>
@@ -392,33 +394,24 @@ export default function Avaliação() {
               </div>
 
               <Typography component="h2" variant="h6" align="center">
-                A dor que você está sentindo tem influenciado a sua relação com
+                Quanto a dor que você está sentindo tem influenciado a sua relação com
                 as outras pessoas?
               </Typography>
-              <div>
-                <Box>
-                  <ButtonGroup
-                    className={classes.button}
-                    disableElevation
-                    variant="contained"
-                    color="primary"
-                  >
-                    <Button
-                      onClick={() => {
-                        setInfluenceRelationship(true);
-                      }}
-                    >
-                      Sim
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setInfluenceRelationship(false);
-                      }}
-                    >
-                      Não
-                    </Button>
-                  </ButtonGroup>
-                </Box>
+              <div className={classes.slider}>
+                <Slider
+                  defaultValue={0}
+                  getAriaValueText={valuetext}
+                  aria-labelledby="discrete-slider-small-steps"
+                  step={1}
+                  marks
+                  min={0}
+                  max={10}
+                  value={moodInfluence}
+                  onChange={(event, newValue) => {
+                    setMoodInfluence(newValue);
+                  }}
+                  valueLabelDisplay="auto"
+                />
               </div>
 
               <Typography component="h2" variant="h6" align="center">
@@ -442,7 +435,7 @@ export default function Avaliação() {
               </div>
 
               <Typography component="h2" variant="h6" align="center">
-                Quanto a dor está influeniando no seu comportamento sexual?
+                Quanto a dor está influenciando o seu comportamento sexual?
               </Typography>
               <div className={classes.slider}>
                 <Slider
@@ -482,7 +475,7 @@ export default function Avaliação() {
               </div>
 
               <Typography component="h2" variant="h6" align="center">
-                Quanto a angústia pode estar relacionada à sua dor?
+                Quanto a dor tem influenciado o seu trabalho?
               </Typography>
               <div className={classes.slider}>
                 <Slider
@@ -502,7 +495,7 @@ export default function Avaliação() {
               </div>
 
               <Typography component="h2" variant="h6" align="center">
-                Quanto você está ansioso para que a dor pare?
+                Quanto a dor tem interferido em sua disposição para andar?
               </Typography>
               <div className={classes.slider}>
                 <Slider

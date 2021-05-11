@@ -11,9 +11,6 @@ import './styles.css';
 
 export default function ProfessionalContainer({ children }) {
   return (
-    <ProfileContextProvider>
-      <CurrentPageContextProvider>
-        <HiddenSidebarContextProvider>
           <div className="wrapper">
             <Sidebar />
             <main>
@@ -23,8 +20,6 @@ export default function ProfessionalContainer({ children }) {
               </div>
             </main>
           </div>
-        </HiddenSidebarContextProvider>
-      </CurrentPageContextProvider>
-    </ProfileContextProvider>
+    
   );
 }

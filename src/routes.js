@@ -42,11 +42,11 @@ export default function Routes() {
         <ProtectedRoute path="/meudesempenho" component = {MeuDesempenho}/>
         <ProtectedRoute path="/educacao" component = {Educacao}/>
         <Route path="/LoginCuidador" component = {LoginCuidador}/>
-        <Route path="/ProfilePatient" component = {ProfilePatient}/>
+        {/* <Route path="/ProfilePatient" component = {ProfilePatient}/> */}
         <Route path="/MainPage" component = {Paperbase}/>
-        <Route path="/MeuPaciente" component = {PaperbasePatient}/>
-        <Route path="/MeuPerfil" component = {PaperbaseProfile}/>
-        <Route path="/table" component = {patientTable}/>
+        {/* <Route path="/MeuPaciente" component = {PaperbasePatient}/> */}
+        {/* <Route path="/MeuPerfil" component = {PaperbaseProfile}/> */}
+        {/* <Route path="/table" component = {patientTable}/> */}
 
         </Switch>
     </BrowserRouter>

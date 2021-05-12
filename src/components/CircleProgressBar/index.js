@@ -10,8 +10,6 @@ export default function CircularProgressBar({ percentage, sqSize, strokeWidth })
 
   return(
     <svg
-      width={sqSize}
-      height={sqSize}
       viewBox={viewBox}>
       <circle
         className="circle-background"

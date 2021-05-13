@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: "center",
       color: theme.palette.text.secondary,
       textAlign: "center",
+      backgroundColor: '#EEF1FA',
     },
     margin: {
       margin: theme.spacing(1),
@@ -24,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
       flexGrow: 0,
       width: '100%',
       marginBottom: '16px',
+      maxWidth: '500px',
       "& > *": {
         margin: theme.spacing(1),
       },
@@ -75,6 +77,11 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         marginTop: '21.18px',
         marginBottom: '13px',
+    },
+    container: {
+      display: "flex",
+      justifyContent: "space-evenly",
+      alignItems: "center",
     },
   }))
 ;

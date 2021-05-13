@@ -7,7 +7,7 @@
 #lineChartContainer > h3 {
   text-align: center;
   font-family: 1.8rem;
-  margin-bottom: 0.8rem;
+  /* margin-bottom: 0.8rem; */
 }
 
 #lineChartContainer > p {
@@ -78,6 +78,11 @@
   }
   
   #lineChartContainer .chart {
-    width: 100%;
+    max-width: 100%;
+    
+    height: 42vh;
+    max-height: 400px;
+
+    margin-bottom: 0;
   }
 }

@@ -1,3 +1,7 @@
+svg {
+  height: 6rem;
+}
+
 svg .circle-background,
 svg .circle-progress {
   fill: none;

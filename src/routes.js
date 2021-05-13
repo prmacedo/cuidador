@@ -15,14 +15,14 @@ import LoginCuidador from './pages/Profissional/LoginCuidador';
 
 
 
-import ProfilePatient from './pages/Profissional/ProfilePatient/index.js';
+
+import InfoPatient from './pages/Profissional/InfoPatient';
 
 import ProtectedRoute from './services/ProtectedRoute';
 import Perfil from './pages/Patient/Perfil';
 import Perfiledit from './pages/Patient/Perfil/perfilEdit';
 
 import Paperbase from './pages/Profissional/MainPage';
-import PaperbasePatient from './pages/Profissional/MainPage/MyPatient';
 import PaperbaseProfile from './pages/Profissional/MainPage/Profile';
 import patientTable from './pages/Profissional/MainPage/CuidadorPage-Components/patientTable.js';
 
@@ -42,9 +42,8 @@ export default function Routes() {
         <ProtectedRoute path="/meudesempenho" component = {MeuDesempenho}/>
         <ProtectedRoute path="/educacao" component = {Educacao}/>
         <Route path="/LoginCuidador" component = {LoginCuidador}/>
-        <Route path="/ProfilePatient" component = {ProfilePatient}/>
         <Route path="/MainPage" component = {Paperbase}/>
-        <Route path="/MeuPaciente" component = {PaperbasePatient}/>
+        <Route path="/paciente" component = {InfoPatient}/>
         <Route path="/MeuPerfil" component = {PaperbaseProfile}/>
         <Route path="/table" component = {patientTable}/>
 

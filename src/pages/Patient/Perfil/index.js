@@ -175,10 +175,12 @@ export default function Perfil() {
                   <Typography className="description" gutterBottom variant="h5">{city}</Typography>
 
                 </ListItem>
+                <Divider light />
 
               </List>
 
               <List component="nav" className={classes.divisor} aria-label="mailbox folders">
+                <Divider light />
 
                 <ListItem button className={classes.listItem}>
 

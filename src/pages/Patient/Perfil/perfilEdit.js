@@ -149,7 +149,7 @@ export default function PerfilEdit() {
         setFirstName(firstName);
         setLastName(lastName);
         setGender(gender);
-        setBirth(birth || new window.Date());
+        setBirth(birth || null);
         setOccupation(occupation);
         setState(state);
         setCity(city);
@@ -234,22 +234,24 @@ export default function PerfilEdit() {
                 </form>
 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="start">
+                  <Grid container justify="start">
 
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="Data do Nascimento"
-                  format="dd/MM/yyyy"
-                  value={birth}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
+                    <KeyboardDatePicker
+                      label="Data do Nascimento"
+                      autoOk={true}
+                        
+                      margin="normal"
+                      id="date-picker-dialog"
+                      format="dd/MM/yyyy"
+                      value={birth}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
 
-              </Grid>
-            </MuiPickersUtilsProvider>
+                  </Grid>
+                </MuiPickersUtilsProvider>
 
                 {/* <MuiThemeProvider>
                   <InputMask

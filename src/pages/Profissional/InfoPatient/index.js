@@ -14,10 +14,16 @@ import clipboard from '../../../assets/images/icons/clipboard.svg';
 import chat from '../../../assets/images/icons/chat-blue.svg';
 
 import './styles.css';
+import { useCurrentPage } from '../../../context/CurrentPage';
 
 export default function InfoPatient() {
   const [percentage, setPercentage] = useState(50);
+  const { setCurrentPage } = useCurrentPage();
   const { hideSidebar } = useHiddenSidebar();
+
+  useEffect(() => {
+    setCurrentPage('Pacientes');
+  }, []);
 
   useEffect(() => {
     if(hideSidebar) {

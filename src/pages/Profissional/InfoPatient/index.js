@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import BarChart from '../../../components/Charts/BarChart';
 import LineChart from '../../../components/Charts/LineChart';
 import MultipleLineChart from '../../../components/Charts/MultipleLineChart';
+import CircularProgressBar from '../../../components/CircleProgressBar';
 
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
 import { useHiddenSidebar } from '../../../context/HiddenSidebar';
@@ -12,7 +14,6 @@ import clipboard from '../../../assets/images/icons/clipboard.svg';
 import chat from '../../../assets/images/icons/chat-blue.svg';
 
 import './styles.css';
-import CircularProgressBar from '../../../components/CircleProgressBar';
 
 export default function InfoPatient() {
   const [percentage, setPercentage] = useState(50);
@@ -23,14 +24,21 @@ export default function InfoPatient() {
       document.querySelector('#lineChartContainer').classList.add('strech');
       document.querySelector('#barChartContainer').classList.add('strech');
       document.querySelector('#multiLineChartContainer').classList.add('strech');
+      document.querySelector('.scroll-charts').classList.add('strech');
     } else {
       document.querySelector('#lineChartContainer').classList.remove('strech');
       document.querySelector('#barChartContainer').classList.remove('strech');
       document.querySelector('#multiLineChartContainer').classList.remove('strech');
+      document.querySelector('.scroll-charts').classList.remove('strech');
     }
 
   }, [hideSidebar]);
 
+  const history = useHistory();
+
+  const redirectToGoals = () => {
+    history.push('/goals');
+  }
 
   return (
     <ProfessionalContainer>
@@ -53,7 +61,7 @@ export default function InfoPatient() {
           <small>29/30</small>
         </div>
 
-        <div id="goals-card" className="card">
+        <div id="goals-card" className="card" onClick={redirectToGoals}>
           <h3>Metas do paciente</h3>
           <img src={clipboard} alt="Metas" />
           <small>Tarefas a serem realizadas pelo paciente</small>

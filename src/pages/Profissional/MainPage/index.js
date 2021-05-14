@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+
+import { useCurrentPage } from '../../../context/CurrentPage';
+
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
 
 import profilePic from '../../../assets/images/icons/profile-user.svg';
-
 import addIcon from '../../../assets/images/icons/add-icon.svg';
 import searchIcon from '../../../assets/images/icons/search-icon.svg';
 import closeIcon from '../../../assets/images/icons/close.svg';
@@ -11,10 +14,21 @@ import './styles.css';
 
 export default function MainPage() {
   const [initialLetter, setInitialLetter] = useState('');
+  const { setCurrentPage } = useCurrentPage();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    setCurrentPage('Pacientes');
+  }, []);
 
   useEffect(() => {
     // Realizar busca pela letra inicial do nome
   }, [initialLetter]);
+
+  function redirectToPatient() {
+    history.push('/paciente');
+  }
 
   function handleSearchByLetter(event, letter) {
     const selected = document.querySelector('#search-alphabet span.active');
@@ -81,7 +95,7 @@ export default function MainPage() {
 
         <div className="scroll-cards">
           <div id="cards-container">
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -91,7 +105,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
             
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -101,7 +115,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -111,7 +125,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -121,7 +135,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -131,7 +145,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -141,7 +155,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -151,7 +165,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -161,7 +175,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -171,7 +185,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>
@@ -181,7 +195,7 @@ export default function MainPage() {
               <footer>Cidade, Estado</footer>
             </div>
 
-            <div className="card">
+            <div className="card" onClick={() => redirectToPatient()}>
               <main>
                 <img src={profilePic} alt="Nome do paciente" />
                 <h4>Nome do paciente</h4>

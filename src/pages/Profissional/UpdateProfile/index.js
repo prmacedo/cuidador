@@ -10,8 +10,8 @@ export default function Profile() {
 
   const history = useHistory();
 
-  function redirectToUpdateProfile() {
-    history.push('/AtualizarPerfil');
+  function redirectToProfile() {
+    history.push('/MeuPerfil');
   }
 
   function handleSelectFile(evt) {
@@ -92,7 +92,7 @@ export default function Profile() {
               </button>
             </div>
             <div className="col col-6">
-              <button type="button" className="btn">
+              <button type="button" className="btn" onClick={() => redirectToProfile()}>
                 Cancelar
               </button>
             </div>

@@ -18,7 +18,7 @@ export default function NavbarProfessional() {
   const [recentChatsData, setRecentChatsData] = useState([]);
 
   const { profile } = useProfile();
-  const { currentPage, setCurrentPage } = useCurrentPage();
+  const { currentPage } = useCurrentPage();
   const { hideSidebar, setHideSidebar } = useHiddenSidebar();
 
   useEffect(() => {
@@ -91,7 +91,6 @@ export default function NavbarProfessional() {
   const history = useHistory();
 
   function redirectToProfile() {
-    setCurrentPage('Meu Perfil');
     history.push('/MeuPerfil');
   }
 

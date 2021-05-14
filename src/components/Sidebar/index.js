@@ -10,11 +10,14 @@ import { useCurrentPage } from '../../context/CurrentPage';
 import { useHiddenSidebar } from '../../context/HiddenSidebar';
 
 import './styles.css';
+import { useHistory } from 'react-router';
 
 export default function Sidebar() {
   const { profile } = useProfile();
-  const { currentPage, setCurrentPage } = useCurrentPage();
+  const { currentPage } = useCurrentPage();
   const { hideSidebar } = useHiddenSidebar();
+
+  const history = useHistory();
 
   useEffect(() => {
     if (hideSidebar) {
@@ -25,11 +28,11 @@ export default function Sidebar() {
   }, [hideSidebar]);
 
   function redirectToPacients() {
-    setCurrentPage('Pacientes');
+    history.push('/MainPage');
   }
 
   function redirectToChat() {
-    setCurrentPage('Chat Interprofissional');
+    
   }
 
   return(

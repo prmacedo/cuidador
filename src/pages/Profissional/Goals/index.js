@@ -10,12 +10,18 @@ import addIcon from '../../../assets/images/icons/add-icon.svg';
 import { useHiddenSidebar } from '../../../context/HiddenSidebar';
 
 import './styles.css';
+import { useCurrentPage } from '../../../context/CurrentPage';
 
 export default function Goals() {
   const [monthPercentage, setMonthPercentage] = useState(33);
   const [totalPercentage, setTotalPercentage] = useState(25);
 
+  const { setCurrentPage } = useCurrentPage();
   const { hideSidebar } = useHiddenSidebar();
+
+  useEffect(() => {
+    setCurrentPage('Metas');
+  }, []);
 
   useEffect(() => {
     if (hideSidebar) {

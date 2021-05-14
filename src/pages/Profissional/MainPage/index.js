@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import { useCurrentPage } from '../../../context/CurrentPage';
+
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
 
 import profilePic from '../../../assets/images/icons/profile-user.svg';
@@ -12,8 +14,13 @@ import './styles.css';
 
 export default function MainPage() {
   const [initialLetter, setInitialLetter] = useState('');
+  const { setCurrentPage } = useCurrentPage();
 
   const history = useHistory();
+
+  useEffect(() => {
+    setCurrentPage('Pacientes');
+  }, []);
 
   useEffect(() => {
     // Realizar busca pela letra inicial do nome

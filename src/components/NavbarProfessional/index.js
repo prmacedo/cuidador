@@ -12,6 +12,7 @@ import { useCurrentPage } from '../../context/CurrentPage';
 import { useHiddenSidebar } from '../../context/HiddenSidebar';
 
 import './styles.css';
+import { useHistory } from 'react-router';
 
 export default function NavbarProfessional() {
   const [recentChatsData, setRecentChatsData] = useState([]);
@@ -87,8 +88,11 @@ export default function NavbarProfessional() {
     setHideSidebar(!hideSidebar);
   }
 
+  const history = useHistory();
+
   function redirectToProfile() {
     setCurrentPage('Meu Perfil');
+    history.push('/MeuPerfil');
   }
 
   return (

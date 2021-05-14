@@ -1,0 +1,255 @@
+#patient-cards {
+  display: grid;
+  grid-template-columns: 33% 3fr 3fr 2fr;
+  gap: 1.6rem;
+}
+
+#patient-cards > div:not(#add-goal-button) {
+  background: #FFF;
+
+  height: 100%;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+
+  transition: height 0.3s;
+}
+
+#patient-cards .card {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8rem;
+
+  text-align: center;
+  padding: 0.8rem 2.4rem;
+
+  height: 100%;
+}
+
+/* Botão adicionar meta */
+#patient-cards #add-goal-button {
+  display: flex;
+  align-items: center;
+}
+
+#patient-cards #add-goal-button > button {
+  color: white;
+  background-color: #547DE2;
+
+  width: 100%;
+
+  border: none;
+  border-radius: 0.8rem;
+
+  padding: 1.2rem 1.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  cursor: pointer;
+
+  transition: background 0.3s;
+}
+
+#patient-cards #add-goal-button > button:hover {
+  background-color: #3a5db4;
+}
+
+/* Scroll */
+#goals-list {
+  display: grid;
+  grid-template-columns: 33% 1fr 1fr;
+  gap: 1.6rem;
+
+  margin-top: 0.8rem;
+}
+
+/* Lista de metas */
+#goals-list .goal-list {
+  background: #FFF;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+
+  padding: 2.4rem 3.2rem;
+
+}
+
+#goals-list .goal-list .header h2 {
+  font-size: 1.6rem;
+  color: #333;
+  text-align: center;
+
+}
+
+#goals-list .goal-list .header p {
+  font-size: 0.8rem;
+  color: #828282;
+
+  margin: 0;
+
+  text-align: center;
+}
+
+#goals-list .goal-list hr {
+  border: 1px solid #E6E6F0;
+  margin: 1.6rem -1.6rem;
+}
+
+#goals-list .goal-items > .scroll {
+  overflow-y: auto;
+  max-height: 21rem;
+}
+
+#goals-list .goal-items > .scroll.stretch {
+  max-height: 24rem;
+}
+
+#goals-list .goal-item {  
+  font-size: 1.2rem;
+  
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 1.6rem;
+}
+
+#goals-list .activity {
+  color: #4F4F4F;
+}
+
+#goals-list .duration {
+  color: #BDBDBD;
+}
+
+/* Modal */
+#add-goal-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-goal-modal .overlay {
+  position: absolute;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  height: 100%;
+  width: 100%;
+}
+
+#add-goal-modal > .content {
+  position: relative;
+
+  background: #FFF;
+  border-radius: 0.4rem;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 48rem;
+  padding: 3.2rem 2.4rem;
+}
+
+#add-goal-modal > .content hr {
+  border: 1px solid #E6E6F0;
+  margin: 1.6rem -0.8rem;
+}
+
+#add-goal-modal > .content > h3 {
+  color: #4F4F4F;
+  font-size: 1.8rem;
+  font-weight: 600;
+
+  margin-bottom: 0.8rem;
+}
+
+#add-goal-modal > .content > p {
+  color: #828282;
+  font-size: 1.2rem;
+
+  margin: 0;
+  padding: 0;
+}
+
+#add-goal-modal > .content form {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-goal-modal > .content .input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-goal-modal > .content label {
+  color: #4F4F4F;
+  font-size: 1.6rem;
+
+  margin-bottom: 0.8rem;
+}
+
+#add-goal-modal > .content input {
+  background: #F8F8FC;
+
+  color: #4F4F4F;
+
+  border: 1px solid #E6E6F0;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+
+  padding: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+#add-goal-modal > .content select {
+  margin: 0;
+  margin-bottom: 1.6rem;
+}
+
+#add-goal-modal > .content button {
+  background: #547DE2;
+  
+  color: #FFF;
+  font-weight: 400;
+  font-size: 1.6rem;
+
+  padding: 0.8rem;
+
+  border: 0;
+  border-radius: 0.4rem;
+
+  cursor: pointer;
+}
+
+#add-goal-modal > .content button:hover {
+  background: #4364B5;
+}
+
+#add-goal-modal > .content > span {
+  position: absolute;
+
+  top: 3.2rem;
+  right: 3.2rem;
+
+  cursor: pointer;
+}
+
+#add-goal-modal.hide {
+  display: none;
+}

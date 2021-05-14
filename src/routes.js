@@ -23,8 +23,8 @@ import Perfil from './pages/Patient/Perfil';
 import Perfiledit from './pages/Patient/Perfil/perfilEdit';
 
 import Paperbase from './pages/Profissional/MainPage';
-import PaperbasePatient from './pages/Profissional/MainPage/MyPatient';
 import ProfessionalProfile from './pages/Profissional/Profile';
+import UpdateProfessionalProfile from './pages/Profissional/UpdateProfile';
 import patientTable from './pages/Profissional/MainPage/CuidadorPage-Components/patientTable.js';
 import Goals from './pages/Profissional/Goals';
 
@@ -48,6 +48,7 @@ export default function Routes() {
         <Route path="/paciente" component = {InfoPatient}/>
         <Route path="/goals" component = {Goals} />
         <Route path="/MeuPerfil" component={ProfessionalProfile} />
+        <Route path="/AtualizarPerfil" component={UpdateProfessionalProfile} />
         <Route path="/table" component = {patientTable}/>
 
         </Switch>

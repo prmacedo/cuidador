@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
+import { useCurrentPage } from '../../../context/CurrentPage';
 
 import './styles.css';
 
 export default function Profile() {
   const [avatar, setAvatar] = useState();
+  const { setCurrentPage } = useCurrentPage();
+
+  useEffect(() => {
+    setCurrentPage('Meu Perfil');
+  }, []);
 
   const history = useHistory();
 

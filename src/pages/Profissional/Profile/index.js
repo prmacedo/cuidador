@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
+import { useCurrentPage } from '../../../context/CurrentPage';
 
 import './styles.css';
 
 export default function Profile() {
   const history = useHistory();
+  const {setCurrentPage} = useCurrentPage();
+
+  useEffect(() => {
+    setCurrentPage('Meu Perfil');
+  }, []);
 
   function redirectToUpdateProfile() {
     history.push('/AtualizarPerfil');

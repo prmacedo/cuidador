@@ -141,10 +141,10 @@ export default function Perfil() {
 
                 <Divider light />
 
-                <ListItem button className={classes.listItem} >
-                  <Typography gutterBottom variant="h4">Gênero:</Typography>
-                  <Typography className="description" gutterBottom variant="h5">{gender}</Typography>
-                </ListItem>
+              <ListItem button className={classes.listItem} >
+                <Typography gutterBottom variant="h4">Sexo:</Typography>
+                <Typography className="description" gutterBottom variant="h5">{gender}</Typography>
+              </ListItem>
 
                 <Divider light />
 

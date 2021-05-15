@@ -21,15 +21,15 @@ export default function PageHeader({hideComeBack, hideLogout}) {
     history.push("/");
   }
 
-  window.addEventListener('scroll', () => {
-    if (document.querySelector('#fixed-header')) {      
+  if (document.querySelector('#fixed-header')) {      
+    window.addEventListener('scroll', () => {
       if (window.scrollY >= 80) {
         document.querySelector('#fixed-header').classList.add('scrolled');
       } else {
         document.querySelector('#fixed-header').classList.remove('scrolled');
       }
-    }
-  });
+    });
+  }
 
   return (
     <>

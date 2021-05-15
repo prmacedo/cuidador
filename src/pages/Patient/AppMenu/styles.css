@@ -61,6 +61,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+
 #page-menu-list .buttons-container a.study{
     background: white;
 }
@@ -70,6 +71,9 @@
     color: var(--color-title-in-primary);
 
 } 
+#page-menu-list .buttons-container a img{
+    margin-right: 8px;
+}
 
 #page-menu-list .total-connections {
     font-size: 1.4rem;

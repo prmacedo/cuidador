@@ -59,45 +59,45 @@ export default function Avaliação() {
 
   async function fetchData() {
     const {
-      user: { firstName, _id, patientdata },
+      user: { first_name, account_id, patientdata },
     } = AuthService.getCurrentUser();
 
-    setUserData(firstName);
-    setPatient_id(_id);
+    setUserData(first_name);
+    setPatient_id(account_id);
     setPatientData(patientdata);
 
-    const patient_id = _id;
-    const avaliacao = await PatientService.getAvaliacaoDiaria({ patient_id });
+  
+    const avaliacao = await PatientService.getAvaliacaoDiaria({ account_id });
 
-    if (avaliacao.data[0]) {
-      setAvaliacaoDone(true);
-      const {
-        pain,
-        painLocation,
-        worstPain,
-        painAverage,
-        moodInfluence,
-        habitualActivities,
-        influenceRelationship,
-        sleep,
-        sexBehavior,
-        selfEsteem,
-        anguish,
-        anxious,
-      } = avaliacao.data[0];
-      setPain(pain);
-      setPainLocation(painLocation);
-      setWorstPain(worstPain);
-      setPainAverage(painAverage);
-      setMoodInfluence(moodInfluence);
-      setHabitualActivities(habitualActivities);
-      setInfluenceRelationship(influenceRelationship);
-      setSleep(sleep);
-      setSexBehavior(sexBehavior);
-      setSelfEsteem(selfEsteem);
-      setAnguish(anguish);
-      setAnxious(anxious);
-    }
+    // if (avaliacao.data[0]) {
+    //   setAvaliacaoDone(true);
+    //   const {
+    //     pain,
+    //     painLocation,
+    //     worstPain,
+    //     painAverage,
+    //     moodInfluence,
+    //     habitualActivities,
+    //     influenceRelationship,
+    //     sleep,
+    //     sexBehavior,
+    //     selfEsteem,
+    //     anguish,
+    //     anxious,
+    //   } = avaliacao.data[0];
+    //   setPain(pain);
+    //   setPainLocation(painLocation);
+    //   setWorstPain(worstPain);
+    //   setPainAverage(painAverage);
+    //   setMoodInfluence(moodInfluence);
+    //   setHabitualActivities(habitualActivities);
+    //   setInfluenceRelationship(influenceRelationship);
+    //   setSleep(sleep);
+    //   setSexBehavior(sexBehavior);
+    //   setSelfEsteem(selfEsteem);
+    //   setAnguish(anguish);
+    //   setAnxious(anxious);
+    // }
     setOkToRender(true);
   }
 

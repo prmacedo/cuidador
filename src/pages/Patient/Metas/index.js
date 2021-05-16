@@ -13,6 +13,7 @@ import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
 import Tasks from "../../../components/Tasks/Tasks.js";
 import CustomTabs from "../../../components/CustomTabs/CustomTabs.js"
+import GoalsService from '../../../services/goals.service'
 
 
 import { Link } from 'react-router-dom';
@@ -31,20 +32,24 @@ import PatientTask from "./general.js";
 
 export default function Metas() {
     const [userData, setUserData] = useState();
+    const [tasks, setTasks] = useState([]);
 
 
     useEffect(() => {
         (async () => {
-            const { user: { firstName } } = AuthService.getCurrentUser()
-            setUserData(firstName);
-
+            const { user } = AuthService.getCurrentUser()
+            setUserData(user.first_name);
+            
+            const tasks_ = GoalsService.getAllGoalsByUserId(user.account_id);
+            setTasks(tasks_)
+        
         })();
     }, []);
 
     return (
         <div id="page-cuidadores" className="container">
             <PageHeader name={userData} />
-
+           
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                     <CustomTabs

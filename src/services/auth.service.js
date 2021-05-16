@@ -4,14 +4,14 @@ import API_URL from './api';
 class AuthService {
 
   patientLogin(email, password) {
-    return API_URL.post('api/patient/authentication', {
+    return API_URL.post('login/patient', {
       email,
       password
     })
       .then(response => {
-        if (response.data.token) {
+        if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data));
-         
+
         }
 
         return response.data;
@@ -19,14 +19,14 @@ class AuthService {
   }
 
   professionalLogin(email, password) {
-    return API_URL.post('api/professional/authentication', {
+    return API_URL.post('login/professional ', {
       email,
       password
     })
       .then(response => {
-        if (response.data.token) {
+        if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data));
-        
+
         }
 
         return response.data;
@@ -35,42 +35,57 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
- 
+
   }
 
-  patientRegister(firstName, lastName, email, password) {
-    return API_URL.post('api/patient/register', {
-      firstName,
-      lastName,
+  patientRegister(email, password, first_name, last_name, birthday) {
+    return API_URL.post('patients', {
       email,
-      password
-    });
+      password,
+      first_name,
+      last_name,
+      birthday
+    }).then(response => {
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+
+      }
+
+      return response.data;
+    });;
   }
 
-  professionalRegister(firstName, lastName, email, Doc, password) {
-    return API_URL.post('api/professional/register', {
-      firstName,
-      lastName,
+  professionalRegister(email, password, first_name, last_name, birthday) {
+    return API_URL.post('professionals ', {
       email,
-      Doc,
-      password
-    });
+      password,
+      first_name,
+      last_name,
+      birthday
+    }).then(response => {
+      if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+
+      }
+
+      return response.data;
+    });;
   }
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     const user = JSON.parse(localStorage.getItem('user'));
-    if(user){
+    if (user) {
       console.log(user)
       return user
     } else {
       return false
     }
-    
-}
+
+  }
 }
 
 export default new AuthService();

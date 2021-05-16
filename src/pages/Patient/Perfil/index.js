@@ -77,38 +77,25 @@ export default function Perfil() {
   useEffect(() => {
     (async () => {
 
-      const { user: { firstName, patient_id: { _id } } } = await AuthService.getCurrentUser()
-      setUserData(firstName);
-      const myData = await PatientService.getMyData({ patient_id: _id })
-
-      if (myData.data) {
-        const { data: {
-          lastName,
-          gender,
-          birth,
-          occupation,
-          state,
-          city,
-          weight,
-          height,
-          imc,
-          bloodtype,
-          condition } } = myData;
+      const { user } = await AuthService.getCurrentUser()
+      setUserData(user.firstName);
+   
 
 
-        setFirstName(firstName)
-        setLastName(lastName)
-        setGender(gender)
-        setBirth(new Date(birth).toLocaleDateString());
-        setOccupation(occupation)
-        setState(state)
-        setCity(city)
-        setWeight(weight)
-        setHeight(height)
-        setImc(imc)
-        setBloodtype(bloodtype)
-        setCondition(condition)
-      }
+
+      setFirstName(user.first_name)
+      setLastName(user.last_name)
+      setGender(user.gender)
+      setBirth(new Date(user.birth).toLocaleDateString());
+      setOccupation(user.occupation)
+      setState(user.state)
+      setCity(user.city)
+      setWeight(user.weight)
+      setHeight(user.height)
+      setImc(user.imc)
+      setBloodtype(user.blood_type)
+      setCondition(user.condition)
+
 
     })();
 
@@ -264,12 +251,12 @@ export default function Perfil() {
                   <>
                     <Divider light />
                     <ListItem button className={classes.listItem}>
-                      <Typography gutterBottom variant="h5">{name}</Typography>
-                      <Typography gutterBottom variant="h5">{dose}</Typography>
-                      <Typography gutterBottom variant="h5">a cada {frequency} horas</Typography>
+                      <Typography  gutterBottom variant="h5">{name}</Typography>
+                      <Typography  gutterBottom variant="h5">{dose}</Typography>
+                      <Typography  gutterBottom variant="h5">a cada {frequency} horas</Typography>
                     </ListItem>
 
-               
+
 
                   </>
                 ))}

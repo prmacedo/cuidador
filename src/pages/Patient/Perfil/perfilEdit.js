@@ -145,46 +145,25 @@ export default function PerfilEdit() {
 
   useEffect(() => {
     (async () => {
-      const {
-        user: {
-          firstName,
-          patient_id: { _id },
-        },
-      } = await AuthService.getCurrentUser();
-      setUserData(firstName);
-      setPatient_id(_id);
-      const myData = await PatientService.getMyData({ patient_id: _id });
+      const { user } = await AuthService.getCurrentUser()
+      setUserData(user.first_name);
+      
 
-      if (myData.data) {
-        const {
-          data: {
-            lastName,
-            gender,
-            birth,
-            occupation,
-            state,
-            city,
-            weight,
-            height,
-            imc,
-            bloodtype,
-            condition,
-          },
-        } = myData;
+    
 
-        setFirstName(firstName);
-        setLastName(lastName);
-        setGender(gender);
-        setBirth(birth || null);
-        setOccupation(occupation);
-        setState(state);
-        setCity(city);
-        setWeight(weight);
-        setHeight(height);
-        setImc(imc);
-        setBloodtype(bloodtype);
-        setCondition(condition);
-      }
+        setFirstName(user.first_name)
+        setLastName(user.last_name)
+        setGender(user.gender)
+        setBirth(new Date(user.birth).toLocaleDateString());
+        setOccupation(user.occupation)
+        setState(user.state)
+        setCity(user.city)
+        setWeight(user.weight)
+        setHeight(user.height)
+        setImc(user.imc)
+        setBloodtype(user.blood_type)
+        setCondition(user.condition)
+    
     })();
   }, []);
 

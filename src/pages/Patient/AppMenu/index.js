@@ -22,8 +22,8 @@ function AppMenu() {
 
     useEffect(() => {
         (async () => {
-            const { user: { firstName } } = AuthService.getCurrentUser()
-            setUserData(firstName);
+            const { user: { first_name } } = AuthService.getCurrentUser()
+            setUserData(first_name);
 
         })();
     }, []);

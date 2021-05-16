@@ -40,7 +40,7 @@ export default function Metas() {
             const { user } = AuthService.getCurrentUser()
             setUserData(user.first_name);
             
-            const tasks_ = GoalsService.getAllGoalsByUserId(user.account_id);
+            const tasks_ = GoalsService.getAllGoalsByUserId(user.id);
             setTasks(tasks_)
         
         })();

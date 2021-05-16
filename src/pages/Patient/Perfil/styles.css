@@ -1,8 +1,10 @@
-#page-perfil  {
-  
-    height: 100vh;
+#root {
+    overflow-y: scroll;
+}
 
-   
+#page-perfil {
+    height: 100vh;
+    background: rgb(238, 241, 250);
 }
 
 #page-perfil main {
@@ -10,8 +12,7 @@
     top: 85px;
     height: 100%;
     padding-bottom: 85px;
-    overflow-y:scroll;
-  
+    overflow-y: scroll;
 }
 
 #page-perfil .forms {
@@ -41,6 +42,10 @@ p {
     height: 40px;
 }
 
+#page-perfil .title {
+    font-weight: bold;
+}
+
 .description {
     margin-right: 5px;
 }
@@ -54,9 +59,6 @@ p {
     cursor: pointer;
 }
 
-
-
-
 /* edit */
 
 #page-edit {
@@ -65,29 +67,58 @@ p {
     flex-direction: column;
     align-items: center;
     overflow: auto;
-
 }
-
 
 #page-edit main {
     position: absolute;
     top: 85px;
     height: 100%;
+    width: 100%;
     padding-bottom: 150px;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
+
 #page-edit .forms {
     width: 80%;
     margin: 0 0 0 30px;
-
 }
+
 #page-edit .nav-button {
     height: 30px;
-    width: 100%;
+    width: 97%;
     display: flex;
     justify-content: space-around;
 }
 
 a.send-buttom {
     margin-top: 40px;
+}
+
+#page-edit .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.3rem;
+}
+
+#page-edit label {
+    color: #4F4F4F;
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+}
+
+#page-edit input {
+    background: #F8F8FC;
+    color: #4F4F4F;
+    border: 1px solid #E6E6F0;
+    box-sizing: border-box;
+    border-radius: 0.4rem;
+    padding: 0.8rem;
+    margin-bottom: 1.6rem;
+}
+#page-edit .medication-header {
+   width: 100%;
+   
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
 }

@@ -4,7 +4,7 @@ import menu from '../../assets/images/icons/toggle-menu.svg';
 import recentMail from '../../assets/images/icons/recent-mail.svg';
 import arrowDown from '../../assets/images/icons/arrow-down.svg';
 import profilePic from '../../assets/images/icons/profile-user.svg';
-import logout from '../../assets/images/icons/logout-preto.svg';
+import logoutIcon from '../../assets/images/icons/logout-preto.svg';
 import profileIcon from '../../assets/images/icons/profile.svg';
 
 import { useProfile } from '../../context/Profile';
@@ -17,11 +17,11 @@ import { useHistory } from 'react-router';
 export default function NavbarProfessional() {
   const [recentChatsData, setRecentChatsData] = useState([]);
 
-  const { profile } = useProfile();
+  const { profile, logout } = useProfile();
   const { currentPage } = useCurrentPage();
   const { hideSidebar, setHideSidebar } = useHiddenSidebar();
 
-  useEffect(() => {
+  useEffect(() => {    
     setRecentChatsData([
       {
         name: 'José Freitas',
@@ -94,6 +94,11 @@ export default function NavbarProfessional() {
     history.push('/MeuPerfil');
   }
 
+  function handleLogout() {
+    logout();
+    history.push('/');
+  }
+
   return (
     <nav id="navbarProfessional">
       <div>
@@ -130,8 +135,11 @@ export default function NavbarProfessional() {
 
         <div className="profile">
           <div className="content" onClick={() => toggleOptionsDropdown()}>
-            <img src={profilePic} alt={profile.avatar} />
-            <span>{profile.name}</span>
+            <img src={profile?.avatar} alt={`${profile?.first_name} ${profile?.last_name}`} />
+            <span>
+              {(profile?.gender === "Masculino") ? "Dr " : (profile?.gender === "Feminino") ? "Drª " : ""}
+              {profile?.first_name} {profile?.last_name}
+            </span>
             <img src={arrowDown} alt="Opções" />
           </div>
 
@@ -140,8 +148,8 @@ export default function NavbarProfessional() {
               <img src={profileIcon} alt="Meu Perfil" />
               Meu Perfil
             </span>
-            <span>
-              <img src={logout} alt="Sair" />
+            <span onClick={() => handleLogout()}>
+              <img src={logoutIcon} alt="Sair" />
               Sair
             </span>
           </div>

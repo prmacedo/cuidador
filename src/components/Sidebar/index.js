@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import logoWhite from '../../assets/images/logoAppWhite.svg';
-import profilePic from '../../assets/images/icons/profile-user.svg';
 import medkit from '../../assets/images/icons/medkit.svg';
 import chat from '../../assets/images/icons/chat.svg';
 
@@ -39,9 +38,12 @@ export default function Sidebar() {
     <aside id="sidebar">
       <img src={logoWhite} className="logo" alt="Cuidador"/>
 
-      <img src={profile.avatar} className="profilePic" alt={profile.name}/>
+      <img src={(profile?.avatar)} className="profilePic" alt={`${profile?.first_name} ${profile?.last_name}`}/>
 
-      <p className="welcome">Bem-vindo<br/>{profile.name}</p>
+      <p className="welcome">Bem-vindo<br/>
+        {(profile?.gender === "Masculino") ? "Dr " : (profile?.gender === "Feminino") ? "Drª " : ""}
+        {profile?.first_name} {profile?.last_name}
+      </p>
 
       <hr/>
 

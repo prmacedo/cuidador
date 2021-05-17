@@ -1,57 +1,52 @@
 
 import React from 'react';
-import { BrowserRouter, Route , Switch } from 'react-router-dom';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import ProtectedRoute from './services/ProtectedRoute';
 
 import Login from './pages/Patient/LoginPaciente/index';
-import Dashboard from './pages/Profissional/Dashboard/index';
+import LoginCuidador from './pages/Profissional/LoginCuidador';
+import SignUp from './pages/SignUp';
+
 import AppMenu from './pages/Patient/AppMenu';
 import Avaliacao from './pages/Patient/Avaliacao/index';
 import Cuidadores from './pages/Patient/Cuidadores';
-import SignUp from './pages/SignUp';
+import Educacao from './pages/Patient/Educação';
 import Metas from './pages/Patient/Metas';
 import MeuDesempenho from './pages/Patient/MeuDesempenho';
-import Educacao from './pages/Patient/Educação';
-import LoginCuidador from './pages/Profissional/LoginCuidador';
-
-
-
-
-import InfoPatient from './pages/Profissional/InfoPatient';
-
-import ProtectedRoute from './services/ProtectedRoute';
 import Perfil from './pages/Patient/Perfil';
 import Perfiledit from './pages/Patient/Perfil/perfilEdit';
 
-import Paperbase from './pages/Profissional/MainPage';
+import MainPage from './pages/Profissional/MainPage';
+import InfoPatient from './pages/Profissional/InfoPatient';
+import Goals from './pages/Profissional/Goals';
 import ProfessionalProfile from './pages/Profissional/Profile';
 import UpdateProfessionalProfile from './pages/Profissional/UpdateProfile';
-import patientTable from './pages/Profissional/MainPage/CuidadorPage-Components/patientTable.js';
-import Goals from './pages/Profissional/Goals';
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
-        <ProtectedRoute path="/AppMenu" component={AppMenu} />
-        <Route path="/Dashboard" component={Dashboard} />
-        <ProtectedRoute path="/Avaliacao" component={Avaliacao} />
-        <ProtectedRoute path="/Perfil" component={Perfil} />
-        <ProtectedRoute path="/Perfiledit" component={Perfiledit} />
-        <ProtectedRoute path="/Cuidadores" component={Cuidadores} />
         <Route path="/Cadastro" component = {SignUp} />
-        <ProtectedRoute path="/metas" component = {Metas}/>
-        <ProtectedRoute path="/meudesempenho" component = {MeuDesempenho}/>
-        <ProtectedRoute path="/educacao" component = {Educacao}/>
         <Route path="/LoginCuidador" component = {LoginCuidador}/>
-        <Route path="/MainPage" component = {Paperbase}/>
-        <Route path="/paciente" component = {InfoPatient}/>
-        <Route path="/goals" component = {Goals} />
-        <Route path="/MeuPerfil" component={ProfessionalProfile} />
-        <Route path="/AtualizarPerfil" component={UpdateProfessionalProfile} />
-        <Route path="/table" component = {patientTable}/>
+        
+        <ProtectedRoute path="/AppMenu" component={AppMenu} type="Patient" />
+        <ProtectedRoute path="/Avaliacao" component={Avaliacao} type="Patient" />
+        <ProtectedRoute path="/Perfil" component={Perfil} type="Patient" />
+        <ProtectedRoute path="/Perfiledit" component={Perfiledit} type="Patient" />
+        <ProtectedRoute path="/Cuidadores" component={Cuidadores} type="Patient" />
+        <ProtectedRoute path="/metas" component={Metas} type="Patient" />
+        <ProtectedRoute path="/meudesempenho" component={MeuDesempenho} type="Patient" />
+        <ProtectedRoute path="/educacao" component={Educacao} type="Patient" />
 
-        </Switch>
+        <ProtectedRoute path="/MainPage" component={MainPage} type="Professional" />
+        <ProtectedRoute path="/paciente/:id" component={InfoPatient} type="Professional" />
+        <ProtectedRoute path="/goals" component={Goals} type="Professional" />
+        <ProtectedRoute path="/MeuPerfil" component={ProfessionalProfile} type="Professional" />
+        <ProtectedRoute path="/AtualizarPerfil" component={UpdateProfessionalProfile} type="Professional" />
+      </Switch>
     </BrowserRouter>
   );
 }

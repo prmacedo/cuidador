@@ -195,6 +195,7 @@ export default function Goals() {
               <label htmlFor="goal">Tarefa</label>
               <input type="text" name="goal" id="goal" placeholder="Digite a tarefa" required/>
             </div>
+
             <div className="input-group">
               <label htmlFor="frequency">Frequência semanal</label>
               <select name="frequency" id="frequency" required>
@@ -208,9 +209,18 @@ export default function Goals() {
                 <option value="7">7x por semana</option>
               </select>
             </div>
-            <div className="input-group">
-              <label htmlFor="duration">Por quanto tempo realizar (apenas números)</label>
-              <input type="text" name="duration" id="duration" placeholder="Digite o valor em meses" required />
+
+            <span id="duration-title">Duração da tarefa</span>
+            <div className="duration">
+              <div className="input-group pr-4">
+                <label htmlFor="start">De</label>
+                <input type="date" name="start" id="start" required />
+              </div>
+
+              <div className="input-group pl-4">
+                <label htmlFor="end">Até</label>
+                <input type="date" name="end" id="end" required />
+              </div>
             </div>
 
             <button type="submit">

@@ -11,9 +11,18 @@ import searchIcon from '../../../assets/images/icons/search-icon.svg';
 import closeIcon from '../../../assets/images/icons/close.svg';
 
 import './styles.css';
+import api_url from '../../../services/api';
+import { useProfile } from '../../../context/Profile';
 
 export default function MainPage() {
+  const { profile } = useProfile();
+  const [patients, setPatients] = useState([]);
+
+  const [email, setEmail] = useState('');
+  
   const [initialLetter, setInitialLetter] = useState('');
+  
+
   const { setCurrentPage } = useCurrentPage();
 
   const history = useHistory();
@@ -26,8 +35,8 @@ export default function MainPage() {
     // Realizar busca pela letra inicial do nome
   }, [initialLetter]);
 
-  function redirectToPatient() {
-    history.push('/paciente');
+  function redirectToPatient(patient_id) {
+    history.push(`/paciente/${patient_id}`);
   }
 
   function handleSearchByLetter(event, letter) {
@@ -43,6 +52,26 @@ export default function MainPage() {
 
   function toggleAddPacientModal() {
     document.querySelector('#add-pacient-modal').classList.toggle('hide');
+  }
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+
+    try {
+      const { data } = await api_url.post("/conect_professional_patient", { email, id: profile.id });
+
+      console.log(data);
+      setPatients([...patients, data]);
+
+      toggleAddPacientModal();
+
+      // mensagem de sucesso
+    } catch (error) {
+      console.log(error.response.data.message);
+      // mensagem de erro
+    }
+
+    // limpar
   }
 
   return (
@@ -95,115 +124,21 @@ export default function MainPage() {
 
         <div className="scroll-cards">
           <div id="cards-container">
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
+            {
+              (!patients.length) ? 
+                <span>Não há pacientes</span>
+              :
+              patients.map(patient => (
+                <div className="card" onClick={() => redirectToPatient(patient.id)} key={patient.id}>
+                  <main>
+                    <img src={profilePic} alt={`${patient.first_name} ${patient.last_name}`} />
+                    <h4>{patient.first_name} {patient.last_name}</h4>
+                    <p>{new Date().getFullYear() - new Date(patient.birthday).getFullYear()} anos</p>
+                  </main>
 
-              <footer>Cidade, Estado</footer>
-            </div>
-            
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
-
-            <div className="card" onClick={() => redirectToPatient()}>
-              <main>
-                <img src={profilePic} alt="Nome do paciente" />
-                <h4>Nome do paciente</h4>
-                <p>50 anos</p>
-              </main>
-
-              <footer>Cidade, Estado</footer>
-            </div>
+                  <footer>{patient.city}, {patient.state}</footer>
+                </div>
+              ))}
           </div>
         </div>
 
@@ -216,9 +151,9 @@ export default function MainPage() {
           <h3>Adicionar novo Paciente</h3>
           <p>Insira o e-mail do Paciente para vincular suas contas</p>
 
-          <form action="">
+          <form action="" onSubmit={handleSubmit}>
             <label htmlFor="email">E-mail do paciente</label>
-            <input type="email" name="email" id="email" placeholder="E-mail" required />
+            <input type="email" value={email} onChange={(evt) => setEmail(evt.target.value)} name="email" id="email" placeholder="E-mail" required />
             <button type="submit">Adicionar paciente</button>
           </form>
         </div>

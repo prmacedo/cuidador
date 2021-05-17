@@ -1,27 +1,48 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import PageHeader from "../../../components/PageHeader";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import Fab from "@material-ui/core/Fab";
-import NavigationIcon from "@material-ui/icons/Navigation";
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
 import "./styles.css";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import InputMask from "react-input-mask";
 import Button from "@material-ui/core/Button";
+import CloseIcon from '@material-ui/icons/Close';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import AuthService from "../../../services/auth.service";
 import PatientService from "../../../services/patient.service";
+import './styles.css'
+
+
+const medications = [
+  {
+    name: "Paracetamol",
+    dose: "2 mg",
+    frequency: 8,
+  }
+
+]
+
+const medicationFrequency = [
+  {
+    frequency: 3,
+  },
+  {
+    frequency: 4,
+  },
+  {
+    frequency: 6,
+  },
+  {
+    frequency: 8,
+  },
+  {
+    frequency: 24,
+  },
+  {
+    frequency: 24,
+  },
+]
 
 const genderObject = [
   {
@@ -31,6 +52,10 @@ const genderObject = [
   {
     value: "Masculino",
     label: "Masculino",
+  },
+  {
+    value: "Não Definido",
+    label: "Não Definido",
   },
 ];
 const bloodTypeObject = [
@@ -116,51 +141,33 @@ export default function PerfilEdit() {
   const [imc, setImc] = useState("");
   const [bloodtype, setBloodtype] = useState("");
   const [condition, setCondition] = useState("");
+  const [medicinesList, setMedicinesList] = useState(medications);
 
   useEffect(() => {
     (async () => {
-      const {
-        user: {
-          firstName,
-          patient_id: { _id },
-        },
-      } = await AuthService.getCurrentUser();
-      setUserData(firstName);
-      setPatient_id(_id);
-      const myData = await PatientService.getMyData({ patient_id: _id });
+      const { user } = await AuthService.getCurrentUser()
+      setUserData(user.first_name);
+      
 
-      if (myData.data) {
-        const {
-          data: {
-            lastName,
-            gender,
-            birth,
-            occupation,
-            state,
-            city,
-            weight,
-            height,
-            imc,
-            bloodtype,
-            condition,
-          },
-        } = myData;
+    
 
-        setFirstName(firstName);
-        setLastName(lastName);
-        setGender(gender);
-        setBirth(birth || null);
-        setOccupation(occupation);
-        setState(state);
-        setCity(city);
-        setWeight(weight);
-        setHeight(height);
-        setImc(imc);
-        setBloodtype(bloodtype);
-        setCondition(condition);
-      }
+        setFirstName(user.first_name)
+        setLastName(user.last_name)
+        setGender(user.gender)
+        setBirth(new Date(user.birth).toLocaleDateString());
+        setOccupation(user.occupation)
+        setState(user.state)
+        setCity(user.city)
+        setWeight(user.weight)
+        setHeight(user.height)
+        setImc(user.imc)
+        setBloodtype(user.blood_type)
+        setCondition(user.condition)
+    
     })();
   }, []);
+
+
 
   const updateData = () => {
     PatientService.updateMyData({
@@ -184,7 +191,34 @@ export default function PerfilEdit() {
     setBirth(date);
   };
 
-  const classes = useStyles();
+  const handleAddMedication = () => {
+    const dataStructure = { name: " ", dose: " ", frequency: 0, }
+    let newArr = [...medicinesList];
+    newArr.push(dataStructure)
+    setMedicinesList(newArr)
+    // console.log(newArr)
+    // console.log(medicinesList)
+  };
+
+  const handleDeleteMedication = (index) => {
+    let newArr = [...medicinesList];
+    newArr.splice(index, 1); 
+    setMedicinesList(newArr)
+    console.log(medicinesList)
+  };
+
+  const updateFieldChanged = (index, key) => e => {
+    let newArr = [...medicinesList];
+    if (key === "frequency") {
+      newArr[index][key] = Number(e.target.value);
+    } else {
+      newArr[index][key] = e.target.value;
+    }
+    setMedicinesList(newArr);
+    console.log(medicinesList)
+  }
+
+
 
   return (
     <>
@@ -194,173 +228,163 @@ export default function PerfilEdit() {
           <main>
 
 
-            <div>
-              <div className="forms">
-                <h1>Informações Pessoais</h1>
-                <TextField
-                  label="Nome"
-                  id="margin-none"
-                  placeholder="Digite seu primeiro nome"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className={classes.textField}
-                  margin="normal"
-                />
-                <TextField
-                  label="Sobrenome"
-                  id="margin-dense"
-                  placeholder="Digite seu sobrenome"
-                  className={classes.textField}
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  margin="normal"
-                />
-                <form className={classes.selected} noValidate autoComplete="off">
-                  <div>
-                    <TextField
-                      id="standard-select-currency"
-                      select
-                      label="Gênero"
-                      value={gender}
-                      onChange={(e) => setGender(e.target.value)}
-                    >
-                      {genderObject.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </div>
-                </form>
 
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container justify="start">
+            <div className="forms">
+              <h1 style={{ width: "100%", textAlign: 'center', marginTop: "2rem" }}>Atualizar Dados</h1>
+              <h2 style={{ width: "100%", textAlign: 'center' }}>Informações Pessoais</h2>
 
-                    <KeyboardDatePicker
-                      label="Data do Nascimento"
-                      autoOk={true}
-                        
-                      margin="normal"
-                      id="date-picker-dialog"
-                      format="dd/MM/yyyy"
-                      value={birth}
-                      onChange={handleDateChange}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                    />
+              <form action="">
+                <div className="input-group">
+                  <label htmlFor="Name">Nome</label>
+                  <input type="text" name="Name" id="Name" placeholder="Digite seu Nome"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)} />
+                </div>
 
-                  </Grid>
-                </MuiPickersUtilsProvider>
+                <div className="input-group">
+                  <label htmlFor="Surname">Sobrenome</label>
+                  <input type="text" name="Surname" id="Surname" placeholder="Digite seu sobrenome"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)} />
+                </div>
 
-                {/* <MuiThemeProvider>
-                  <InputMask
-                    mask="00/00/0000"
-                    value={birth}
-                    disabled={false}
-                    maskChar=" "
-                    className={classes.textField}
-
+                <div className="input-group">
+                  <label htmlFor="gender">Gênero</label>
+                  <select
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
                   >
-                    {() => <TextField />}
-                  </InputMask>
-                </MuiThemeProvider> */}
+                    {genderObject.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                  </select>
+                </div>
 
-                <TextField
-                  label="Ocupação"
-                  id="margin-normal"
-                  placeholder="Digite sua ocupação"
-                  className={classes.textField}
-                  value={occupation}
-                  onChange={(e) => setOccupation(e.target.value)}
-                  margin="normal"
-                />
-                <TextField
-                  label="Estado"
-                  id="margin-normal"
-                  placeholder="Digite o estado que você mora: "
-                  className={classes.textField}
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                  margin="normal"
-                />
-                <TextField
-                  label="Cidade"
-                  id="margin-none"
-                  placeholder="Digite a cidade onde você mora: "
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className={classes.textField}
-                  margin="normal"
-                />
-                <TextField
-                  label="Peso"
-                  id="margin-dense"
-                  placeholder="Digite seu peso"
-                  className={classes.textField}
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                  margin="normal"
-                />
-                <TextField
-                  label="Altura"
-                  id="margin-dense"
-                  placeholder="Digite sua altura "
-                  className={classes.textField}
-                  value={height}
-                  onChange={(e) => setHeight(e.target.value)}
-                  margin="normal"
-                />
-                {/* <TextField
-              label="IMC"
-              id="margin-dense"
-              placeholder="Digite seu "
-              className={classes.textField}
+                <div className="input-group">
+                  <label htmlFor="birth">Data de Nascimento</label>
+                  <input type="date" name="birth" id="birth" placeholder=""
+                    value={birth}
+                    onChange={handleDateChange} />
+                </div>
 
-              margin="normal"
-            /> */}
-                <form className={classes.selected} noValidate autoComplete="off">
-                  <div>
-                    <TextField
-                      id="standard-select-currency"
-                      select
-                      label="Tipo Sanguíneo"
-                      value={bloodtype}
-                      onChange={(e) => setBloodtype(e.target.value)}
-                    >
-                      {bloodTypeObject.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </div>
-                </form>
-                <TextField
-                  label="Condição de saúde"
-                  id="margin-dense"
-                  placeholder="Digite sua condição de saúde relacionada com a dor crônica "
-                  className={classes.textField}
-                  value={condition}
-                  onChange={(e) => setCondition(e.target.value)}
-                  margin="normal"
-                />
-                <TextField
-                  label="Ano que foi Diagnosticado"
-                  id="margin-dense"
-                  placeholder="Não implementado "
-                  className={classes.textField}
-                  margin="normal"
-                />
-                <TextField
-                  label="Medicações em Uso"
-                  id="margin-dense"
-                  placeholder="Não implementado "
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </div>
+                <div className="input-group">
+                  <label htmlFor="Occupation">Ocupação</label>
+                  <input type="text" name="Occupation" id="Occupation" placeholder="Qual sua ocupação?"
+                    value={occupation}
+                    onChange={(e) => setOccupation(e.target.value)} />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="state">Estado</label>
+                  <input type="text" name="state" id="state" placeholder="Qual estado que você mora?"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)} />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="city">Cidade</label>
+                  <input type="text" name="city" id="city" placeholder="Qual Cidade você mora?"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)} />
+                </div>
+
+
+
+                <h2 style={{ width: "100%", textAlign: 'center', marginBottom: "2rem" }}>Informações Médicas</h2>
+
+
+
+                <div className="input-group">
+                  <label htmlFor="goal">Altura</label>
+                  <input type="text" name="goal" id="goal" placeholder="Qual a sua altura?"
+                    value={height}
+                    onChange={(e) => setHeight(e.target.value)} />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="goal">Peso</label>
+                  <input type="text" name="goal" id="goal" placeholder="Qual seu peso?"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)} />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="frequency">Grupo Sanguíneo</label>
+                  <select
+                    value={bloodtype}
+                    onChange={(e) => setBloodtype(e.target.value)}
+                  >
+                    {bloodTypeObject.map(({ value, label }, index) => <option value={value} >{label}</option>)}
+                  </select>
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="condition">Condição de Saúde</label>
+                  <input type="text" name="condition" id="condition" placeholder="Qual condição de Saúde que causa sua dor Crônica?"
+                    value={condition}
+                    onChange={(e) => setCondition(e.target.value)} />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="condition">Ano do Diagnostico</label>
+                  <input type="text" name="condition" id="condition" placeholder="Qual Ano você foi Diagnosticado?"
+
+                  />
+                </div>
+
+
+                <h2 style={{ width: "100%", textAlign: 'center', marginBottom: "2rem" }}>Medicações em uso</h2>
+
+
+                {medicinesList.map(({ name, dose, frequency }, index) => (
+                  <>
+                    <div className="medication-header">
+                      <h3>Medicação {index + 1}</h3>
+
+                      {index > 0 ? (
+                        <Button variant="contained" color="secondary" onClick={() => handleDeleteMedication(index)}>
+                          <smal>Delete </smal><CloseIcon />
+                        </Button>
+                      ) : <Button onClick={handleAddMedication}>
+                            <Fab size="small" color="primary" aria-label="add" >
+                              <AddIcon />
+                            </Fab> 
+                          </Button>}
+
+                    </div>
+
+                    <div className="input-group">
+                      <label htmlFor="condition">Nome</label>
+                      <input type="text" name="condition" id="condition" placeholder="Qual condição de Saúde que causa sua dor Crônica?"
+                        value={name}
+                        onChange={updateFieldChanged(index, 'name')} />
+                    </div>
+
+                    <div className="input-group">
+                      <label htmlFor="condition">Dose <small>(nº de comprimidos)</small></label>
+                      <input type="text" name="condition" id="condition" placeholder="Qual condição de Saúde que causa sua dor Crônica?"
+                        value={dose}
+                        onChange={updateFieldChanged(index, 'dose')} />
+                    </div>
+
+                    <div className="input-group">
+                      <label htmlFor="condition">Frequência</label>
+                      <select
+                        value={Number(frequency)}
+                        onChange={updateFieldChanged(index, 'frequency')}
+                      >
+                        {medicationFrequency.map(({ frequency }, index) => <option value={frequency} >a cada {frequency} horas</option>)}
+                      </select>
+                    </div>
+
+
+                  </>
+                ))}
+
+
+              </form>
+
+
             </div>
+
             <div className="nav-button">
               <NavLink className="send-buttom" to="/Perfil">
                 <Button

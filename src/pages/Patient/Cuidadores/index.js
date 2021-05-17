@@ -31,13 +31,13 @@ export default function Cuidadores() {
 
   useEffect(() => {
     (async () => {
-      const { user: { patient_id:{ _id} } } = await AuthService.getCurrentUser()
-      const { data: { profissionals } } = await PatientService.returnMyProfissionals({ patient_id: _id })
-      const { user: { firstName } } = AuthService.getCurrentUser()
+      const { user  } = await AuthService.getCurrentUser()
+      // const { data: { profissionals } } = await PatientService.returnMyProfissionals({ patient_id: _id })
       
-      setUserData(firstName);
-      setProfissionals(profissionals)
-      setPatient_id(_id)
+      
+      setUserData(user.first_name);
+      // setProfissionals(profissionals)
+      setPatient_id(user.account_id)
       setProfissionalUpdate(false)
     })();
 
@@ -75,7 +75,7 @@ export default function Cuidadores() {
   const classes = useStyles();
 
   async function addNewCuidador() {
-    const response = await PatientService.insertProfissional({patient_id: patient_id, email: email })
+    const response = await PatientService.insertProfissional({id: patient_id, email: email })
 
     setProfissionalUpdate(true)
   }

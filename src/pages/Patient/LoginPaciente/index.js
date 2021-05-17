@@ -30,7 +30,7 @@ function App() {
         (async () => {
             const logged = await AuthService.isAuthenticated()
             setUserData(logged)
-            if (logged.role == "Pacient") {
+            if (logged.role == "Patient") {
                 history.push('/appmenu');
             } else if (logged.role == "Professional") {
                 history.push('/MainPage');

@@ -14,51 +14,57 @@ import "./styles.css";
 function SignUp() {
   const history = useHistory();
 
-  const { register, handleSubmit, watch, errors } = useForm({
-    resolver: yupResolver(schema), 
-  });
+  const { register, handleSubmit, errors } = useForm({resolver: yupResolver(schema)})
 
-  const password = useRef({});
-  password.current = watch("password", "");
-  const selectedPaper = watch("paper");
 
-  const handleRegisterUser = ({
-    paper,
-    cpf,
-    firstName,
-    lastName,
-    bornDate,
-    email,
-    code,
-    password,
-    confirmPassword,
-  }) => {
+  const handleRegisterUser = async (event) => {
+    event.preventDefault();
+    console.log(event)
 
-    if (selectedPaper == "pacient") {
+    const formData = {
+      role: event.target[1].value,
+      cpf: event.target[2].value,
+      firstName: event.target[3].value,
+      lastName: event.target[4].value,
+      bornDate: event.target[5].value,
+      email: event.target[6].value,
+      password: event.target[7].value,
+      confirmPassword: event.target[8].value
+    }
+    const isValid = await schema.isValid(formData)
+    // console.log(formData, isValid)
+    if(!isValid){
+      alert("dados invalidos!");
+      return 
+    }
+    if (formData.role == "pacient") {
       AuthService.patientRegister(
-        firstName,
-        lastName,
-        email,
-        password
+        formData.email, 
+        formData.password, 
+        formData.firstName, 
+        formData.lastName, 
+        formData.bornDate
       )
         .then(() => {
           alert("Cadastro realizado com sucesso!");
+
+
+          // history.push('/appmenu');
           history.push("/");
         })
         .catch(() => {
           alert("Erro no cadastro!");
 
-          history.push("/");
+          // history.push("/");
         });
-    } else if (selectedPaper == "professional") {
+    } else if (formData.role == "professional") {
       AuthService.professionalRegister(
-        firstName,
-        lastName,
-        bornDate,
-        Number(cpf),
-        paper,
-        email,
-        password
+        formData.email, 
+        formData.password, 
+        formData.firstName, 
+        formData.lastName, 
+        formData.bornDate
+     
       )
         .then(() => {
           alert("Cadastro realizado com sucesso!");
@@ -67,8 +73,8 @@ function SignUp() {
         })
         .catch(() => {
           alert("Erro no cadastro!");
-
-          history.push("/LoginCuidador");
+          // history.push('/MainPage');
+          // history.push("/LoginCuidador");
         });
     }
   };
@@ -89,144 +95,72 @@ function SignUp() {
       </header>
 
       <main>
-        <div className="page-title">
 
-        <strong >Cadastro</strong>
+        <div className="page-title">
+          <strong >Cadastro</strong>
         </div>
-        <form onSubmit={handleSubmit(handleRegisterUser)}>
+
+        <form onSubmit={handleRegisterUser}>
           <fieldset>
+
+
             <div className="input-block">
               <label htmlFor="id">Papel</label>
-              <select
-                name="paper"
-                ref={register({
-                  required: true,
-                })}
-              >
+              <select name="paper">
                 <option value="">Selecione uma opção</option>
                 <option value="pacient">Paciente</option>
                 <option value="professional">Profissional</option>
               </select>
-              {/* <button onClick={() => setShow(!show)}>{show ? "hide": "show"}</button> */}
-            </div>
-            {errors.paper?.message}
-            <div className="input-block">
-              <label htmlFor="id">CPF*</label>
-              <input
-                type="text"
-                id="cpf"
-                name="cpf"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.cpf?.message}
             </div>
 
-            {selectedPaper == "professional" && (
+            <div className="input-block">
+              <label htmlFor="id">CPF*</label>
+              <input name="cpf" type="text" id="cpf" maxlength="11"/>
+            </div>
+
+            {/* {selectedPaper == "professional" && (
               <div className="input-block">
                 <label htmlFor="id">Código do Conselho</label>
-                <input
-                  type="text"
-                  id="codigo"
-                  name="code"
-                  ref={register({
-                    required: true,
-                  })}
-                />
-                {errors.code?.message}
+                <input type="text" id="codigo" name="code" />
               </div>
-            )}
+            )} */}
 
             <div className="input-block">
               <label htmlFor="name">Nome*</label>
-              <input
-                type="text"
-                id="name"
-                name="firstName"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.firstName?.message}
+              <input type="text" id="name" name="firstName"/>
             </div>
 
             <div className="input-block">
               <label htmlFor="name">Sobrenome*</label>
-              <input
-                type="text"
-                id="surname"
-                name="lastName"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.lastName?.message}
+              <input type="text" id="surname" name="lastName"/>
             </div>
 
             <div className="input-block">
               <label htmlFor="date">Data de Nascimento*</label>
-              <input
-                type="text"
-                id="date"
-                name="bornDate"
-                placeholder="DD/MM/AAAA"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.bornDate?.message}
+              <input type="date" id="date" name="bornDate" placeholder="DD/MM/AAAA"/>
             </div>
 
             <div className="input-block">
               <label htmlFor="email">Email*</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.email?.message}
+              <input type="email" id="email" name="email"ref={register} />
             </div>
 
             <div className="input-block">
               <label htmlFor="password">Senha*</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                ref={register({
-                  required: true,
-                })}
-              />
-              {errors.password?.message}
+              <input type="password" id="password" name="password"/>
             </div>
 
             <div className="input-block">
               <label htmlFor="password">Confirmar senha*</label>
-              <input
-                type="password"
-                id="confirm-password"
-                name="confirmPassword"
-                ref={register({
-                  required: true,
-                  validate: (value) =>
-                    value === password.current || "The passwords do not match",
-                })}
-              />
-              {errors.confirmPassword?.message}
+              <input type="password" id="confirm-password" name="confirmPassword" />
             </div>
+
           </fieldset>
 
           <footer>
             <button type="submit">Cadastrar</button>
           </footer>
 
-          <span className="total-connections">
-            Produzido por: E-brains Team
-          </span>
         </form>
       </main>
     </div>

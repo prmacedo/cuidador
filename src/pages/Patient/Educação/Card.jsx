@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     marginLeft: 20,
     marginBottom: 20,
     marginTop: 20,
+    
   },
   media: {
     height: 140,
@@ -35,7 +36,7 @@ export default function MediaCard({props}) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {props.name}
+          {props.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
           {props.description}

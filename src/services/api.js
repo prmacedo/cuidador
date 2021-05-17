@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = axios.create({
-    baseURL: 'https://appsaudebackend.herokuapp.com/'
-})
+const api_url = axios.create({
+    baseURL: "https://api-cuidador.herokuapp.com"
+});
 
-export default API_URL;
+export default api_url;

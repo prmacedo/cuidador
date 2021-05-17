@@ -67,7 +67,7 @@ export default function Avaliação() {
     setPatientData(patientdata);
 
   
-    const avaliacao = await PatientService.getAvaliacaoDiaria({ account_id });
+    // const avaliacao = await PatientService.getAvaliacaoDiaria({ account_id });
 
     // if (avaliacao.data[0]) {
     //   setAvaliacaoDone(true);

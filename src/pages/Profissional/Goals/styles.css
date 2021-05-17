@@ -250,6 +250,39 @@
   cursor: pointer;
 }
 
+#add-goal-modal #duration-title {
+  color: #4F4F4F;
+  font-size: 1.6rem;
+}
+
+#add-goal-modal .duration {
+  display: flex;
+  margin-bottom: 1.6rem;
+}
+
+#add-goal-modal .duration .input-group {
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+}
+
+#add-goal-modal .pr-4 {
+  padding-right: 0.4rem;
+}
+
+#add-goal-modal .pl-4 {
+  padding-left: 0.4rem;
+}
+
+#add-goal-modal .duration label {
+  margin-right: 0.4rem;
+}
+
+#add-goal-modal .duration label,
+#add-goal-modal .duration input {
+  margin-bottom: 0;
+}
+
 #add-goal-modal.hide {
   display: none;
 }

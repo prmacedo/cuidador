@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ProtectedRoute from './services/ProtectedRoute';
 
-import Login from './pages/Patient/LoginPaciente/index';
+
 import LoginCuidador from './pages/Profissional/LoginCuidador';
 import SignUp from './pages/SignUp';
 
@@ -23,6 +23,7 @@ import InfoPatient from './pages/Profissional/InfoPatient';
 import Goals from './pages/Profissional/Goals';
 import ProfessionalProfile from './pages/Profissional/Profile';
 import UpdateProfessionalProfile from './pages/Profissional/UpdateProfile';
+import Login from './pages/Login';
 
 export default function Routes() {
   return (

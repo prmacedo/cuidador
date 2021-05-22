@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useLoginType } from '../../context/LoginType';
+import { useProfile } from '../../context/Profile';
+
+import api_url from '../../services/api';
 
 import logoImg from '../../assets/images/logoApp.svg';
 import Doctor from '../../assets/images/doctor.svg';
@@ -11,10 +14,18 @@ import Patient from '../../assets/images/landingApp.svg';
 import styles from './styles.module.css';
 
 export default function LoginCard() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { loginType, setLoginType, selectedUserType, notSelectedUserType } = useLoginType();
+  const { setProfile } = useProfile();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+  }, [loginType])
   
   function handleSubmitForm(evt) {
     evt.preventDefault();
@@ -25,14 +36,29 @@ export default function LoginCard() {
       handleProfessionalLogin();
     }
   }
-
-  function handleProfessionalLogin() {
-
-  }
-
+  
   function handlePatientLogin() {
 
   }
+
+  async function handleProfessionalLogin() {
+    try {
+      const { data } = await api_url.post("/login/professional", {
+        email,
+        password
+      });
+
+      localStorage.setItem("user", JSON.stringify(data));
+
+      const user = data.user;
+      setProfile(user);
+      history.push('/MainPage');
+
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
+
 
   return (
     <div id={styles.loginCard}>

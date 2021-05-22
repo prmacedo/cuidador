@@ -42,21 +42,20 @@
 }
 
 .logo {
-  height: 5.6rem;
-  margin: 0.8rem auto 0;
+  height: 7.2rem;
+  margin: 0 auto;
+  align-self: flex-end;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-
-  padding: 0 4.8rem ;
 }
 
 .content h2 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: normal;
 }
 
@@ -71,31 +70,31 @@
 }
 
 .content .inputGroup {
-  width: 100%;
+  width: 80%;
 }
 
 .inputGroup label {
   color: #4F4F4F;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   margin-bottom: 0.8rem;
 }
 
 .inputGroup input {
   background: #F8F8FC;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 
   width: 100%;
-  padding: 0.4rem 0.8rem;
+  padding: 0.8rem 1.2rem;
 
   border: 1px solid #E6E6F0;
   border-radius: 4px;
 }
 
 .btn {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: 600;
   
-  width: 100%;
+  width: 80%;
   padding: 0.8rem 0;
   border-radius: 4px;
   
@@ -134,8 +133,7 @@ button:hover {
 
 .link {
   color: #828282;
-  font-size: 1rem;
-  margin-bottom: 1.6rem;
+  font-size: 1.2rem;
 }
 
 @media (max-width: 767px) {
@@ -148,10 +146,6 @@ button:hover {
     align-items: center;
 
     box-shadow: 0 0 0 transparent;
-  }
-
-  .logo {
-    height: 7.2rem;
   }
 
   .container {

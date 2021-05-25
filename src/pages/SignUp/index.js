@@ -69,7 +69,7 @@ function SignUp() {
         .then(() => {
           alert("Cadastro realizado com sucesso!");
 
-          history.push("/LoginCuidador");
+          history.push("/");
         })
         .catch(() => {
           alert("Erro no cadastro!");

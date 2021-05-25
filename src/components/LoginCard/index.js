@@ -37,8 +37,19 @@ export default function LoginCard() {
     }
   }
   
-  function handlePatientLogin() {
+  async function handlePatientLogin() {
+    try {
+      const { data } = await api_url.post("/login/patient", {
+        email,
+        password
+      });
 
+      localStorage.setItem("user", JSON.stringify(data));
+      history.push('/AppMenu');
+
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   }
 
   async function handleProfessionalLogin() {
@@ -61,50 +72,50 @@ export default function LoginCard() {
 
 
   return (
-    <div id={styles.loginCard}>
-      <div className={styles.container}>
-        <div className={`${styles.image} ${styles.item1}`}>
-          <img src={(loginType === "Patient") ? Patient : Doctor} alt={`Imagem do login de ${selectedUserType}`} />
-        </div>
-        
-        <img src={logoImg} alt="Cuidador logo" className={`${styles.logo} ${styles.item2}`} />
+    <div className={styles.container}>
+      <div className={`${styles.image} ${styles.item1}`}>
+        <img src={(loginType === "Patient") ? Patient : Doctor} alt={`Imagem do login de ${selectedUserType}`} />
+      </div>
+      
+      <img src={logoImg} alt="Cuidador logo" className={`${styles.logo} ${styles.item2}`} />
 
-        <div className={`${styles.content} ${styles.item3}`}>
-          <h2>Entrar como {selectedUserType}</h2>
+      <div className={`${styles.content} ${styles.item3}`}>
+        <h2>Entrar como {selectedUserType}</h2>
 
-          <form action="" onSubmit={handleSubmitForm}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">E-mail</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(evt) => setEmail(evt.target.value)}
-              />
-            </div>
+        <form action="" onSubmit={handleSubmitForm}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">E-mail</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Digite o seu e-mail"
+              id="email"
+              value={email}
+              onChange={(evt) => setEmail(evt.target.value)}
+            />
+          </div>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="password">Senha</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={(evt) => setPassword(evt.target.value)}
-              />
-            </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Senha</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Digite a sua senha"
+              id="password"
+              value={password}
+              onChange={(evt) => setPassword(evt.target.value)}
+            />
+          </div>
 
-            <button className={styles.btn} type="submit">Entrar</button>
-            <a 
-              className={`${styles.btn} ${styles.btnSecondary}`} 
-              onClick={() => setLoginType(notSelectedUserType.type)}
-            >
-              Entrar como {notSelectedUserType.label}
-            </a>
-            <Link to="/Cadastro" className={styles.link}>Ainda não tem conta? Cadastre-se</Link>
-          </form>
-        </div>
+          <button className={styles.btn} type="submit">Entrar</button>
+          <a 
+            className={`${styles.btn} ${styles.btnSecondary}`} 
+            onClick={() => setLoginType(notSelectedUserType.type)}
+          >
+            Entrar como {notSelectedUserType.label}
+          </a>
+          <Link to="/Cadastro" className={styles.link}>Ainda não tem conta? Cadastre-se</Link>
+        </form>
       </div>
     </div>
   );

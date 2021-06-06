@@ -10,12 +10,12 @@ import { Tooltip, Typography, Divider, ListItem, List, Fab, makeStyles } from '@
 const medications = [
   {
     name: "Paracetamol",
-    dose: "2 mg",
+    dose: "2",
     frequency: 8,
   },
   {
     name: "Paracetamol",
-    dose: "2 mg",
+    dose: "2",
     frequency: 8,
   }
 

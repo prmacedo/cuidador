@@ -37,8 +37,8 @@ class PatientService {
     //     return axios.put(API_URL + '/api/daily/assessment/updaily', data, { headers: authHeader() });
     // }
 
-    getNews (data){
-        return axios.get(API_URL + '/pain_education', data, { headers: authHeader() });
+    getNews (){
+        return axios.get(API_URL + '/pain_education', { headers: authHeader() });
     }
     
 

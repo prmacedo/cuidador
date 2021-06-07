@@ -37,7 +37,7 @@ const medicationFrequency = [
     frequency: 8,
   },
   {
-    frequency: 24,
+    frequency: 12,
   },
 ]
 
@@ -144,23 +144,20 @@ export default function PerfilEdit() {
     (async () => {
       const { user } = await AuthService.getCurrentUser()
       setUserData(user.first_name);
-      
 
-    
+      setFirstName(user.first_name)
+      setLastName(user.last_name)
+      setGender(user.gender)
+      setBirth(new Date(user.birth).toLocaleDateString());
+      setOccupation((user.occupation === "Não informado") ? "" : user.occupation);
+      setState((user.state === "Não informado") ? "" : user.state);
+      setCity((user.city === "Não informado") ? "" : user.city);
+      setWeight((user.weight === "Não informado") ? "" : user.weight);
+      setHeight((user.height === "Não informado") ? "" : user.height);
+      setImc((user.imc === "Não informado") ? "" : user.imc);
+      setBloodtype((user.blood_type === "Não informado") ? "" : user.blood_type);
+      setCondition((user.condition === "Não informado") ? "" : user.condition);
 
-        setFirstName(user.first_name)
-        setLastName(user.last_name)
-        setGender(user.gender)
-        setBirth(new Date(user.birth).toLocaleDateString());
-        setOccupation(user.occupation)
-        setState(user.state)
-        setCity(user.city)
-        setWeight(user.weight)
-        setHeight(user.height)
-        setImc(user.imc)
-        setBloodtype(user.blood_type)
-        setCondition(user.condition)
-    
     })();
   }, []);
 
@@ -184,10 +181,6 @@ export default function PerfilEdit() {
     // });
   };
 
-  const handleDateChange = (date) => {
-    setBirth(date);
-  };
-
   const handleAddMedication = () => {
     const dataStructure = { name: " ", dose: " ", frequency: 0, }
     let newArr = [...medicinesList];
@@ -199,7 +192,7 @@ export default function PerfilEdit() {
 
   const handleDeleteMedication = (index) => {
     let newArr = [...medicinesList];
-    newArr.splice(index, 1); 
+    newArr.splice(index, 1);
     setMedicinesList(newArr)
     console.log(medicinesList)
   };
@@ -259,7 +252,7 @@ export default function PerfilEdit() {
                   <label htmlFor="birth">Data de Nascimento</label>
                   <input type="date" name="birth" id="birth" placeholder=""
                     value={birth}
-                    onChange={(e) => handleDateChange(e.target.value)} />
+                    onChange={(e) => setBirth(e.target.value)} />
                 </div>
 
                 <div className="input-group">
@@ -341,10 +334,10 @@ export default function PerfilEdit() {
                           <smal>Delete </smal><CloseIcon />
                         </Button>
                       ) : <Button onClick={handleAddMedication}>
-                            <Fab size="small" color="primary" aria-label="add" >
-                              <AddIcon />
-                            </Fab> 
-                          </Button>}
+                        <Fab size="small" color="primary" aria-label="add" >
+                          <AddIcon />
+                        </Fab>
+                      </Button>}
 
                     </div>
 

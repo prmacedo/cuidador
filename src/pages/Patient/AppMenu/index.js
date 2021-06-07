@@ -15,82 +15,80 @@ import './styles.css';
 
 function AppMenu() {
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const [userData, setUserData] = useState();
-
-
-    useEffect(() => {
-        (async () => {
-            const { user: { first_name } } = AuthService.getCurrentUser()
-            setUserData(first_name);
-
-        })();
-    }, []);
+  const [userData, setUserData] = useState();
 
 
+  useEffect(() => {
+    (async () => {
+      const { user: { first_name } } = AuthService.getCurrentUser()
+      setUserData(first_name);
 
-    return (
-        <div id="page-menu-list" className="container">
-            {userData &&
-                <>
-                    <PageHeader hideComeBack={true} hideLogout={false} />
-                    <main>
-                        <div className="user-greeting" >
-                            <strong>Bem vindo, {userData}!</strong>
-                        </div>
-                        <div className="all-buttons">
-                            <div className="buttons-container">
-                                <NavLink to="/Perfil" className="study">
-                                    <img src={Profile_icon} alt="Meu perfil icon"></img>
-                                    <span>Meu perfil</span>
-                                </NavLink>
-                            </div>
+    })();
+  }, []);
 
-                            <div className="buttons-container">
-                                <NavLink to="/Avaliacao" className="study">
-                                    <img src={Agenda_icon} alt="Agenda icon"></img>
-                                    <span> Avaliação Diária</span>
 
-                                </NavLink>
-                            </div>
-                            <div className="buttons-container">
-                                <NavLink to="/metas" className="study">
-                                    <img src={Meta_icon} alt="Meta icon"></img>
-                                    <span>Minhas Metas</span>
 
-                                </NavLink>
-                            </div>
-                            <div className="buttons-container">
-                                <NavLink to="/educacao" className="study">
-                                    <img src={News_icon} alt="Educação em dor icon"></img>
-                                    <span>Educação em dor</span>
+  return (
+    <div id="page-menu-list" className="container">
+      {userData &&
+        <>
+          <PageHeader hideComeBack={true} hideLogout={false} />
+          <main>
+            <div className="user-greeting" >
+              <strong>Bem vindo, {userData}!</strong>
+            </div>
+            <div className="all-buttons">
+              <div className="buttons-container">
+                <NavLink to="/Perfil" className="study">
+                  <img src={Profile_icon} alt="Meu perfil icon"></img>
+                  <span>Meu perfil</span>
+                </NavLink>
+              </div>
 
-                                </NavLink>
-                            </div>
-                            <div className="buttons-container">
-                                <NavLink to="/meudesempenho" className="study">
-                                    <img src={Charts_icon} alt="Meu desenpenho icon"></img>
-                                    <span>Meu desempenho</span>
+              <div className="buttons-container">
+                <NavLink to="/Avaliacao" className="study">
+                  <img src={Agenda_icon} alt="Agenda icon"></img>
+                  <span> Avaliação Diária</span>
+                </NavLink>
+              </div>
 
-                                </NavLink>
-                            </div>
+              <div className="buttons-container">
+                <NavLink to="/metas" className="study">
+                  <img src={Meta_icon} alt="Meta icon"></img>
+                  <span>Minhas Metas</span>
+                </NavLink>
+              </div>
+              
+              <div className="buttons-container">
+                <NavLink to="/meudesempenho" className="study">
+                  <img src={Charts_icon} alt="Meu desenpenho icon"></img>
+                  <span>Meu desempenho</span>
+                </NavLink>
+              </div>
 
-                            <div className="buttons-container">
-                                <NavLink to="/cuidadores" className="study">
-                                    <img src={Cuidador_icon} alt="Cuidador icon"></img>
-                                    <span>Cuidadores</span>
+              <div className="buttons-container">
+                <NavLink to="/educacao" className="study">
+                  <img src={News_icon} alt="Educação em dor icon"></img>
+                  <span>Educação em dor</span>
+                </NavLink>
+              </div>
 
-                                </NavLink>
-                            </div>
-                        </div>
+              <div className="buttons-container">
+                <NavLink to="/cuidadores" className="study">
+                  <img src={Cuidador_icon} alt="Cuidador icon"></img>
+                  <span>Cuidadores</span>
+                </NavLink>
+              </div>
+            </div>
 
-                    </main>
+          </main>
 
-                </>}
-        </div>
-    )
-    // }
+        </>}
+    </div>
+  )
+  // }
 
 
 

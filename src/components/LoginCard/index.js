@@ -12,12 +12,15 @@ import Doctor from '../../assets/images/doctor.svg';
 import Patient from '../../assets/images/landingApp.svg';
 import exclamationIcon from '../../assets/images/exclamation.png'
 
+import { LoopCircleLoading } from 'react-loadingg';
+
 import styles from './styles.module.css';
 
 export default function LoginCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginFaild, setIsLoginFaild] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   const { loginType, setLoginType, selectedUserType, notSelectedUserType } = useLoginType();
   const { setProfile } = useProfile();
@@ -41,7 +44,8 @@ export default function LoginCard() {
 
   async function handlePatientLogin() {
     try {
-      const { data , token } = await api_url.post("/login/patient", {
+      setIsPageLoading(true)
+      const { data } = await api_url.post("/login/patient", {
         email,
         password
       });
@@ -51,6 +55,7 @@ export default function LoginCard() {
 
     } catch (error) {
       setIsLoginFaild(true)
+      setIsPageLoading(false)
       console.log(error.response.data.message);
     }
   }
@@ -101,7 +106,7 @@ export default function LoginCard() {
               value={email}
               onChange={(evt) => setEmail(evt.target.value)}
             />
-            {isLoginFaild ? <LoginFaildComponent/> : <div></div>} 
+            {isLoginFaild ? <LoginFaildComponent /> : <div></div>}
           </div>
 
           <div className={styles.inputGroup}>
@@ -126,6 +131,10 @@ export default function LoginCard() {
           <Link to="/Cadastro" className={styles.link}>Ainda não tem conta? Cadastre-se</Link>
         </form>
       </div>
+      
+      {isPageLoading? <LoopCircleLoading size='small' color='#003d75'/>:<div></div>}
+      
+    
     </div>
   );
 }

@@ -39,9 +39,6 @@ const medicationFrequency = [
   {
     frequency: 24,
   },
-  {
-    frequency: 24,
-  },
 ]
 
 const genderObject = [
@@ -170,21 +167,21 @@ export default function PerfilEdit() {
 
 
   const updateData = () => {
-    PatientService.updateMyData({
-      patient_id,
-      firstName,
-      lastName,
-      gender,
-      birth,
-      occupation,
-      state,
-      city,
-      weight,
-      height,
-      imc,
-      bloodtype,
-      condition,
-    });
+    // PatientService.updateMyData({
+    //   patient_id,
+    //   firstName,
+    //   lastName,
+    //   gender,
+    //   birth,
+    //   occupation,
+    //   state,
+    //   city,
+    //   weight,
+    //   height,
+    //   imc,
+    //   bloodtype,
+    //   condition,
+    // });
   };
 
   const handleDateChange = (date) => {
@@ -262,7 +259,7 @@ export default function PerfilEdit() {
                   <label htmlFor="birth">Data de Nascimento</label>
                   <input type="date" name="birth" id="birth" placeholder=""
                     value={birth}
-                    onChange={handleDateChange} />
+                    onChange={(e) => handleDateChange(e.target.value)} />
                 </div>
 
                 <div className="input-group">
@@ -359,7 +356,7 @@ export default function PerfilEdit() {
                     </div>
 
                     <div className="input-group">
-                      <label htmlFor="condition">Dose <small>(nº de comprimidos)</small></label>
+                      <label htmlFor="condition">Dose <small>(gramas/nº de comprimidos)</small></label>
                       <input type="text" name="condition" id="condition" placeholder="Qual condição de Saúde que causa sua dor Crônica?"
                         value={dose}
                         onChange={updateFieldChanged(index, 'dose')} />

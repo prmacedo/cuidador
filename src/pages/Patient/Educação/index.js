@@ -28,7 +28,7 @@ export default function Educação() {
   }, []);
 
   return (
-    <div id="page-cuidadores" className="container">
+    <div id="page-edu" className="container">
       {/* <PageHeader/> */}
       <PageHeader name={userData} />
 

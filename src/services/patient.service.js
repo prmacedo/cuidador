@@ -25,9 +25,9 @@ class PatientService {
     //     return axios.post(API_URL + '/api/patient/data/myprofissional', data, { headers: authHeader() });
     // }
 
-    // novaAvaliacaoDiaria (data){
-    //     return axios.put(API_URL + '/api/daily/assessment/newdaily', data, { headers: authHeader() });
-    // }
+    novaAvaliacaoDiaria (data){
+        return axios.post(API_URL + '/daily_assessment', data, { headers: authHeader() });
+    }
 
     // getAvaliacaoDiaria (data){
     //     return axios.post(API_URL + '/api/daily/assessment/user', data, { headers: authHeader() });

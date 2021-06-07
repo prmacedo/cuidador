@@ -68,7 +68,8 @@ export const useStyles = makeStyles((theme) => ({
       background: '#ffffff !important',
     },
     divider: {
-        width: '80%',
+        width: '100%',
+        margin: '10px 0'
     },
     painBox: {
         display: 'flex',

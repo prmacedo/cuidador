@@ -8,7 +8,6 @@
     display: block;
 }
 
-
 .MuiToolbar-regular {
     min-height: 48px;
 }
@@ -33,9 +32,8 @@
     flex-direction: column;
     align-items: center;
     /* justify-content: space-around; */
-   
     padding-bottom: 85px;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
 #page-avaliacao .send-assessment-button {
@@ -44,6 +42,7 @@
 
 #page-avaliacao .button-group {
     width: 100%;
+    margin-top: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -67,9 +66,28 @@
     margin-bottom: 2rem;
 }
 
+#page-avaliacao .boxContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 21.18px;
+    margin-bottom: 13px;
+}
+#page-avaliacao .imagem-corpo {
+    margin-top: 2.5rem;
+}
 @media (min-width: 700px) {
     #page-avaliacao .button-group {
-        width:30%;
-    
+        width: 30%;
+    }
+}
+
+@media (max-width: 700px) {
+    #page-avaliacao .boxContainer {
+        width: 95%;
+    }
+    #page-avaliacao .imagem-corpo {
+        width: 95%;
     }
 }

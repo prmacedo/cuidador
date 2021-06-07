@@ -14,7 +14,7 @@ import Chip from "@material-ui/core/Chip";
 import { Link, useHistory } from "react-router-dom";
 import logoImg from "../../../assets/images/logoAppWhite.svg";
 import backIcon from "../../../assets/images/icons/back.svg";
-import imagem from "../../../assets/images/Corpo_numerado.png";
+import imagemCorpo from "../../../assets/images/Corpo_numerado.png";
 import PageHeader from '../../../components/PageHeader';
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
@@ -58,15 +58,13 @@ export default function Avaliação() {
   }, []);
 
   async function fetchData() {
-    const {
-      user: { first_name, account_id, patientdata },
-    } = AuthService.getCurrentUser();
+    const { user: { first_name, account_id, patientdata }, } = AuthService.getCurrentUser();
 
     setUserData(first_name);
     setPatient_id(account_id);
     setPatientData(patientdata);
 
-  
+
     // const avaliacao = await PatientService.getAvaliacaoDiaria({ account_id });
 
     // if (avaliacao.data[0]) {
@@ -102,24 +100,46 @@ export default function Avaliação() {
   }
 
   const sendAssessement = () => {
-    PatientService.novaAvaliacaoDiaria({
-      patient_id,
-      patientdata_id,
-      pain, //Question 01
-      painLocation, //Question 0
-      worstPain, //Question 03
-      painAverage, //Question 04
-      moodInfluence,
-      habitualActivities, //Question 05
-      influenceRelationship, //Question 07
-      sleep, //Question 08
-      sexBehavior,
-      selfEsteem, //Question 09
-      anguish, //Question 11
-      anxious, //Question 12
-    });
+
+    try{
+      PatientService.novaAvaliacaoDiaria({
+        patient_id: patient_id,
+        question_01: pain == "0"? false: true, //Question 01
+        question_02: `[${painLocation}]`, //Question 0
+        question_03: Number(worstPain), //Question 03
+        question_04: Number(painAverage), //Question 04
+        question_05: Number(moodInfluence),
+        question_06: Number(habitualActivities), //Question 05
+        question_07: Number(influenceRelationship), //Question 07
+        question_08: Number(sleep), //Question 08
+        question_09: Number(sexBehavior),
+        question_10: Number(selfEsteem), //Question 09
+        question_11: Number(anguish), //Question 11
+        // question_12: Number(anxious), //Criar coluna dose
+      });
+    }
+    catch(erro){
+      console.log(erro)
+    }
+
     setAvaliacaoDone(true);
-    history.push("/appmenu");
+    // history.push("/appmenu");
+
+    // console.log({
+    //   patient_id: patient_id,
+    //   question_01: pain == "0"? false: true, //Question 01
+    //   question_02: `[${painLocation}]`, //Question 0
+    //   question_03: Number(worstPain), //Question 03
+    //   question_04: Number(painAverage), //Question 04
+    //   question_05: Number(moodInfluence),
+    //   question_06: Number(habitualActivities), //Question 05
+    //   question_07: Number(influenceRelationship), //Question 07
+    //   question_08: Number(sleep), //Question 08
+    //   question_09: Number(sexBehavior),
+    //   question_10: Number(selfEsteem), //Question 09
+    //   question_11: Number(anguish), //Question 11
+    //   // question_12: Number(anxious), //Criar coluna dose
+    // })
   };
 
   const updateAssessement = () => {
@@ -215,18 +235,18 @@ export default function Avaliação() {
               </ToggleButtonGroup>
             </div>
 
-            <Divider className={classes.divider} />
 
-            <Box className={classes.painBox}>
+
+            <Box className={'boxContainer'}>
               <Typography component="span" variant="h4" align="center">
-                
+
               </Typography>
               <Typography component="span" variant="h4" align="center">
                 Utilize a imagem abaixo para responder às perguntas
               </Typography>
               <div>
-              <img src={imagem} />
-               </div>
+                <img src={imagemCorpo} className={'imagem-corpo'} />
+              </div>
               <Typography omponent="h2" variant="h">
                 Onde está localizada a(s) sua(s) dor(es)?
               </Typography>
@@ -338,7 +358,7 @@ export default function Avaliação() {
                   value={moodInfluence}
                   setPain={setMoodInfluence}
                 />
-              </div> 
+              </div>
 
               <div
                 style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}

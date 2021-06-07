@@ -25,6 +25,8 @@ import Input from "../../../components/Input";
 import AdaptativeToggleGroup from "../../../components/AdaptativeToggleGroup";
 import { useStyles } from "./styles";
 
+import { LoopCircleLoading } from 'react-loadingg';
+
 function valuetext(value) {
   return `${value}°C`;
 }
@@ -52,7 +54,7 @@ export default function Avaliação() {
   const [patientdata_id, setPatientData] = useState();
   const [avaliacaoDone, setAvaliacaoDone] = useState(false);
   const [okToRender, setOkToRender] = useState(false);
-
+  const [isPageLoading, setIsPageLoading] = useState(false);
   useEffect(() => {
     fetchData();
   }, []);
@@ -63,7 +65,7 @@ export default function Avaliação() {
     setUserData(first_name);
     setPatient_id(account_id);
     setPatientData(patientdata);
-
+    
 
     // const avaliacao = await PatientService.getAvaliacaoDiaria({ account_id });
 
@@ -100,7 +102,7 @@ export default function Avaliação() {
   }
 
   const sendAssessement = () => {
-
+    setIsPageLoading(true)
     try{
       PatientService.novaAvaliacaoDiaria({
         patient_id: patient_id,
@@ -120,10 +122,11 @@ export default function Avaliação() {
     }
     catch(erro){
       console.log(erro)
+      setIsPageLoading(false)
     }
 
     setAvaliacaoDone(true);
-    // history.push("/appmenu");
+    history.push("/appmenu");
 
     // console.log({
     //   patient_id: patient_id,
@@ -467,9 +470,10 @@ export default function Avaliação() {
               </div>
             </Box>
             <div className="send-assessment-button">
-
+                      
               {avaliacaoDone ? avaliationDidntDone : avaliationAlreadyDone}
             </div>
+            {isPageLoading? <LoopCircleLoading size='small' color='#003d75'/>:<div></div>}
           </main>
         </>
       )}

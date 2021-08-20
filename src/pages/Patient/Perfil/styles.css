@@ -7,14 +7,6 @@
     background: rgb(238, 241, 250);
 }
 
-#page-perfil main {
-    position: absolute;
-    top: 85px;
-    height: 100%;
-    padding-bottom: 85px;
-    overflow-y: scroll;
-}
-
 #page-perfil .forms {
     display: flex;
     flex-direction: column;
@@ -80,7 +72,7 @@ p {
 
 #page-edit .forms {
     width: 80%;
-    margin: 0 0 0 30px;
+    margin: 0 auto 30px;
 }
 
 #page-edit .nav-button {

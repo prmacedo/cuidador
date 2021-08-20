@@ -14,6 +14,7 @@ export default function AdaptativeToggleGroup({
 }) {
   const classes = useStyles();
   const optionsArray = [
+    { value: "0" },
     { value: "1" },
     { value: "2" },
     { value: "3" },

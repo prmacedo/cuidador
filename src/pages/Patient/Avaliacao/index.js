@@ -328,7 +328,7 @@ export default function Avaliação() {
                 Nas últimas 24 horas
               </Typography>
 
-              <div
+              {/* <div
                 style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
               >
                 <Typography component="span" variant="h4" align="center">
@@ -338,7 +338,7 @@ export default function Avaliação() {
                   value={moodInfluence}
                   setPain={setMoodInfluence}
                 />
-              </div> 
+              </div>  */}
 
               <div
                 style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}

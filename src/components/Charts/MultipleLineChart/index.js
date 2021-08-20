@@ -228,7 +228,7 @@ export default function MultipleLineChart() {
 
   return (
     <div id="multiLineChartContainer">
-      <h3>Intensidade da dor mais intensa em cada dia do mês</h3>
+      <h3>Influência das dores no dia a dia</h3>
       
       <p>Escolha o mês e o ano</p>
 

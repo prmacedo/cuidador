@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import { FiInfo } from 'react-icons/fi';
+
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
 import { useCurrentPage } from '../../../context/CurrentPage';
 
@@ -67,17 +69,31 @@ export default function Profile() {
           
           <div className="row">
             <div className="col col-4">
-              <label htmlFor="telephone">Telefone</label>
-              <input type="text" name="telephone" id="telephone" required />
+              <label htmlFor="telephone">
+                Telefone 
+                <span>
+                  <span className="info-icon"><FiInfo /></span>
+                  <span className="info-message">Essa informação ficará visível para o seu paciente.</span>
+                </span>
+              </label>
+              
+              <input type="text" name="telephone" id="telephone" />
             </div>
             <div className="col col-4">
-              <label htmlFor="email">E-mail</label>
-              <input type="text" name="email" id="email" required />
+              <label htmlFor="email">
+                E-mail 
+                <span>
+                  <span className="info-icon"><FiInfo /></span>
+                  <span className="info-message">Essa informação ficará visível para o seu paciente.</span>
+                </span>
+              </label>
+              
+              <input type="text" name="email" id="email" />
             </div>
             <div className="col col-4 avatar">
               <label htmlFor="">Foto de Perfil</label>
               <div>
-                <input className="avatar-filename" placeholder="Escolha um arquivo" disabled />
+                <input className="avatar-filename" placeholder="Escolha um arquivo" />
                 <label className="avatar-btn btn" htmlFor="avatar">Buscar</label>
               </div>
               <input type="file" name="avatar" id="avatar" value={avatar} onChange={(evt) => handleSelectFile(evt) } required />
@@ -86,8 +102,14 @@ export default function Profile() {
           
           <div className="row">
             <div className="col col-12">
-              <label htmlFor="places">Locais onde trabalha <small>(separe com vírgula)</small></label>
-              <input type="text" name="places" id="places" required />
+              <label htmlFor="places">
+                Locais onde trabalha <small>(separe com vírgula)</small>
+                <span>
+                  <span className="info-icon"><FiInfo /></span>
+                  <span className="info-message">Essa informação ficará visível para o seu paciente.</span>
+                </span>
+                </label>
+              <input type="text" name="places" id="places" />
             </div>
           </div>
 

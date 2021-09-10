@@ -80,7 +80,7 @@ export default function MainPage() {
         <div id="top-bar">
           <span id="add-button" onClick={ () => toggleAddPacientModal() }>
             <img src={addIcon} alt="Adicionar paciente"/>
-            Adicionar Paciente
+            Adicionar paciente
           </span>
 
           <form action="">
@@ -148,7 +148,7 @@ export default function MainPage() {
         <div className="overlay" onClick={ () => toggleAddPacientModal() }></div>
         <div className="content">
           <span onClick={ () => toggleAddPacientModal() }><img src={closeIcon} alt="Fechar modal"/></span>
-          <h3>Adicionar novo Paciente</h3>
+          <h3>Adicionar novo paciente</h3>
           <p>Insira o e-mail do Paciente para vincular suas contas</p>
 
           <form action="" onSubmit={handleSubmit}>

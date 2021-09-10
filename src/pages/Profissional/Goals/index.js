@@ -6,6 +6,7 @@ import ProfessionalContainer from '../../../components/ProfessionalContainer';
 import profilePic from '../../../assets/images/icons/profile-user.svg';
 import closeIcon from '../../../assets/images/icons/close.svg';
 import addIcon from '../../../assets/images/icons/add-icon.svg';
+import backIcon from '../../../assets/images/icons/back.svg';
 
 import { useHiddenSidebar } from '../../../context/HiddenSidebar';
 
@@ -75,8 +76,12 @@ export default function Goals() {
           <div id="add-goal-button">
             <button type="button" onClick={() => toggleAddGoalModal()}>
               <img src={addIcon} alt="Adicionar meta" />
-            Adicionar meta
-          </button>
+              Adicionar meta
+            </button>
+
+            <a href="paciente/1">
+              ← Voltar
+            </a>
           </div>
         </div>
 

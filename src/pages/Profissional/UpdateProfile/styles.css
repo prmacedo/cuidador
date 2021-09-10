@@ -83,10 +83,11 @@
   height: 100%;
 
   display: flex;
-  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .avatar .avatar-filename {
+  flex: 1;
   color: #828282;
   background: #F8F8FC;
   border: 1px solid #E6E6F0;
@@ -99,7 +100,6 @@
   width: 22ch;
   
   overflow-x: auto;
-  margin-right: 0.8rem;
 }
 
 .avatar .avatar-btn {
@@ -117,4 +117,43 @@
 
 #avatar {
   display: none;  
+}
+
+label>span {
+  position: relative;
+}
+
+.info-icon {
+  cursor: pointer;
+}
+
+.info-icon * {
+  max-height: 16px;
+  margin-left: 0.8rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.info-icon:hover ~ .info-message {
+  opacity: 1;
+}
+
+.info-message {
+  position: absolute;
+  bottom: 8px;
+  left: 24px;
+
+  font-size: 1.2rem;
+  min-width: 32ch;
+
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.75);
+
+  padding: 1rem 1.6rem;
+  border-radius: 0.8rem;
+  border-bottom-left-radius: 0;
+
+  opacity: 0;
+
+  transition: 0.3s;
 }

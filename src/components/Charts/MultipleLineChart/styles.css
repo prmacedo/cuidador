@@ -65,6 +65,24 @@
   width: 100%;
 }
 
+/* #multiLineChartContainer .filters-container {
+  overflow-x: scroll;
+  width: max-content;
+} */
+
+#multiLineChartContainer .filter {
+  display: inline-block;
+  padding: 1rem 1.2rem;
+
+  background: #E6E6F0;
+  border-radius: 0.8rem;
+
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+
+  cursor: pointer;
+}
+
 @media (min-width: 767px) {
   #multiLineChartContainer > .scroll {
     overflow-x: hidden;

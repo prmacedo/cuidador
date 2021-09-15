@@ -9,9 +9,43 @@ export default function MultipleLineChart() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [dateLabel, setDateLabel] = useState([]);
   const [chartValues, setChartValues] = useState([]);
+  const [chartValuesFiltered, setChartValuesFiltered] = useState([]);
   const [showChart, setShowChart] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const filtersConstants = [
+    {
+      name: 'Atv.diárias',
+      color: 'rgb(187, 107, 217)'
+    },
+    {
+      name: 'Relações interpessoais',
+      color: 'rgb(84, 125, 226)',
+    },
+    {
+      name: 'Sono',
+      color: 'rgb(242, 201, 76)',
+    },
+    {
+      name: 'Comport.sexual',
+      color: 'rgb(39, 174, 96)'
+    },
+    {
+      name: 'Autoestima',
+      color: 'rgb(239, 89, 122)'
+    },
+    {
+      name: 'Trabalho',
+      color: 'rgb(86, 204, 242)'
+    },
+    {
+      name: 'Dispo. para andar',
+      color: 'rgb(111, 207, 151)'
+    },
+  ];
 
   const dailyAssesmentByYear = [
+    // Janeiro
     [
       {
         days: ['1', '2', '4', '5', '6', '7'],
@@ -42,9 +76,10 @@ export default function MultipleLineChart() {
         intensities: [5, 6, 4, 3, 2, 1]
       },
     ],
-    [],
-    [],
-    [
+    [], // Fevereiro
+    [], // Março
+    // Abril
+    [ 
       {
         days: ['1', '2', '4', '5', '6', '7'],
         intensities: [1, 9, 3, 5, 2, 3]
@@ -74,25 +109,63 @@ export default function MultipleLineChart() {
         intensities: [7, 6, 5, 8, 4, 3]
       },
     ],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
+    [], // Maio
+    [], // Junho
+    [], // Julho
+    [], // Agosto
+    // Setembro
+    [
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [1, 9, 3, 5, 2, 3]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [5, 6, 3, 4, 5, 8]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [9, 5, 6, 2, 6, 3]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [3, 5, 8, 4, 7, 6]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [8, 6, 8, 3, 2, 5]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [7, 5, 2, 6, 2, 8]
+      },
+      {
+        days: ['1', '2', '4', '5', '6', '7'],
+        intensities: [7, 6, 5, 8, 4, 3]
+      },
+    ], 
+    [], // Outubro
+    [], // Novembro
+    []  // Dezembro
   ];
 
   useEffect(() => {
     setDateLabel(getDaysOfMonth());
-    setChartValues(formatMultiLineChartData());
+    const values = formatMultiLineChartData();
+    setChartValues(values);
+    setChartValuesFiltered([{}, {}, {}, {}, {}, {}, {}]);
   }, []);
-
+  
   useEffect(() => {
     setDateLabel(getDaysOfMonth());
-    setChartValues(formatMultiLineChartData());
+    const values = formatMultiLineChartData();
+    setChartValues(values);
+    setChartValuesFiltered([{}, {}, {}, {}, {}, {}, {}]);
   }, [month]);
+
+  useEffect(() => {
+    console.log("oi");
+  }, [chartValuesFiltered]);
 
   function getDaysOfMonth() {
     const yearNormal = ['31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
@@ -202,29 +275,52 @@ export default function MultipleLineChart() {
 
   const data = {
     labels: dateLabel,
-    datasets: chartValues,
+    datasets: chartValuesFiltered,
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false,    
     plugins: {
       title: {
-        display: true,
+        display: false,
         text: 'Escolha os parâmetros',
         align: 'start'
+      },
+      legend: {
+        display: false
       },
     },
     scales: {
       y: {
         beginAtZero: true,
-        reverse: true,title: {
-        display: false,
-      },
+        reverse: true,
+        title: {
+          display: false,
+        },
         max: 10
-      }
+      },
     }
   };
+
+  function handleClickFilter(filterNumber) {
+    const element = document.querySelector(`#filter-${filterNumber}`);
+    const isActive = element.classList.toggle('active');
+    const newValues = chartValuesFiltered;
+    
+    if (isActive) {
+      element.style.backgroundColor = filtersConstants[filterNumber].color;
+      element.style.color = '#fff';
+      newValues[filterNumber] = chartValues[filterNumber];
+    } else {
+      element.style.backgroundColor = '#E6E6F0';
+      element.style.color = '#6A6180';
+      newValues[filterNumber] = {};      
+    }
+    
+    setChartValuesFiltered(newValues);
+    setRefresh(!refresh);
+  }
 
   return (
     <div id="multiLineChartContainer">
@@ -257,6 +353,11 @@ export default function MultipleLineChart() {
       (
       <>
         <div className="scroll">
+          <div className="filters-container">
+            {filtersConstants.map((filter, index) => (
+              <div key={index} className="filter" id={"filter-"+index} onClick={() => handleClickFilter(index)}>{filter.name}</div>              
+            ))}
+          </div>
           <div className="chart">
             <Line data={data} options={options} />
           </div>

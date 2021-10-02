@@ -52,10 +52,15 @@ export default function Avaliação() {
   const [patientdata_id, setPatientData] = useState();
   const [avaliacaoDone, setAvaliacaoDone] = useState(false);
   const [okToRender, setOkToRender] = useState(false);
+  const [showQuestions, setShowQuestions] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setShowQuestions(pain == 1);
+  }, [pain]);
 
   async function fetchData() {
     const {
@@ -215,241 +220,247 @@ export default function Avaliação() {
               </ToggleButtonGroup>
             </div>
 
-            <Divider className={classes.divider} />
+            
+            {showQuestions && (
+              <>
+                <Divider className={classes.divider} />
 
-            <Box className={classes.painBox}>
-              <Typography component="span" variant="h4" align="center">
-                
-              </Typography>
-              <Typography component="span" variant="h4" align="center">
-                Utilize a imagem abaixo para responder às perguntas
-              </Typography>
-              <div>
-              <img src={imagem} />
-               </div>
-              <Typography omponent="h2" variant="h">
-                Onde está localizada a(s) sua(s) dor(es)?
-              </Typography>
+                <Box className={classes.painBox}>
+                  <Typography component="span" variant="h4" align="center">
+                    
+                  </Typography>
+                  <Typography component="span" variant="h4" align="center">
+                    Utilize a imagem abaixo para responder às perguntas
+                  </Typography>
+                  <div>
+                  <img src={imagem} />
+                  </div>
+                  <Typography omponent="h2" variant="h">
+                    Onde está localizada a(s) sua(s) dor(es)?
+                  </Typography>
 
-              <form className={classes.root} noValidate autoComplete="off">
-                <div className={classes.container}>
-                  <Input
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                  />
-                  <ButtonGroup
-                    variant="contained"
-                    color="primary"
-                    aria-label="contained primary button group"
+                  <form className={classes.root} noValidate autoComplete="off">
+                    <div className={classes.container}>
+                      <Input
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                      />
+                      <ButtonGroup
+                        variant="contained"
+                        color="primary"
+                        aria-label="contained primary button group"
+                      >
+                        <Button
+                          style={{ height: 30 }}
+                          onClick={() => {
+                            setPainLocation((painLocation) => [
+                              ...painLocation,
+                              Number(text),
+                            ]);
+                            setText("");
+                          }}
+                          disabled={text === ""}
+                        >
+                          Inserir
+                        </Button>
+                      </ButtonGroup>
+                    </div>
+                    <div className={classes.chips}>
+                      {painLocation.map((element, index) => (
+                        <Chip
+                          key={index}
+                          size="small"
+                          label={element}
+                          // value={painLocation}
+                          onDelete={(index) => {
+                            const arrayChips = [...painLocation];
+                            arrayChips.splice(index, 1);
+                            setPainLocation(arrayChips);
+                          }}
+                          color="primary"
+                        />
+                      ))}
+                    </div>
+                  </form>
+
+                  <Divider className={classes.divider} />
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
                   >
-                    <Button
-                      style={{ height: 30 }}
-                      onClick={() => {
-                        setPainLocation((painLocation) => [
-                          ...painLocation,
-                          Number(text),
-                        ]);
-                        setText("");
-                      }}
-                      disabled={text === ""}
+                    <Typography
+                      className={classes.Typography}
+                      component="span"
+                      variant="h4"
+                      align="center"
                     >
-                      Inserir
-                    </Button>
-                  </ButtonGroup>
-                </div>
-                <div className={classes.chips}>
-                  {painLocation.map((element, index) => (
-                    <Chip
-                      key={index}
-                      size="small"
-                      label={element}
-                      // value={painLocation}
-                      onDelete={(index) => {
-                        const arrayChips = [...painLocation];
-                        arrayChips.splice(index, 1);
-                        setPainLocation(arrayChips);
-                      }}
-                      color="primary"
+                      Onde está a dor que mais te incomoda?
+                    </Typography>
+                    <form className={classes.root} noValidate autoComplete="off">
+                      <AdaptativeToggleGroup
+                        choicedPain={painLocation}
+                        setPain={setText2}
+                        value={text2}
+                        dynamic={true}
+                      />
+                    </form>
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography
+                      className={classes.Typography}
+                      component="span"
+                      variant="h4"
+                      align="center"
+                    >
+                      Qual é a média de intensidade desta dor nas últimas 24hs?
+                    </Typography>
+                    <AdaptativeToggleGroup
+                      setPain={setPainAverage}
+                      value={painAverage}
+                      goodFeelings="Sem dor"
+                      badFeelings="Pior dor"
                     />
-                  ))}
+                  </div>
+
+                  <Divider className={classes.divider} />
+
+                  <Typography
+                    className={classes.Typography}
+                    component="span"
+                    variant="h4"
+                    align="center"
+                  >
+                    Nas últimas 24 horas
+                  </Typography>
+
+                  {/* <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor está influenciando no seu humor?
+                    </Typography>
+                    <AdaptativeToggleGroup
+                      value={moodInfluence}
+                      setPain={setMoodInfluence}
+                    />
+                  </div>  */}
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor está atrapalhando no seu desempenho nas
+                      atividades diárias?
+                    </Typography>
+
+                    <AdaptativeToggleGroup
+                      value={habitualActivities}
+                      setPain={setHabitualActivities}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor que você está sentindo tem influenciado a sua
+                      relação com as outras pessoas?
+                    </Typography>
+
+                    <AdaptativeToggleGroup
+                      value={influenceRelationship}
+                      setPain={setInfluenceRelationship}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="justify">
+                      Quanto o seu sono está sendo prejudicado pela dor?
+                    </Typography>
+                    <AdaptativeToggleGroup
+                      value={sleep}
+                      setPain={setSleep}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor está influenciando o seu comportamento sexual?
+                    </Typography>
+
+                    <AdaptativeToggleGroup
+                      value={sexBehavior}
+                      setPain={setSexBehavior}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor tem afetado a sua autoestima?
+                    </Typography>
+                    <AdaptativeToggleGroup
+                      value={selfEsteem}
+                      setPain={setSelfEsteem}
+                      goodFeelings="Não afeta"
+                      badFeelings="Afeta completamente"
+                    />
+                  </div>
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor tem influenciado o seu trabalho?
+                    </Typography>
+
+                    <AdaptativeToggleGroup
+                      value={anguish}
+                      setPain={setAnguish}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+
+
+                  <div
+                    style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
+                  >
+                    <Typography component="span" variant="h4" align="center">
+                      Quanto a dor tem interferido em sua disposição para andar?
+                    </Typography>
+
+                    <AdaptativeToggleGroup
+                      value={anxious}
+                      setPain={setAnxious}
+                      goodFeelings="Não interferiu"
+                      badFeelings="Interferiu completamente"
+                    />
+                  </div>
+                </Box>
+                <div className="send-assessment-button">
+
+                  {avaliacaoDone ? avaliationDidntDone : avaliationAlreadyDone}
                 </div>
-              </form>
-
-              <Divider className={classes.divider} />
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography
-                  className={classes.Typography}
-                  component="span"
-                  variant="h4"
-                  align="center"
-                >
-                  Onde está a dor que mais te incomoda?
-                </Typography>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <AdaptativeToggleGroup
-                    choicedPain={painLocation}
-                    setPain={setText2}
-                    value={text2}
-                    dynamic={true}
-                  />
-                </form>
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography
-                  className={classes.Typography}
-                  component="span"
-                  variant="h4"
-                  align="center"
-                >
-                  Qual é a média de intensidade desta dor nas últimas 24hs?
-                </Typography>
-                <AdaptativeToggleGroup
-                  setPain={setPainAverage}
-                  value={painAverage}
-                  goodFeelings="Sem dor"
-                  badFeelings="Pior dor"
-                />
-              </div>
-
-              <Divider className={classes.divider} />
-
-              <Typography
-                className={classes.Typography}
-                component="span"
-                variant="h4"
-                align="center"
-              >
-                Nas últimas 24 horas
-              </Typography>
-
-              {/* <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor está influenciando no seu humor?
-                </Typography>
-                <AdaptativeToggleGroup
-                  value={moodInfluence}
-                  setPain={setMoodInfluence}
-                />
-              </div>  */}
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor está atrapalhando no seu desempenho nas
-                  atividades diárias?
-                </Typography>
-
-                <AdaptativeToggleGroup
-                  value={habitualActivities}
-                  setPain={setHabitualActivities}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor que você está sentindo tem influenciado a sua
-                  relação com as outras pessoas?
-                </Typography>
-
-                <AdaptativeToggleGroup
-                  value={influenceRelationship}
-                  setPain={setInfluenceRelationship}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="justify">
-                  Quanto o seu sono está sendo prejudicado pela dor?
-                </Typography>
-                <AdaptativeToggleGroup
-                  value={sleep}
-                  setPain={setSleep}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor está influenciando o seu comportamento sexual?
-                </Typography>
-
-                <AdaptativeToggleGroup
-                  value={sexBehavior}
-                  setPain={setSexBehavior}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  A dor está afetando a sua autoestima?
-                </Typography>
-                <AdaptativeToggleGroup
-                  value={selfEsteem}
-                  setPain={setSelfEsteem}
-                  goodFeelings="Não afeta"
-                  badFeelings="Afeta completamente"
-                />
-              </div>
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor tem influenciado o seu trabalho?
-                </Typography>
-
-                <AdaptativeToggleGroup
-                  value={anguish}
-                  setPain={setAnguish}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-
-
-              <div
-                style={{ width: "100%", maxWidth: "500px", padding: "0 8px" }}
-              >
-                <Typography component="span" variant="h4" align="center">
-                  Quanto a dor tem interferido em sua disposição para andar?
-                </Typography>
-
-                <AdaptativeToggleGroup
-                  value={anxious}
-                  setPain={setAnxious}
-                  goodFeelings="Não interferiu"
-                  badFeelings="Interferiu completamente"
-                />
-              </div>
-            </Box>
-            <div className="send-assessment-button">
-
-              {avaliacaoDone ? avaliationDidntDone : avaliationAlreadyDone}
-            </div>
+              </>
+            )}
+            
           </main>
         </>
       )}

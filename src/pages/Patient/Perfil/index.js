@@ -86,7 +86,7 @@ export default function Perfil() {
       setFirstName(user.first_name)
       setLastName(user.last_name)
       setGender(user.gender)
-      setBirth(new Date(user.birth).toLocaleDateString());
+      setBirth(new Date(user.birthday).toLocaleDateString());
       setOccupation(user.occupation)
       setState(user.state)
       setCity(user.city)

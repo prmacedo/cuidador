@@ -6,6 +6,7 @@ import { useCurrentPage } from '../../../context/CurrentPage';
 
 import './styles.css';
 
+
 export default function Profile() {
   const history = useHistory();
   const {setCurrentPage} = useCurrentPage();

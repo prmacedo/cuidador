@@ -48,7 +48,7 @@ export default function LoginCard() {
       history.push('/AppMenu');
 
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.response);
     }
   }
 
@@ -66,7 +66,7 @@ export default function LoginCard() {
       history.push('/MainPage');
 
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.response.data);
     }
   }
 

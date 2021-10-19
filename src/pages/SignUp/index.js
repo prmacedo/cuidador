@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,70 +12,66 @@ import AuthService from "../../services/auth.service";
 import "./styles.css";
 
 function SignUp() {
+  const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [crmCode, setCRMCode] = useState('');
+  const [crmText, setCRMText] = useState('');
+  const [birthday, setBirthday] = useState(new Date());
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
   const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm({resolver: yupResolver(schema)})
 
 
   const handleRegisterUser = async (event) => {
-    event.preventDefault();
-    console.log(event)
+    event.preventDefault();    
+    
+    if(password !== confirmPassword){
+      alert("As senhas devem ser iguais!");
+      return;
+    }
 
-    const formData = {
-      role: event.target[1].value,
-      cpf: event.target[2].value,
-      firstName: event.target[3].value,
-      lastName: event.target[4].value,
-      bornDate: event.target[5].value,
-      email: event.target[6].value,
-      password: event.target[7].value,
-      confirmPassword: event.target[8].value
-    }
-    const isValid = await schema.isValid(formData)
-    // console.log(formData, isValid)
-    if(!isValid){
-      alert("dados invalidos!");
-      return 
-    }
-    if (formData.role == "pacient") {
+    if (role == "pacient") {
       AuthService.patientRegister(
-        formData.email, 
-        formData.password, 
-        formData.firstName, 
-        formData.lastName, 
-        formData.bornDate
+        email, 
+        password, 
+        firstName, 
+        lastName, 
+        birthday,
+        cpf
       )
-        .then(() => {
-          alert("Cadastro realizado com sucesso!");
+      .then(() => {
+        alert("Cadastro realizado com sucesso!");
+        history.push("/");
+      })
+      .catch(() => {
+        alert("Erro no cadastro!");
+      });
 
-
-          // history.push('/appmenu');
-          history.push("/");
-        })
-        .catch(() => {
-          alert("Erro no cadastro!");
-
-          // history.push("/");
-        });
-    } else if (formData.role == "professional") {
+    } else if (role == "professional") {
+      const crm = crmCode+'-'+crmText;
       AuthService.professionalRegister(
-        formData.email, 
-        formData.password, 
-        formData.firstName, 
-        formData.lastName, 
-        formData.bornDate
-     
+        email, 
+        password, 
+        firstName, 
+        lastName, 
+        birthday,
+        cpf,
+        crm        
       )
-        .then(() => {
-          alert("Cadastro realizado com sucesso!");
+      .then(() => {
+        alert("Cadastro realizado com sucesso!");
 
-          history.push("/");
-        })
-        .catch(() => {
-          alert("Erro no cadastro!");
-          // history.push('/MainPage');
-          // history.push("/LoginCuidador");
-        });
+        history.push("/");
+      })
+      .catch(() => {
+        alert("Erro no cadastro!");
+      });
     }
   };
 
@@ -105,8 +101,8 @@ function SignUp() {
 
 
             <div className="input-block">
-              <label htmlFor="id">Papel</label>
-              <select name="paper">
+              <label htmlFor="role">Papel</label>
+              <select name="role" id="role" required value={role} onChange={(evt) => setRole(evt.target.value)}>
                 <option value="">Selecione uma opção</option>
                 <option value="pacient">Paciente</option>
                 <option value="professional">Profissional</option>
@@ -114,45 +110,52 @@ function SignUp() {
             </div>
 
             <div className="input-block">
-              <label htmlFor="id">CPF*</label>
-              <input name="cpf" type="text" id="cpf" maxlength="11"/>
+              <label htmlFor="cpf">CPF*</label>
+              <input name="cpf" type="text" id="cpf" required maxLength="11" value={cpf} onChange={(evt) => setCPF(evt.target.value)}/>
             </div>
 
-            {/* {selectedPaper == "professional" && (
-              <div className="input-block">
-                <label htmlFor="id">Código do Conselho</label>
-                <input type="text" id="codigo" name="code" />
-              </div>
-            )} */}
+            {role == "professional" && (
+              <>
+                <div className="input-block">
+                  <label htmlFor="crm">Código do Conselho</label>
+                  <input type="text" id="crm" name="crm" required value={crmCode} onChange={(evt) => setCRMCode(evt.target.value)}/>
+                </div>
+
+                <div className="input-block">
+                  <label htmlFor="sigla">Sigla do Conselho</label>
+                  <input type="text" id="sigla" name="sigla" required value={crmText} onChange={(evt) => setCRMText(evt.target.value)} />
+                </div>
+              </>
+            )}
 
             <div className="input-block">
               <label htmlFor="name">Nome*</label>
-              <input type="text" id="name" name="firstName"/>
+              <input type="text" id="name" name="firstName" required value={firstName} onChange={(evt) => setFirstName(evt.target.value)}/>
             </div>
 
             <div className="input-block">
-              <label htmlFor="name">Sobrenome*</label>
-              <input type="text" id="surname" name="lastName"/>
+              <label htmlFor="surname">Sobrenome*</label>
+              <input type="text" id="surname" name="lastName" required value={lastName} onChange={(evt) => setLastName(evt.target.value)}/>
             </div>
 
             <div className="input-block">
               <label htmlFor="date">Data de Nascimento*</label>
-              <input type="date" id="date" name="bornDate" placeholder="DD/MM/AAAA"/>
+              <input type="date" id="date" name="bornDate" required placeholder="DD/MM/AAAA" value={birthday} onChange={(evt) => setBirthday(evt.target.value)}/>
             </div>
 
             <div className="input-block">
               <label htmlFor="email">Email*</label>
-              <input type="email" id="email" name="email"ref={register} />
+              <input type="email" id="email" name="email" required ref={register} value={email} onChange={(evt) => setEmail(evt.target.value)}/>
             </div>
 
             <div className="input-block">
               <label htmlFor="password">Senha*</label>
-              <input type="password" id="password" name="password"/>
+              <input type="password" id="password" name="password" required value={password} onChange={(evt) => setPassword(evt.target.value)}/>
             </div>
 
             <div className="input-block">
               <label htmlFor="password">Confirmar senha*</label>
-              <input type="password" id="confirm-password" name="confirmPassword" />
+              <input type="password" id="confirm-password" required name="confirmPassword" value={confirmPassword} onChange={(evt) => setConfirmPassword(evt.target.value)}/>
             </div>
 
           </fieldset>

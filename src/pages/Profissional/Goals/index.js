@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { useParams } from 'react-router';
+
+
 import CircularProgressBar from '../../../components/CircleProgressBar';
 import ProfessionalContainer from '../../../components/ProfessionalContainer';
 
@@ -12,6 +15,7 @@ import { useHiddenSidebar } from '../../../context/HiddenSidebar';
 
 import './styles.css';
 import { useCurrentPage } from '../../../context/CurrentPage';
+import api_url from '../../../services/api';
 
 export default function Goals() {
   const [monthPercentage, setMonthPercentage] = useState(33);
@@ -20,8 +24,49 @@ export default function Goals() {
   const { setCurrentPage } = useCurrentPage();
   const { hideSidebar } = useHiddenSidebar();
 
+  const { id } = useParams();
+
+  const [patient, setPatient] = useState({});
+  const [goals, setGoals] = useState({});
+  const [reloadGoals, setReloadGoals] = useState(false);
+
+  const [frequency, setFrequency] = useState(0);
+  const [content, setContent] = useState('');
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const headers = { authorization: `Bearer ${token}` }
+
+  // async function getDataAccessPatient() {
+  //   const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+  //   const headers = { authorization: `Bearer ${token}` }
+
+  //   const { data } = await api_url.get(`/patient/${id}/access`, { headers });
+
+  //   setAccess(data.access);
+  //   // console.log(data.access);
+  // }
+
+  async function getDataPatient() {
+    const { data } = await api_url.get(`/patient/${id}`, { headers });
+
+    // console.log(data);
+    setPatient(data);
+  }
+
+  async function getDataGoals() {
+    const { data } = await api_url.get(`/goals/${id}`, { headers });
+
+    console.log(data);
+    setGoals(data);
+  }
+
   useEffect(() => {
     setCurrentPage('Metas');
+
+    getDataPatient();
   }, []);
 
   useEffect(() => {
@@ -37,8 +82,34 @@ export default function Goals() {
 
   }, [hideSidebar]);
 
+  useEffect(() => {
+    getDataGoals();
+  }, [reloadGoals]);
+
   function toggleAddGoalModal() {
     document.querySelector('#add-goal-modal').classList.toggle('hide');
+  }
+
+  async function handleAddGoal (evt) {
+    evt.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem("user"))?.user;
+
+    const request = {
+      content,
+      patient_id: id,
+      professional_id: user.id,
+      frequency_per_week: frequency,
+      runtime: 0,
+      dataInicio: start,
+      dataFinal: end
+    }
+
+    await api_url.post('/goals/', request, { headers });
+
+    toggleAddGoalModal();
+
+    setReloadGoals(!reloadGoals);
   }
 
   return (
@@ -48,7 +119,7 @@ export default function Goals() {
           <div id="profile-card">
             <img src={profilePic} alt="Usuário" />
             <div>
-              <h2>José Freitas Albuquerde Santiago</h2>
+              <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
               <span>Último acesso: 16/04</span>
             </div>
           </div>
@@ -94,20 +165,14 @@ export default function Goals() {
             <hr />
             <div className="goal-items">
               <div className="scroll">
-                <div className="goal-item">
-                  <span className="activity">Alongar ao acordar</span>
-                  <span className="duration">7 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Alongar antes do exercício</span>
-                  <span className="duration">2 dias por semana</span>
-                </div>
+                {
+                  goals.emAndamento?.map(goal => (
+                    <div className="goal-item" key={goal.id}>
+                      <span className="activity">{goal.content}</span>
+                      <span className="duration">{goal.frequency_per_week} dia(s) por semana</span>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -120,40 +185,14 @@ export default function Goals() {
             <hr />
             <div className="goal-items">
               <div className="scroll">
-                <div className="goal-item">
-                  <span className="activity">Alongar ao acordar</span>
-                  <span className="duration">7 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Alongar antes do exercício</span>
-                  <span className="duration">2 dias por semana</span>
-                </div>
+                {
+                  goals.concluidos?.map(goal => (
+                    <div className="goal-item" key={goal.id}>
+                      <span className="activity">{goal.content}</span>
+                      <span className="duration">{goal.frequency_per_week} dia(s) por semana</span>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -166,20 +205,14 @@ export default function Goals() {
             <hr />
             <div className="goal-items">
               <div className="scroll">
-                <div className="goal-item">
-                  <span className="activity">Alongar ao acordar</span>
-                  <span className="duration">7 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Fazer agachamento</span>
-                  <span className="duration">5 dias por semana</span>
-                </div>
-
-                <div className="goal-item">
-                  <span className="activity">Alongar antes do exercício</span>
-                  <span className="duration">2 dias por semana</span>
-                </div>
+                {
+                  goals.naoConcluidos?.map(goal => (
+                    <div className="goal-item" key={goal.id}>
+                      <span className="activity">{goal.content}</span>
+                      <span className="duration">{goal.frequency_per_week} dia(s) por semana</span>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -195,16 +228,20 @@ export default function Goals() {
 
           <hr />
 
-          <form action="">
+          <form action="" onSubmit={handleAddGoal}>
             <div className="input-group">
               <label htmlFor="goal">Tarefa</label>
-              <input type="text" name="goal" id="goal" placeholder="Digite a tarefa" required/>
+              <input type="text" name="goal" id="goal" placeholder="Digite a tarefa" required
+                value={content}
+                onChange={(evt) => setContent(evt.target.value)}
+              />
             </div>
 
             <div className="input-group">
               <label htmlFor="frequency">Frequência semanal</label>
-              <select name="frequency" id="frequency" required>
-                <option value="" selected disabled hidden>Selecione a frequência</option>
+              <select name="frequency" id="frequency" required
+                onChange={(evt) => setFrequency(evt.target.value)}
+              >                
                 <option value="1">1x por semana</option>
                 <option value="2">2x por semana</option>
                 <option value="3">3x por semana</option>
@@ -219,12 +256,18 @@ export default function Goals() {
             <div className="duration">
               <div className="input-group pr-4">
                 <label htmlFor="start">De</label>
-                <input type="date" name="start" id="start" required />
+                <input type="date" name="start" id="start" required 
+                  value={start}
+                  onChange={(evt) => setStart(evt.target.value)}
+                />
               </div>
 
               <div className="input-group pl-4">
                 <label htmlFor="end">Até</label>
-                <input type="date" name="end" id="end" required />
+                <input type="date" name="end" id="end" required 
+                  value={end}
+                  onChange={(evt) => setEnd(evt.target.value)}
+                />
               </div>
             </div>
 

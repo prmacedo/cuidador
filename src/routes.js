@@ -41,7 +41,7 @@ export default function Routes() {
 
         <ProtectedRoute path="/MainPage" component={MainPage} type="Professional" />
         <ProtectedRoute path="/paciente/:id" component={InfoPatient} type="Professional" />
-        <ProtectedRoute path="/goals" component={Goals} type="Professional" />
+        <ProtectedRoute path="/goals/:id" component={Goals} type="Professional" />
         <ProtectedRoute path="/MeuPerfil" component={ProfessionalProfile} type="Professional" />
         <ProtectedRoute path="/AtualizarPerfil" component={UpdateProfessionalProfile} type="Professional" />
       </Switch>

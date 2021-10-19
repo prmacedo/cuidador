@@ -135,7 +135,7 @@ export default function NavbarProfessional() {
 
         <div className="profile">
           <div className="content" onClick={() => toggleOptionsDropdown()}>
-            <img src={profile?.avatar} alt={`${profile?.first_name} ${profile?.last_name}`} />
+            <img src={ profile.avatar ? profile.avatar : profilePic } alt={`${profile?.first_name} ${profile?.last_name}`} />
             <span>
               {(profile?.gender === "Masculino") ? "Dr " : (profile?.gender === "Feminino") ? "Drª " : ""}
               {profile?.first_name} {profile?.last_name}

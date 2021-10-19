@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import logoWhite from '../../assets/images/logoAppWhite.svg';
 import medkit from '../../assets/images/icons/medkit.svg';
 import chat from '../../assets/images/icons/chat.svg';
+import profilePic from '../../assets/images/icons/profile-user.svg';
 
 import { useProfile } from '../../context/Profile';
 import { useCurrentPage } from '../../context/CurrentPage';
@@ -38,7 +39,7 @@ export default function Sidebar() {
     <aside id="sidebar">
       <img src={logoWhite} className="logo" alt="Cuidador"/>
 
-      <img src={(profile?.avatar)} className="profilePic" alt={`${profile?.first_name} ${profile?.last_name}`}/>
+      <img src={profile.avatar ? profile.avatar : profilePic} className="profilePic" alt={`${profile?.first_name} ${profile?.last_name}`}/>
 
       <p className="welcome">Bem-vindo<br/>
         {(profile?.gender === "Masculino") ? "Dr " : (profile?.gender === "Feminino") ? "Drª " : ""}

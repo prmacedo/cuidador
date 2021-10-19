@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 import BarChart from '../../../components/Charts/BarChart';
 import LineChart from '../../../components/Charts/LineChart';
@@ -15,14 +15,48 @@ import chat from '../../../assets/images/icons/chat-blue.svg';
 
 import './styles.css';
 import { useCurrentPage } from '../../../context/CurrentPage';
+import api_url from '../../../services/api';
 
 export default function InfoPatient() {
   const [percentage, setPercentage] = useState(50);
   const { setCurrentPage } = useCurrentPage();
   const { hideSidebar } = useHiddenSidebar();
 
+  const [ access, setAccess ] = useState({});
+  const [ patient, setPatient ] = useState({});
+
+  const { id } = useParams();
+
+  const lastDay = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+
+  async function getDataAccessPatient() {
+    const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+    const headers = { authorization: `Bearer ${token}` }
+
+    const { data } = await api_url.get(`/patient/${id}/access`, { headers });
+    
+    setAccess(data.access);
+    // console.log(data.access);
+  }
+
+  async function getDataPatient() {
+    const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+    const headers = { authorization: `Bearer ${token}` }
+
+    const { data } = await api_url.get(`/patient/${id}`, { headers });
+
+    // console.log(data);
+    setPatient(data);
+  }
+
+
   useEffect(() => {
     setCurrentPage('Pacientes');
+
+    getDataAccessPatient();
+    getDataPatient();
   }, []);
 
   useEffect(() => {
@@ -43,7 +77,7 @@ export default function InfoPatient() {
   const history = useHistory();
 
   const redirectToGoals = () => {
-    history.push('/goals');
+    history.push(`/goals/${id}`);
   }
 
   return (
@@ -52,7 +86,7 @@ export default function InfoPatient() {
         <div id="profile-card">
           <img src={profilePic} alt="Usuário" />
           <div>
-            <h2>José Freitas Albuquerde Santiago</h2>
+            <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
             <span>Último acesso: 16/04</span>
           </div>
         </div>
@@ -62,9 +96,9 @@ export default function InfoPatient() {
           <CircularProgressBar 
             strokeWidth="10"
             sqSize="200"
-            percentage={percentage}
+            percentage={access.porcentagem}
           />
-          <small>29/30</small>
+          <small>{access.diasFeitos} / {lastDay}</small>
         </div>
 
         <div id="goals-card" className="card" onClick={redirectToGoals}>

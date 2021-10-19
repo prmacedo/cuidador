@@ -38,30 +38,32 @@ class AuthService {
 
   }
 
-  patientRegister(email, password, first_name, last_name, birthday) {
-    return API_URL.post('patients', {
+  patientRegister(email, password, first_name, last_name, birthday, cpf) {
+    return API_URL.post('/patients', {
       email,
       password,
       first_name,
       last_name,
-      birthday
+      birthday,
+      cpf
     }).then(response => {
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
-
       }
 
       return response.data;
-    });;
+    });
   }
 
-  professionalRegister(email, password, first_name, last_name, birthday) {
-    return API_URL.post('professionals ', {
+  professionalRegister(email, password, first_name, last_name, birthday, cpf, crm) {
+    return API_URL.post('/professionals', {
       email,
       password,
       first_name,
       last_name,
-      birthday
+      birthday,
+      cpf,
+      crm
     }).then(response => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -69,7 +71,7 @@ class AuthService {
       }
 
       return response.data;
-    });;
+    });
   }
 
   getCurrentUser() {

@@ -27,8 +27,20 @@ export default function MainPage() {
 
   const history = useHistory();
 
+  async function loadPatients() {
+    const user = JSON.parse(localStorage.getItem("user"))?.user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+    const headers = { authorization: `Bearer ${token}` }
+
+    const { data } = await api_url.get(`/professional/${user.id}/patients`, { headers });    
+    setPatients(data);
+  }
+
   useEffect(() => {
     setCurrentPage('Pacientes');
+  
+    loadPatients();
   }, []);
 
   useEffect(() => {
@@ -58,7 +70,10 @@ export default function MainPage() {
     evt.preventDefault();
 
     try {
-      const { data } = await api_url.post("/conect_professional_patient", { email, id: profile.id });
+      const token = JSON.parse(localStorage.getItem("user"))?.token;
+      const headers = { authorization: `Bearer ${token}` }
+
+      const { data } = await api_url.post("/conect_professional_patient", { email, id: profile.id }, { headers });
 
       console.log(data);
       setPatients([...patients, data]);
@@ -129,14 +144,14 @@ export default function MainPage() {
                 <span>Não há pacientes</span>
               :
               patients.map(patient => (
-                <div className="card" onClick={() => redirectToPatient(patient.id)} key={patient.id}>
+                <div className="card" onClick={() => redirectToPatient(patient.patient.id)} key={patient.patient.id}>
                   <main>
-                    <img src={profilePic} alt={`${patient.first_name} ${patient.last_name}`} />
-                    <h4>{patient.first_name} {patient.last_name}</h4>
-                    <p>{new Date().getFullYear() - new Date(patient.birthday).getFullYear()} anos</p>
+                    <img src={profilePic} alt={`${patient.patient.first_name} ${patient.patient.last_name}`} />
+                    <h4>{patient.patient.first_name} {patient.patient.last_name}</h4>
+                    <p>{new Date().getFullYear() - new Date(patient.patient.birthday).getFullYear()} anos</p>
                   </main>
 
-                  <footer>{patient.city}, {patient.state}</footer>
+                  <footer>{patient.patient.city}, {patient.patient.state}</footer>
                 </div>
               ))}
           </div>

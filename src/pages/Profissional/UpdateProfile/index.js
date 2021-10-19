@@ -43,7 +43,7 @@ export default function Profile() {
               <input type="text" name="lastname" id="lastname" required />
             </div>
             <div className="col col-4">
-              <label htmlFor="">CPF</label>
+              <label htmlFor="cpf">CPF</label>
               <input type="text" name="cpf" id="cpf" required />
             </div>
           </div>

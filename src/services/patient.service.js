@@ -13,29 +13,29 @@ class PatientService {
     //     return axios.post(API_URL + '/api/patient/data/myprofile', data, { headers: authHeader() });
     // }
 
-    // updateMyData (data){
-    //     return axios.put(API_URL + '/api/patient/data/updateMyprofile', data, { headers: authHeader() });
-    // }
+    updateMyData (data, headers, id){
+        return axios.put(API_URL + `/patient/${id}`, data, { headers });
+    }
     
     insertProfissional (data){
-        return axios.put(API_URL + '/conect_professional_patient', data, { headers: authHeader() });
+        return axios.post(API_URL + '/conect_professional_patient', data, { headers: authHeader() });
     }
 
     // returnMyProfissionals (data){
     //     return axios.post(API_URL + '/api/patient/data/myprofissional', data, { headers: authHeader() });
     // }
 
-    // novaAvaliacaoDiaria (data){
-    //     return axios.put(API_URL + '/api/daily/assessment/newdaily', data, { headers: authHeader() });
-    // }
+    novaAvaliacaoDiaria (data, headers){
+        return axios.post(API_URL + '/daily_assessment', data, { headers });
+    }
 
     // getAvaliacaoDiaria (data){
     //     return axios.post(API_URL + '/api/daily/assessment/user', data, { headers: authHeader() });
     // }
 
-    // updateAvaliacaoDiaria (data){
-    //     return axios.put(API_URL + '/api/daily/assessment/updaily', data, { headers: authHeader() });
-    // }
+    updateAvaliacaoDiaria (data){
+        return axios.post(API_URL + '/api/daily/assessment/updaily', data, { headers: authHeader() });
+    }
 
     getNews (data){
         return axios.get(API_URL + '/pain_education', data, { headers: authHeader() });

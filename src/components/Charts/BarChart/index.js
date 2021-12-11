@@ -19,22 +19,52 @@ export default function BarChart() {
   const dailyAssesmentByYear = [
     {
       regions: ['1', '45', '22', '11', '23'],
-      numberOfDays: [9, 8, 5, 2, 1],
+      numberOfDays: [9, 8, 5, 5, 2],
     },
-    {},
-    {},
+    {
+      regions: ['12', '4', '17', '44', '36'],
+      numberOfDays: [11, 9, 5, 3, 2],
+    },
+    {
+      regions: ['19', '3', '25', '37', '21', '16'],
+      numberOfDays: [10, 8, 6, 4, 2, 1],
+    },
     {
       regions: ['1', '13', '5', '37', '11'],
       numberOfDays: [13, 8, 5, 2, 1],
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {}
+    {
+      regions: ['1', '45', '22', '11', '23'],
+      numberOfDays: [9, 8, 5, 5, 2],
+    },
+    {
+      regions: ['12', '4', '17', '44', '36'],
+      numberOfDays: [11, 9, 5, 3, 2],
+    },
+    {
+      regions: ['19', '3', '25', '37', '21', '16'],
+      numberOfDays: [10, 8, 6, 4, 2, 1],
+    },
+    {
+      regions: ['1', '13', '5', '37', '11'],
+      numberOfDays: [13, 8, 5, 2, 1],
+    },
+    {
+      regions: ['12', '4', '17', '44', '36'],
+      numberOfDays: [11, 9, 5, 3, 2],
+    },
+    {
+      regions: ['1', '13', '5', '37', '11'],
+      numberOfDays: [13, 8, 5, 2, 1],
+    },
+    {
+      regions: ['1', '13', '5', '37', '11'],
+      numberOfDays: [13, 8, 5, 2, 1],
+    },
+    {
+      regions: ['19', '3', '25', '37', '21', '16'],
+      numberOfDays: [6, 3, 2, 1],
+    }
   ];
 
   const data = {

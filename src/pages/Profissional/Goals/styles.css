@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-#patient-cards #add-goal-button > button {
+#patient-cards #add-goal-button > .btnAddGoal {
   color: white;
   background-color: #547DE2;
 
@@ -58,7 +58,7 @@
   transition: background 0.3s;
 }
 
-#patient-cards #add-goal-button > button:hover {
+#patient-cards #add-goal-button > .btnAddGoal:hover {
   background-color: #3a5db4;
 }
 
@@ -222,7 +222,7 @@
   margin-bottom: 1.6rem;
 }
 
-#add-goal-modal > .content button {
+#add-goal-modal > .content .btnAddGoal {
   background: #547DE2;
   
   color: #FFF;
@@ -237,7 +237,7 @@
   cursor: pointer;
 }
 
-#add-goal-modal > .content button:hover {
+#add-goal-modal > .content .btnAddGoal:hover {
   background: #4364B5;
 }
 
@@ -291,7 +291,9 @@
   gap: 1rem;
 }
 
-#add-goal-button a {
+#add-goal-button .goBackBtn {
+  background-color: transparent;
+  
   color: #547DE2;
   font-weight: 500;
   text-decoration: none;
@@ -303,11 +305,12 @@
   text-align: center;
   
   padding: 1rem 0;
+  cursor: pointer;
 
   transition: 0.3s;
 }
 
-#add-goal-button a:hover {
+#add-goal-button .goBackBtn:hover {
   background-color: #547DE2;
   color: #fff;
 }

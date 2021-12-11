@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#chat.container {
+  width: 100%;
+  height: 100vh;
+  background: #F8F8FC;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-container {
+  width: 70%;
+  height: 80%;
+  background: #fff;
+  border: 2px solid #E6E6F0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-space {
+  /* padding: 1rem; */
+  height: 13%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid #E6E6F0;
+}
+
+.search-space input {
+  height: 5vh;
+  width: 70%;
+  border: 1px solid #E6E6F0;
+  border-radius: 3px;
+  padding-left: 1rem;
+  background: #F8F8FC;
+  outline: none;
+}
+
+.search-space button {
+  width: 15%;
+  height: 5vh;
+  border: none;
+  background-color: #547DE2;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out .2s;
+}
+
+.search-space button:hover{
+  cursor: pointer;
+  background-color: #3e61bb;
+}
+
+
+.patients-list {
+  width: 28%;
+  height: 100%;
+  border-right: 1px solid #E6E6F0;
+  list-style: none;
+  
+}
+.patients-list li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E6E6F0;
+  padding: .5rem;
+  transition: ease-in-out .2s;
+}
+
+.patients-list li:hover {
+  cursor: pointer;
+  background: #F8F8FC;
+}
+
+.patients-list li img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: .5rem;
+}
+
+
+
+.chat-banner {
+  background: #F8F8FC;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-banner h1 {
+  color: #4F4F4F;
+  margin-bottom: 2rem;
+}
+
+.chat-banner h3{
+  color: #747070;
+  width: 70%;
+  text-align: center;
+}
+
+.chat-content {
+  background: #F8F8FC;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-header {
+  height: 13%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E6E6F0;
+  padding-left: 2rem;
+}
+
+.chat-header p {
+  font-size: 1.3rem;
+}
+
+.chat-header img{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-right: .5rem;
+}
+
+.chat {
+  height: 72%;
+  padding: .8rem 2rem;
+  overflow-y: auto;
+}
+
+.chat-footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 13%;
+  border-top: 1px solid #E6E6F0;
+  background-color: #fff;
+}
+
+.chat-footer input{
+  height: 6vh;
+  width: 70%;
+  border: 1px solid #E6E6F0;
+  border-radius: 3px;
+  padding-left: 1rem;
+  background: #F8F8FC;
+  outline: none;
+}
+
+.chat-footer button{
+  width: 15%;
+  height: 6vh;
+  border: none;
+  background-color: #547DE2;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: ease-in-out .2s;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.chat-footer button:hover{
+  cursor: pointer;
+  background-color: #3e61bb;
+}

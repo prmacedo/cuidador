@@ -22,18 +22,39 @@ export default function MainPage() {
   
   const [initialLetter, setInitialLetter] = useState('');
   
-
   const { setCurrentPage } = useCurrentPage();
 
   const history = useHistory();
 
+  const user = JSON.parse(localStorage.getItem("user"))?.user;
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+  const headers = { authorization: `Bearer ${token}` }
+
   async function loadPatients() {
-    const user = JSON.parse(localStorage.getItem("user"))?.user;
-    const token = JSON.parse(localStorage.getItem("user"))?.token;
-
-    const headers = { authorization: `Bearer ${token}` }
-
     const { data } = await api_url.get(`/professional/${user.id}/patients`, { headers });    
+    setPatients(data);
+  }
+
+  async function searchByName() {
+    const name = document.querySelector('#searchName').value;
+    
+    const params = {
+      nome: name
+    };
+    
+    const { data } = await api_url.get(`/professional/${user.id}/patients`, { headers, params });
+    
+    setPatients(data);
+  }
+
+  async function searchByLetter() {
+    const params = {
+      orderBy: initialLetter
+    };
+
+    const { data } = await api_url.get(`/professional/${user.id}/patients`, { headers, params });
+
     setPatients(data);
   }
 
@@ -45,6 +66,7 @@ export default function MainPage() {
 
   useEffect(() => {
     // Realizar busca pela letra inicial do nome
+    searchByLetter();
   }, [initialLetter]);
 
   function redirectToPatient(patient_id) {
@@ -52,12 +74,17 @@ export default function MainPage() {
   }
 
   function handleSearchByLetter(event, letter) {
-    const selected = document.querySelector('#search-alphabet span.active');
-    if(selected) {
-      document.querySelector('#search-alphabet span.active').classList.remove('active');
+    if (letter === initialLetter) {
+      event.target.classList.remove('active');
+      letter = "";
+    } else {     
+      const selected = document.querySelector('#search-alphabet span.active');
+      if(selected) {
+        document.querySelector('#search-alphabet span.active').classList.remove('active');
+      }
+      
+      event.target.classList.add('active');      
     }
-
-    event.target.classList.add('active');
 
     setInitialLetter(letter);
   }
@@ -70,9 +97,6 @@ export default function MainPage() {
     evt.preventDefault();
 
     try {
-      const token = JSON.parse(localStorage.getItem("user"))?.token;
-      const headers = { authorization: `Bearer ${token}` }
-
       const { data } = await api_url.post("/conect_professional_patient", { email, id: profile.id }, { headers });
 
       console.log(data);
@@ -98,13 +122,13 @@ export default function MainPage() {
             Adicionar paciente
           </span>
 
-          <form action="">
-            <input type="text" name="name" placeholder="Buscar paciente" />
-            <button type="submit">
+          <div id="searchPatientForm">
+            <input type="text" name="name" id="searchName" placeholder="Buscar paciente" />
+            <button type="button" onClick={() => searchByName()}>
               <img src={searchIcon} alt="Buscar"/>
               Buscar
             </button>
-          </form>
+          </div>
         </div>
 
         <h3 id="search-title">Meus Pacientes</h3>

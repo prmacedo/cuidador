@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import logoImg from '../../../assets/images/logoAppWhite.svg';
 import backIcon from '../../../assets/images/icons/back.svg';
-
+import profilePic from '../../../assets/images/icons/profile-user.svg';
 
 import './styles.css';
 import CuidadorList from '../../../components/CuidadorList';
@@ -20,14 +20,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import PageHeader from '../../../components/PageHeader';
 import PatientService from '../../../services/patient.service'
 import AuthService from '../../../services/auth.service'
+import api_url from '../../../services/api';
 
 export default function Cuidadores() {
   const [open, setOpen] = useState(false);
-  const [profissionals, setProfissionals] = useState([]);
   const [patient_id, setPatient_id] = useState();
   const [email, setEmail] = useState();
   const [profissionalUpdate, setProfissionalUpdate] = useState(false);
   const [userData, setUserData] = useState();
+
+  const [professionals, setProfessionals] = useState([{}]);
+
+  const user = JSON.parse(localStorage.getItem("user"))?.user;
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+  const headers = { authorization: `Bearer ${token}` }
+
+  async function getProfessionals() {
+    const { data } = await api_url.get(`/patient/${user.id}/professionals`, { headers });
+    console.log(data);
+    setProfessionals(data);
+  }
+
+  useEffect(() => {
+    getProfessionals();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -120,11 +137,42 @@ export default function Cuidadores() {
               </Button>
           </DialogActions>
         </Dialog>
-        {profissionals && profissionals.map(element => (
+        <div className="professional-card-container">
+        {professionals.map(professional => (   
+          <div className="professional-card">
+            {console.log(professional)}       
+            <div className="professional-card-header">
+              <img src={ profilePic } alt="" />
+              <h3>Dr {`${professional?.professional?.first_name} ${professional?.professional?.last_name}`}</h3>
+            </div>
+            
+            <div className="professional-card-info">
+              <p>CRM: {professional?.professional?.crm}</p>
+              <p>Profissão: {professional?.professional?.profissao}</p>
+              <p>Especialidade: {professional?.professional?.specialization}</p>
+            </div>
 
-          <CuidadorList key={element._id} props={element} />
+            <hr />
+
+            <div className="professional-card-contact">
+              <div>
+                {/* <img src="" alt="" /> */}
+                <h3>Contato</h3>
+              </div>
+              <p>{professional?.professional?.telefone}</p>
+              <p>{professional?.professional?.email}</p>
+            </div>
+
+            <div className="professional-card-places">
+              <div>
+                {/* <img src="" alt="" /> */}
+                <h3>Locais de atendimento</h3>
+              </div>
+              <p>{professional?.professional?.service_locations}</p>
+            </div>
+          </div>
         ))}
-   
+        </div>
 
    
       </main>

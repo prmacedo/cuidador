@@ -16,6 +16,8 @@
 .profile-content .info {
   color: #4F4F4F;
   font-size: 2rem;
+
+  display: inline;
 }
 
 .profile-content .info-value {

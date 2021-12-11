@@ -18,10 +18,11 @@
     /* margin: 1.2rem auto; */
     width: 90%;
     height:100vh;
+    margin: 0 auto;
     /* background-color: chartreuse; */
-    position: absolute;
-    top: 85px;
-    overflow: scroll;
+    /* position: absolute;
+    top: 85px; */
+    /* overflow: scroll; */
 
 }
 
@@ -97,9 +98,48 @@
     color: var(--color-title-in-primary);
 }
 
+#page-cuidador .professional-card-container {
+    display: grid;
+    gap: 1.6rem;
+}
+
+#page-cuidador .professional-card {
+    background: #fff;
+    border-radius: 0.8rem;
+    padding: 2.4rem 1.6rem;
+}
+
+#page-cuidador .professional-card p {
+    margin: 0;
+}
+
+#page-cuidador .professional-card .professional-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+#page-cuidador .professional-card .professional-card-header img {
+    width: 8rem;
+}
+
+#page-cuidador .professional-card  .professional-card-info,
+#page-cuidador .professional-card  .professional-card-contact {
+    padding: 1.6rem 0;
+}
 
 @media(min-width:700px) {
     #page-cuidador {
         max-width: 100vw;
+    }
+
+    #page-cuidador .professional-card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width:1024px) {
+    #page-cuidador .professional-card-container {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

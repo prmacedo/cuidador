@@ -24,30 +24,27 @@ export default function InfoPatient() {
 
   const [ access, setAccess ] = useState({});
   const [ patient, setPatient ] = useState({});
+  const [ lastAccess, setLastAccess ] = useState("");
 
   const { id } = useParams();
 
   const lastDay = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+  
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const headers = { authorization: `Bearer ${token}` };
+
+  async function getLastAccess() {
+    const { data } = await api_url.get(`/patient/${id}/access/last`, { headers });    
+    setLastAccess(String(data.ultimoAcesso).split("T")[0].split("-").reverse().join("/"));
+  }
 
   async function getDataAccessPatient() {
-    const token = JSON.parse(localStorage.getItem("user"))?.token;
-
-    const headers = { authorization: `Bearer ${token}` }
-
-    const { data } = await api_url.get(`/patient/${id}/access`, { headers });
-    
+    const { data } = await api_url.get(`/patient/${id}/access`, { headers });    
     setAccess(data.access);
-    // console.log(data.access);
   }
 
   async function getDataPatient() {
-    const token = JSON.parse(localStorage.getItem("user"))?.token;
-
-    const headers = { authorization: `Bearer ${token}` }
-
     const { data } = await api_url.get(`/patient/${id}`, { headers });
-
-    // console.log(data);
     setPatient(data);
   }
 
@@ -57,6 +54,7 @@ export default function InfoPatient() {
 
     getDataAccessPatient();
     getDataPatient();
+    getLastAccess();
   }, []);
 
   useEffect(() => {
@@ -79,6 +77,10 @@ export default function InfoPatient() {
   const redirectToGoals = () => {
     history.push(`/goals/${id}`);
   }
+  
+  const redirectToChat = () => {
+    history.push(`/Chat`);
+  }
 
   return (
     <ProfessionalContainer>
@@ -87,7 +89,12 @@ export default function InfoPatient() {
           <img src={profilePic} alt="Usuário" />
           <div>
             <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
-            <span>Último acesso: 16/04</span>
+            <span>
+              { lastAccess ?
+                `Último acesso: ${lastAccess}`
+                : "Nunca acessou!"
+              }
+            </span>
           </div>
         </div>
 
@@ -107,7 +114,7 @@ export default function InfoPatient() {
           <small>Tarefas a serem realizadas pelo paciente</small>
         </div>
 
-        <div id="chat-card" className="card">
+        <div id="chat-card" className="card" onClick={redirectToChat}>
           <h3>Chat Interprofissional</h3>
           <img src={chat} alt="Chat Interprofissional" />
           <small>Compartilhe informações do paciente com outros profissionais</small>

@@ -24,7 +24,7 @@
   margin-right: 0.8rem;
 }
 
-#top-bar > form > input {
+#top-bar > #searchPatientForm > input {
   background: #F8F8FC;
 
   border: 1px solid #E6E6F0;
@@ -38,7 +38,7 @@
   margin-right: 0.8rem;
 }
 
-#top-bar > form > button {
+#top-bar > #searchPatientForm > button {
   background: #547DE2;
 
   border: 0;
@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-#top-bar > form > button > img {
+#top-bar > #searchPatientForm > button > img {
   margin-right: 0.8rem;
 }
 

@@ -3,7 +3,11 @@ import React from 'react';
 import './styles.css';
 
 function CuidadorList({ props }) {
+    const { professional } = props;
+    
     console.log("meu elemnto: ", props)
+    console.log(professional)
+
     return (
         <article className="cuidador-item">
             <header>

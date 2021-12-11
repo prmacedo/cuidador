@@ -77,6 +77,10 @@ export default function InfoPatient() {
   const redirectToGoals = () => {
     history.push(`/goals/${id}`);
   }
+  
+  const redirectToChat = () => {
+    history.push(`/Chat`);
+  }
 
   return (
     <ProfessionalContainer>
@@ -110,7 +114,7 @@ export default function InfoPatient() {
           <small>Tarefas a serem realizadas pelo paciente</small>
         </div>
 
-        <div id="chat-card" className="card">
+        <div id="chat-card" className="card" onClick={redirectToChat}>
           <h3>Chat Interprofissional</h3>
           <img src={chat} alt="Chat Interprofissional" />
           <small>Compartilhe informações do paciente com outros profissionais</small>

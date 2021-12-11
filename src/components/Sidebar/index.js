@@ -30,9 +30,9 @@ export default function Sidebar() {
   function redirectToPacients() {
     history.push('/MainPage');
   }
-
+  
   function redirectToChat() {
-    
+    history.push('/Chat');    
   }
 
   return(

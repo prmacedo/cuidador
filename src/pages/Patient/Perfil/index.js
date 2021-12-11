@@ -223,20 +223,10 @@ export default function Perfil() {
                   <Typography className="description" gutterBottom variant="h5"> Ainda não implementado</Typography>
 
                 </ListItem>
-
-                <Divider light />
-
-                <ListItem button className={classes.listItem}>
-
-                  <Typography className="title" gutterBottom variant="h5">Medicações em Uso:</Typography>
-                  <Typography className="description" gutterBottom variant="h5">Ainda não implementado</Typography>
-
-                </ListItem>
               </List>
 
 
-              <h2>Informações Médicas</h2>
-              <p  >Informações importantes, como sua altura e condição de saúde</p>
+              <h2>Medicações em uso</h2>
 
               <List component="nav" className={classes.divisor} aria-label="mailbox folders">
                 <ListItem button className={classes.listItem}>
@@ -255,9 +245,6 @@ export default function Perfil() {
                       <Typography  gutterBottom variant="h5">{dose}</Typography>
                       <Typography  gutterBottom variant="h5">a cada {frequency} horas</Typography>
                     </ListItem>
-
-
-
                   </>
                 ))}
 

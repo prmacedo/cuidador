@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 
 
 import CircularProgressBar from '../../../components/CircleProgressBar';
@@ -26,6 +26,8 @@ export default function Goals() {
 
   const { id } = useParams();
 
+  const history = useHistory();
+
   const [patient, setPatient] = useState({});
   const [goals, setGoals] = useState({});
   const [reloadGoals, setReloadGoals] = useState(false);
@@ -34,6 +36,8 @@ export default function Goals() {
   const [content, setContent] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
+
+  const [lastAccess, setLastAccess] = useState("");
 
   const token = JSON.parse(localStorage.getItem("user"))?.token;
   const headers = { authorization: `Bearer ${token}` }
@@ -49,6 +53,11 @@ export default function Goals() {
   //   // console.log(data.access);
   // }
 
+  async function getLastAccess() {
+    const { data } = await api_url.get(`/patient/${id}/access/last`, { headers });
+    setLastAccess(String(data.ultimoAcesso).split("T")[0].split("-").reverse().join("/"));
+  }
+
   async function getDataPatient() {
     const { data } = await api_url.get(`/patient/${id}`, { headers });
 
@@ -59,7 +68,6 @@ export default function Goals() {
   async function getDataGoals() {
     const { data } = await api_url.get(`/goals/${id}`, { headers });
 
-    console.log(data);
     setGoals(data);
   }
 
@@ -67,6 +75,7 @@ export default function Goals() {
     setCurrentPage('Metas');
 
     getDataPatient();
+    getLastAccess();
   }, []);
 
   useEffect(() => {
@@ -108,8 +117,18 @@ export default function Goals() {
     await api_url.post('/goals/', request, { headers });
 
     toggleAddGoalModal();
+    resetGoalsInputFields();
 
     setReloadGoals(!reloadGoals);
+  }
+
+  function resetGoalsInputFields() {
+    setFrequency(1);
+    setContent('');
+    setStart('');
+    setEnd('');
+
+    document.querySelector("#frequency").value = 1;
   }
 
   return (
@@ -120,7 +139,12 @@ export default function Goals() {
             <img src={profilePic} alt="Usuário" />
             <div>
               <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
-              <span>Último acesso: 16/04</span>
+              <span>
+                {lastAccess ?
+                  `Último acesso: ${lastAccess}`
+                  : "Nunca acessou!"
+                }
+              </span>
             </div>
           </div>
 
@@ -145,14 +169,14 @@ export default function Goals() {
           </div>
 
           <div id="add-goal-button">
-            <button type="button" onClick={() => toggleAddGoalModal()}>
+            <button type="button" className="btnAddGoal" onClick={() => toggleAddGoalModal()}>
               <img src={addIcon} alt="Adicionar meta" />
               Adicionar meta
             </button>
 
-            <a href="paciente/1">
+            <button type="button" className="goBackBtn" onClick={() => history.goBack()}>
               ← Voltar
-            </a>
+            </button>
           </div>
         </div>
 
@@ -271,7 +295,7 @@ export default function Goals() {
               </div>
             </div>
 
-            <button type="submit">
+            <button type="submit" className="btnAddGoal">
               Adicionar tarefa
             </button>
           </form>

@@ -46,3 +46,24 @@
 
     padding: 1.6rem 0 3.2rem;
 }
+
+#page-cuidadores main .tasks .completed {
+    margin-top: 1.6rem;
+}
+
+#page-cuidadores main .tasks .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+#page-cuidadores main .tasks .task-item-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.8rem;
+}
+
+#page-cuidadores main .tasks .duration {
+    opacity: 0.8;
+    font-size: 1.2rem;
+}

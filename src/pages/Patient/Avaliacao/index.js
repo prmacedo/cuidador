@@ -24,6 +24,7 @@ import PatientService from "../../../services/patient.service";
 import Input from "../../../components/Input";
 import AdaptativeToggleGroup from "../../../components/AdaptativeToggleGroup";
 import { useStyles } from "./styles";
+import closeIcon from '../../../assets/images/icons/close.svg';
 
 function valuetext(value) {
   return `${value}°C`;
@@ -48,11 +49,42 @@ export default function Avaliação() {
   const [anguish, setAnguish] = useState(0);
   const [anxious, setAnxious] = useState(0);
   const [userData, setUserData] = useState();
-  const [patient_id, setPatient_id] = useState();
+  // const [patient_id, setPatient_id] = useState();
   const [patientdata_id, setPatientData] = useState();
   const [avaliacaoDone, setAvaliacaoDone] = useState(false);
   const [okToRender, setOkToRender] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
+
+  const id = JSON.parse(localStorage.getItem("user"))?.user.id;
+
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+  const headers = { authorization: `Bearer ${token}` }
+
+  function toggleNoPainModal() {
+    document.querySelector('#add-nopain-modal').classList.toggle('hide');
+  }
+
+  function confirmSendAssessment() {
+    document.querySelector('#add-confirmsend-modal').classList.toggle('hide');
+  }
+
+  function sendEmptyAssessment() {
+    setPain(false); //Question 01
+    setPainLocation([]); //Question 0
+    setWorstPain(0); //Question 03
+    setPainAverage(0); //Question 04
+    setHabitualActivities(0); //Question 05
+    setInfluenceRelationship(0); //Question 06
+    setSleep(0); //Question 07
+    setSexBehavior(0);
+    setSelfEsteem(0); //Question 09
+    setAnguish(0); //Question 11
+    setAnxious(0); //Question 12
+
+    toggleNoPainModal();
+    sendAssessement();
+  }
 
   useEffect(() => {
     fetchData();
@@ -68,7 +100,7 @@ export default function Avaliação() {
     } = AuthService.getCurrentUser();
 
     setUserData(first_name);
-    setPatient_id(account_id);
+    // setPatient_id(account_id);
     setPatientData(patientdata);
 
   
@@ -106,30 +138,34 @@ export default function Avaliação() {
     setOkToRender(true);
   }
 
-  const sendAssessement = () => {
-    PatientService.novaAvaliacaoDiaria({
-      patient_id,
+  const sendAssessement = async () => {
+    const data = await PatientService.novaAvaliacaoDiaria({
+      patient_id: id,
       patientdata_id,
-      pain, //Question 01
-      painLocation, //Question 0
-      worstPain, //Question 03
-      painAverage, //Question 04
+      question_01: pain, //Question 01
+      question_02: JSON.stringify(painLocation), //Question 0
+      question_03: worstPain, //Question 03
+      question_04: painAverage, //Question 04
       moodInfluence,
-      habitualActivities, //Question 05
-      influenceRelationship, //Question 07
-      sleep, //Question 08
-      sexBehavior,
-      selfEsteem, //Question 09
-      anguish, //Question 11
-      anxious, //Question 12
-    });
+      question_05: habitualActivities, //Question 05
+      question_06: influenceRelationship, //Question 06
+      question_07: sleep, //Question 07
+      question_08: sexBehavior,
+      question_09: selfEsteem, //Question 09
+      question_10: anguish, //Question 11
+      question_11: anxious, //Question 12
+    }, headers);
     setAvaliacaoDone(true);
-    history.push("/appmenu");
+    console.log(data)
+    if(data.status === 201) {
+      confirmSendAssessment();
+    }
+    // history.push("/appmenu");
   };
 
   const updateAssessement = () => {
     PatientService.updateAvaliacaoDiaria({
-      patient_id,
+      patient_id: id,
       patientdata_id,
       pain, //Question 01
       painLocation, //Question 0
@@ -179,6 +215,7 @@ export default function Avaliação() {
   );
 
   return (
+    <>
     <div id="page-avaliacao" >
       {okToRender && (
         <>
@@ -214,6 +251,7 @@ export default function Avaliação() {
                   aria-label="centered"
                   className={classes.toggle}
                   classes={{ selected: classes.toggleSelected }}
+                  onClick={() => toggleNoPainModal()}
                 >
                   Não
                 </ToggleButton>
@@ -225,7 +263,7 @@ export default function Avaliação() {
               <>
                 <Divider className={classes.divider} />
 
-                <Box className={classes.painBox}>
+                <Box className={`${classes.painBox} avalizacao-container`}>
                   <Typography component="span" variant="h4" align="center">
                     
                   </Typography>
@@ -235,7 +273,7 @@ export default function Avaliação() {
                   <div>
                   <img src={imagem} />
                   </div>
-                  <Typography omponent="h2" variant="h">
+                  <Typography component="h2" variant="h2">
                     Onde está localizada a(s) sua(s) dor(es)?
                   </Typography>
 
@@ -465,5 +503,28 @@ export default function Avaliação() {
         </>
       )}
     </div>
+    <div id="add-nopain-modal" className="hide">
+      <div className="overlay" onClick={() => toggleNoPainModal()}></div>
+      <div className="content">
+        <span onClick={()=>toggleNoPainModal()}><img src={closeIcon} alt="Fechar modal"/></span>
+        <h3>Confirma que não sentiu dor nas últimas 24 horas?</h3>
+        <p>Ao confirmar sua resposta será registrada em nossa base de dados.</p>
+
+        <button type="button" onClick={()=>toggleNoPainModal()}>Cancelar</button>
+        <button type="button" onClick={()=>sendEmptyAssessment()}>Confirmar</button>
+      </div>
+    </div>
+    <div id="add-confirmsend-modal" className="hide">
+      <div className="overlay" onClick={() => confirmSendAssessment()}></div>
+      <div className="content">
+        <span onClick={() => confirmSendAssessment()}><img src={closeIcon} alt="Fechar modal" /></span>
+        <h3>Avaliação diária respondida com sucesso!</h3>
+        <p>Volte para a página anterior.</p>
+        <button type="button" className="goBackBtn" onClick={() => history.goBack()}>
+          ← Voltar
+        </button>
+      </div>
+    </div>
+    </>
   );
 }

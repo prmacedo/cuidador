@@ -11,36 +11,43 @@ import Card from "./Card";
 import { Grid } from "@material-ui/core";
 import './style.css';
 
+import articles from './articles';
+
 export default function Educação() {
 
 
-  const [userData, setUserData] = useState();
-  const [news, setNews] = useState([]);
+  // const [userData, setUserData] = useState();
+  // const [news, setNews] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const { user: { firstName } } = AuthService.getCurrentUser()
-      const { data } = await PatientService.getNews()
-      setNews(data)
-      setUserData(firstName);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { user: { firstName } } = AuthService.getCurrentUser()
+  //     const { data } = await PatientService.getNews()
+  //     setNews(data)
+  //     setUserData(firstName);
 
-    })();
-  }, []);
+  //   })();
+  // }, []);
 
   return (
     <div id="page-cuidadores" className="container">
-      {/* <PageHeader/> */}
-      <PageHeader name={userData} />
+      <PageHeader/>
+      {/* <PageHeader name={userData} /> */}
 
 
       <div className="card-container">
         <div className="card-box ">
-          {news && news.map(element => (
+          {
+            articles.map((element, index) => (
+              <Card key={index} props={element} />
+            ))
+          }
+          {/* {news && news.map(element => (
        
               <Card key={element._id} props={element} />
             
 
-          ))}
+          ))} */}
 
         </div>
       </div>

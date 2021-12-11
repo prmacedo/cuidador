@@ -32,7 +32,7 @@ export default function Profile() {
 
         <div>
           <span className="info">Profissão:</span>
-          <span className="info-value">{`${user.experience}`}</span>
+          <span className="info-value">{`${user.profissao}`}</span>
         </div>
 
         <div>
@@ -47,7 +47,7 @@ export default function Profile() {
 
         <div>
           <span className="info">Sigla do conselho:</span>
-          <span className="info-value">{(user.crm).split('-')[1].toUpperCase()}</span>
+          <span className="info-value">{(user.crm).split('-')[1] ? (user.crm).split('-')[1].toUpperCase():"Não informado"}</span>
         </div>
 
         <div>

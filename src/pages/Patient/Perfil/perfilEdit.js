@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import AuthService from "../../../services/auth.service";
 import PatientService from "../../../services/patient.service";
 import './styles.css'
+import api_url from '../../../services/api';
 
 
 const medications = [
@@ -164,24 +165,32 @@ export default function PerfilEdit() {
     })();
   }, []);
 
+  const id = JSON.parse(localStorage.getItem("user")).user.id
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const headers = { authorization: `Bearer ${token}` };
 
-
-  const updateData = () => {
-    PatientService.updateMyData({
-      patient_id,
-      firstName,
-      lastName,
+  const updateData = async () => {
+    const info = {
+      first_name: firstName,
+      last_name: lastName,
       gender,
-      birth,
+      birthday: birth,
       occupation,
       state,
       city,
       weight,
       height,
       imc,
-      bloodtype,
+      blood_type: bloodtype,
       condition,
-    });
+    }
+    const data = await api_url.put(`/patient/${id}`, info, { headers });
+    const userData = JSON.parse(localStorage.getItem("user"));
+    userData.user = data.data;
+
+    localStorage.setItem("user", JSON.stringify(userData));
+    
+    console.log(data);
   };
 
   const handleAddMedication = () => {

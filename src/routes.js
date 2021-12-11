@@ -22,6 +22,7 @@ import InfoPatient from './pages/Profissional/InfoPatient';
 import Goals from './pages/Profissional/Goals';
 import ProfessionalProfile from './pages/Profissional/Profile';
 import UpdateProfessionalProfile from './pages/Profissional/UpdateProfile';
+import {ChatProfessional} from './pages/Profissional/ChatProfessional';
 
 export default function Routes() {
   return (
@@ -44,6 +45,7 @@ export default function Routes() {
         <ProtectedRoute path="/goals/:id" component={Goals} type="Professional" />
         <ProtectedRoute path="/MeuPerfil" component={ProfessionalProfile} type="Professional" />
         <ProtectedRoute path="/AtualizarPerfil" component={UpdateProfessionalProfile} type="Professional" />
+        <ProtectedRoute path="/Chat" component={ChatProfessional} type="Professional" />
       </Switch>
     </BrowserRouter>
   );
